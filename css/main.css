@@ -1,3 +1,7 @@
+body {
+    font-family: "Microsoft YaHei", "Arial", "Hiragino Sans GB", "sans-serif";
+}
+
 .clearfix:after{
 	content : "." ; 
 	display: block; 
@@ -7,12 +11,30 @@
 	visibility: hidden;
 }
 .clearfix {*zoom: 1;}
+
+
 /* 顶部提示信息 */
 .m-msg {
 	width: 100%;	
 	height: 36px;
 	line-height: 36px;
 	background: #f3f3f3;
+	font-size: 12px;
+	color: #333;
+}
+
+.m-msg a {
+	text-decoration: none;
+	color: #21a557;
+}
+
+.m-msg .lastspan {
+	float: right;
+}
+
+.g-wrap {
+	margin: 0 auto;
+	width: 1206px;
 }
 
 /* /顶部提示信息 */
@@ -24,13 +46,49 @@
 	height: 89px;
 	line-height: 89px;
 	background: #fff;
+	font-family: "HiraginoSansGB W3", "Microsoft YaHei", "Arial", "sans-serif";
 }
-.m-nav .logo {
+
+.m-nav .logo span {
 	float: left;
+	font-size: 28px;
+	font-weight: bold;
+	color: #39a030;
+}
+
+.m-nav h1 {
+	float: left;
+	font-size: 22px;
+	font-weight: normal;
 }
 
 .m-nav .follow {
 	float: left;
+	font-size: 12px;
+	font-family: "宋体", "Microsoft YaHei", "Arial", "sans-serif";	
+}
+.m-nav .flw-btn {
+	display: inline-block;
+	width: 54px;
+	height: 21px;
+	line-height: 21px;
+	margin: 0 14px 0 31px;
+	border-radius: 2px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;		
+	background: #21a557;
+	color: #fff;
+}
+.m-nav .flw-btn:hover {
+	background: #2fb556;
+}
+.m-nav .fans {
+    display: inline-block;
+    height: 21px;
+    line-height: 21px;	    
+    vertical-align: middle;
+	color: #666;
 }
 
 .m-nav .topnav {
@@ -41,17 +99,39 @@
 
 .m-nav li {
 	display: inline;
+	margin-left: 55px;
 }
 
-.m-slide {
+.m-nav a {
+	text-decoration: none;
+	color: #666;
+}
+
+.m-nav a:hover {
+	color: #39a030;
+}
+
+.m-slider {
+	position: relative;
 	width: 100%;
 	height: 460px;
+	overflow: hidden;
 	background: #7EC2BC;
 }
 
+.m-slider img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+}
+
+.m-slider .crt_slide {
+	opacity: 1;
+	z-index: 1;
+}
+
 .m-intro {
-	margin: 0 auto;
-	width: 1206px;
 	height: 295px;
 	background: #DDCA85;
 }
@@ -71,11 +151,6 @@
 	width: 100%;
 	height: 220px;
 	background: #B8AAAA;
-}
-
-.g-body .wrap {
-	margin: 0 auto;
-	width: 1206px;
 }
 
 .m-content {
@@ -98,7 +173,7 @@
 	background: #F79090;
 }
 
-.m-pages {
+.m-pager {
 	float: right;
 	width: 302px;
 	height: 20px;

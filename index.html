@@ -4,31 +4,46 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/main.css">
-	<title>EDU 网易教育产品部</title>
+	<script src="js/basic.js"></script>	
+	<title>EDU | 网易教育产品部</title>
 </head>
 <body>
 	<!-- 顶部提示信息 -->
-	<div class="m-msg">网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！  立即查看></div>
+	<div class="m-msg">
+		<div class="g-wrap">
+			<span>网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！  </span>
+			<a href="#">立即查看></a>
+			<span class="lastspan">不再提醒</span>
+		</div>
+	</div>
 	<!-- /顶部提示信息 -->
 
 	<!-- 头部(导航及轮播图) -->
 	<div class="g-head">
 		<div class="m-nav">
 			<div class="logo">
-				<h1>EDU | 网易教育产品部</h1>
+				<span>EDU</span>
+				<h1>&nbsp;|&nbsp;网易教育产品部</h1>
 			</div>
 			<div class="follow">
-				<span>+关注</span>
-				<span>粉丝</span>
+				<span class="flw-btn">+关注</span>
+				<span class="fans">粉丝 45</span>
 			</div>
 			<ul class="topnav">
-				<li><a href="#">网易云课堂</a></li>
-				<li><a href="#">公开课</a></li>
-				<li><a href="#">中国大学MOOC</a></li>
+				<li><a href="http://open.163.com/">网易公开课</a></li>
+				<li><a href="http://study.163.com/">云课堂</a></li>
+				<li><a href="http://www.icourse163.org/">中国大学MOOC</a></li>
 			</ul>
 		</div>
-		<div class="m-slide">图片轮播</div>
-		<div class="m-intro">产品介绍</div>		
+		<div class="m-slider">			
+			<a href="http://open.163.com/"><img class="slide crt_slide" src="img/banner1.jpg" alt="网易公开课"></a>
+			<a href="http://study.163.com/"><img class="slide" src="img/banner2.jpg" alt="云课堂"></a>		
+			<a href="http://www.icourse163.org/"><img class="slide" src="img/banner3.jpg" alt="中国大学MOOC"></a>
+			<div class="pointer">
+				<i class="crt_point"></i><i></i><i></i>
+			</div>
+		</div>
+		<div class="g-wrap m-intro">产品介绍</div>		
 	</div>
 	<!-- /头部(导航及轮播图) -->
 
@@ -36,14 +51,14 @@
 	<!-- 主体（课程） -->
 	<div class="g-body">
 		<div class="showimg">图片展示</div>
-		<div class="wrap clearfix">		
+		<div class="g-wrap clearfix">		
 			<div class="m-content">
 				<div class="tab">
 					<span>产品设计</span>
 					<span>编程语言</span>
 				</div>
 				<div class="courses">课程区</div>
-				<div class="m-pages">分页</div>
+				<div class="m-pager">分页</div>
 			</div>
 			<div class="m-ad">视频展示</div>
 			<div class="m-top">课程排行</div>
@@ -54,6 +69,7 @@
 	<!-- 页脚 -->
 	<div class="g-foot">页脚</div>
 	<!-- /页脚 -->
-
+	
+	<script src="js/script.js"></script>
 </body>
 </html>
