@@ -1,0 +1,131 @@
+.clearfix:after{
+	content : "." ; 
+	display: block; 
+	clear: both; 
+	height: 0; 
+	overflow: hidden; 
+	visibility: hidden;
+}
+.clearfix {*zoom: 1;}
+/* 顶部提示信息 */
+.m-msg {
+	width: 100%;	
+	height: 36px;
+	line-height: 36px;
+	background: #f3f3f3;
+}
+
+/* /顶部提示信息 */
+
+/* 头部(导航及轮播图) */
+.m-nav {
+	margin: 0 auto;		
+	width: 1206px;
+	height: 89px;
+	line-height: 89px;
+	background: #fff;
+}
+.m-nav .logo {
+	float: left;
+}
+
+.m-nav .follow {
+	float: left;
+}
+
+.m-nav .topnav {
+	float: right;
+	margin: 0;
+	list-style: none;
+}
+
+.m-nav li {
+	display: inline;
+}
+
+.m-slide {
+	width: 100%;
+	height: 460px;
+	background: #7EC2BC;
+}
+
+.m-intro {
+	margin: 0 auto;
+	width: 1206px;
+	height: 295px;
+	background: #DDCA85;
+}
+
+/* /头部(导航及轮播图) */
+
+
+/* 主体（课程） */
+.g-body {
+	width: 100%;
+	height: 1771px;
+	padding-top: 2px;
+	background: #f8f8f8;
+}
+.g-body .showimg {
+	margin-bottom: 81px;
+	width: 100%;
+	height: 220px;
+	background: #B8AAAA;
+}
+
+.g-body .wrap {
+	margin: 0 auto;
+	width: 1206px;
+}
+
+.m-content {
+	float: left;
+	width: 960px;	
+	background: #B2B0B0;	
+}
+
+.m-content .tab {
+	margin-bottom: 30px;
+	width: 400px;
+	height: 50px;
+	line-height: 50px;
+	background: #39a030;
+}
+
+.m-content .courses {
+	margin-bottom: 10px;
+	height: 1240px;
+	background: #F79090;
+}
+
+.m-pages {
+	float: right;
+	width: 302px;
+	height: 20px;
+	background: #BF3E3E;
+}
+
+.m-ad {
+	float: right;
+	margin: 3px 0 21px;
+	width: 223px;
+	height: 229px;
+	background: #81AD92;
+}
+
+.m-top {
+	float: right;
+	width: 223px;
+	height: 778px;
+	background: #C5C75F;
+}
+
+/* /主体（课程） */
+
+/* 页脚 */
+.g-foot {
+	height: 262px;
+	background: #2c3339;
+}
+
+/* /页脚 */
