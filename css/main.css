@@ -40,12 +40,14 @@ body {
 /* /顶部提示信息 */
 
 /* 头部(导航及轮播图) */
+.g-head {
+	background: #fff;
+}
 .m-nav {
 	margin: 0 auto;		
 	width: 1206px;
 	height: 89px;
 	line-height: 89px;
-	background: #fff;
 	font-family: "HiraginoSansGB W3", "Microsoft YaHei", "Arial", "sans-serif";
 }
 
@@ -84,10 +86,10 @@ body {
 	background: #2fb556;
 }
 .m-nav .fans {
-    display: inline-block;
-    height: 21px;
-    line-height: 21px;	    
-    vertical-align: middle;
+	display: inline-block;
+	height: 21px;
+	line-height: 21px;	    
+	vertical-align: middle;
 	color: #666;
 }
 
@@ -164,7 +166,43 @@ body {
 
 .m-intro {
 	height: 295px;
-	background: #DDCA85;
+}
+
+.m-intro .intro {
+	float: left;
+	width: 344px;
+	height: 180px;
+	margin-top: 60px;
+	margin-left: 80px;
+}
+
+.m-intro .intro:first-child{
+	margin-left: 5px;
+}
+
+.m-intro h3 {
+	margin: 0;	
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 20px;
+	color: #333;
+}
+
+.m-intro p,
+.m-intro a {
+	margin: 15px 0 24px;
+	font-size: 14px;
+	line-height: 24px;
+	color: #666;
+}
+
+.m-intro a {
+	text-decoration: none;
+	color: #39a030;
+}
+
+.m-intro a:hover {
+	text-decoration: underline;
 }
 
 /* /头部(导航及轮播图) */
@@ -175,13 +213,25 @@ body {
 	width: 100%;
 	height: 1771px;
 	padding-top: 2px;
+	overflow: hidden;
 	background: #f8f8f8;
 }
-.g-body .showimg {
+.m-imgcolm {
+	position: relative;
+	left: 50%;
+	margin-left: -808px;
 	margin-bottom: 81px;
-	width: 100%;
+	width: 1616px;
 	height: 220px;
-	background: #B8AAAA;
+}
+
+.m-imgcolm img {
+	float: left;
+	margin-left: 4px;
+}
+
+.m-imgcolm img:first-child {
+	margin-left: 0;
 }
 
 .m-content {

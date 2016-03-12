@@ -1,6 +1,9 @@
 /* banner 轮播图 */
 
+// 待解决问题记录
+// hover当前图片对应的pointer时图片均不显示
 // IE8 opacity待兼容
+
 // 图片渐变: fadein,fadeout
 var slide = {
     fadeout: function (ele,stepLength,stepTime) {
@@ -89,6 +92,7 @@ function slider() {
     // 点击poniter后的切换
     function clickPointer(event) {
         event = event || window.event;
+        clearInterval(onload);
         for (var i=0;i<3;i++) {
             slides[i].className = "slide";
             pointer[i].className = "";
@@ -105,10 +109,14 @@ function slider() {
         }
 
         // 更改切换前后的 opacity
-        crtSlide.style.opacity = 0;
-        crtSlide = slides[pointIndex];
-        crtSlide.style.opacity = 1;
-        crtSlide.className = "slide crt_slide";        
+        if(crtSlide !== slides[pointIndex]) {
+            slide.fadein(slides[pointIndex],1/50,10);
+            slide.fadeout(crtSlide,1/50,10);        
+            crtSlide = slides[pointIndex];
+            crtSlide.className = "slide crt_slide";
+        } else {
+            crtSlide.className = "slide crt_slide";
+        }       
     }
 
     // 鼠标悬停事件注册
@@ -119,7 +127,7 @@ function slider() {
 
     // pointer切换事件注册
     for (var i=0;i<pointer.length;i++) {
-        eventUtil.addHandler(pointer[i], 'click',clickPointer);
+        eventUtil.addHandler(pointer[i], 'mouseover',clickPointer);
     }
 
     // 每隔5s进行一次轮播
