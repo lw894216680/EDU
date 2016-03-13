@@ -80,7 +80,7 @@ function slider() {
     // 鼠标悬停
     function msover(event) {
         event = event || window.event;
-        event.target.style.opacity = 1;
+        event.target.style.opacity = 1;      
         clearInterval(onload);
     }
     function msout(event) {
