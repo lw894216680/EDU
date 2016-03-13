@@ -412,10 +412,30 @@ body {
 
 .m-card-top {
 	float: right;
-/*	height: 778px;*/
+}
+
+.m-card-top .top_course {
+	padding: 20px 20px 0;
+}
+
+.m-card-top p {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	line-height: 14px;
+	color: #999;	
+}
+
+.top_course .course_name {
+	margin-bottom: 13px;
+	color: #333;	
 }
 
 
+.m-card-top .top_course img {
+	float: left;
+	margin-right: 12px;	
+}
 
 /* /主体（课程） */
 
