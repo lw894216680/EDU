@@ -347,8 +347,9 @@ body {
 	font-size: 14px;
 	line-height: 20px;
 	text-align: center;
-	color: #666;		
-} 
+	color: #666;
+	cursor: pointer;		
+}
 
 .m-pager .prevs_page,
 .m-pager .next_page {
@@ -359,24 +360,62 @@ body {
 }
 
 .m-pager .crt_page {
-	color: #fff;
-	background: #9dd8b1	
+	color: #39a030;
 }
 
-.m-ad {
+.m-pager li:hover {
+	background: #9dd8b1;		
+}
+
+.m-card {
+	width: 223px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0 1px 1px #d4d3d3;
+	-moz-box-shadow: 0 1px 1px #d4d3d3;
+	-o-box-shadow: 0 1px 1px #d4d3d3;
+	box-shadow: 0 1px 1px #d4d3d3;
+	font-size: 0;
+	background: #fff;
+}
+
+.m-card h4 {
+	margin: 0;
+	padding-left: 20px;	
+	height: 55px;
+	border-bottom: 1px solid #ddd;	
+	font-size: 16px;
+	font-weight: normal;	
+	line-height: 55px;
+	color: #333;
+}
+
+.m-card p {
+	margin: 0;
+	font-size: 14px;
+	color: #666;
+}
+
+.m-card-video {
 	float: right;
 	margin: 3px 0 21px;
-	width: 223px;
-	height: 229px;
-	background: #81AD92;
 }
 
-.m-top {
-	float: right;
-	width: 223px;
-	height: 778px;
-	background: #C5C75F;
+.m-card-video p {
+	padding: 20px 0 9px 22px;
+	line-height: 14px;	
 }
+
+.m-card-video img {
+	padding-left: 22px;
+	cursor: pointer;
+}
+
+.m-card-top {
+	float: right;
+/*	height: 778px;*/
+}
+
+
 
 /* /主体（课程） */
 
