@@ -1,8 +1,8 @@
 body {
     font-family: "Microsoft YaHei", "Arial", "Hiragino Sans GB", "sans-serif";
 }
-
-.clearfix:after{
+/* 清除浮动 */
+.f-cb:after{
 	content : "." ; 
 	display: block; 
 	clear: both; 
@@ -10,7 +10,22 @@ body {
 	overflow: hidden; 
 	visibility: hidden;
 }
-.clearfix {*zoom: 1;}
+.f-cb {
+	*zoom: 1;
+}
+
+/* 浮动 */
+.f-fl {
+	float: left;
+}
+.f-fr {
+	float: right;
+}
+
+/* 文本居中 */
+.f-tac {
+	text-align: center;
+}
 
 
 /* 顶部提示信息 */
@@ -43,31 +58,37 @@ body {
 .g-head {
 	background: #fff;
 }
-.m-nav {
-	margin: 0 auto;		
-	width: 1206px;
-	height: 89px;
-	line-height: 89px;
-	font-family: "HiraginoSansGB W3", "Microsoft YaHei", "Arial", "sans-serif";
-}
 
-.m-nav .logo span {
-	float: left;
+.m-logo span {
 	font-size: 28px;
 	font-weight: bold;
 	color: #39a030;
 }
 
-.m-nav h1 {
-	float: left;
+.m-logo h1 {
 	font-size: 22px;
 	font-weight: normal;
+}
+
+.m-logo-1 {
+	margin-bottom: 14px;	
+	line-height: 28px;
+}
+
+.m-logo-1 h1 {
+	color: #39a030;	
+}
+
+.m-nav {
+	height: 89px;
+	line-height: 89px;
+	font-family: "HiraginoSansGB W3";
 }
 
 .m-nav .follow {
 	float: left;
 	font-size: 12px;
-	font-family: "宋体", "Microsoft YaHei", "Arial", "sans-serif";	
+	font-family: "宋体";	
 }
 .m-nav .flw-btn {
 	display: inline-block;
@@ -82,9 +103,11 @@ body {
 	background: #21a557;
 	color: #fff;
 }
+
 .m-nav .flw-btn:hover {
 	background: #2fb556;
 }
+
 .m-nav .fans {
 	display: inline-block;
 	height: 21px;
@@ -333,7 +356,7 @@ body {
 
 .m-pager ul {
 	margin: 0;
-    -webkit-padding-start: 0; /* 有待兼容 */
+    padding: 0;
 	list-style: none;
 	font-size: 0px;
 
@@ -441,8 +464,54 @@ body {
 
 /* 页脚 */
 .g-foot {
-	height: 262px;
 	background: #2c3339;
+}
+
+.m-foot .ftlf {
+	padding: 90px 0 80px 50px;
+	margin-right: 150px;
+}
+
+.m-foot .copy p {
+	margin: 0;
+	font-size: 12.5px;
+	line-height: 25px;
+	color: #fff;
+}
+
+.m-foot .ftrt {
+	padding: 80px 0 80px;
+}
+
+.m-list {
+	margin-right: 98px;
+	color: #fff;
+}
+.m-list h6 {
+	margin: 0 0 5px 0;
+	font-size: 13px;
+	line-height: 13px;
+}
+
+.m-list ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 15px;
+	line-height: 28px;
+}
+
+.m-list a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.m-list a:hover {
+	text-decoration: underline;
+}
+
+.m-list-1 {
+	margin-right: 72px;
 }
 
 /* /页脚 */
