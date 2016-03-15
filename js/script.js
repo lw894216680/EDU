@@ -1,7 +1,24 @@
+/* 顶部提示信息 */
+// 点击后再刷新会先显示再隐藏，不友好，待解决
+function msgDisplay() {
+    var cookie = getCookie();
+    var msg = getByClass('m-msg')[0],
+        close = getByClass('close')[0];
+    if (cookie.hiddenMsg) {
+        addClass(msg, 'f-dn');
+    } else {
+        eventUtil.addHandler(close, 'click', function(){
+            addClass(msg, 'f-dn');            
+            setCookie('hiddenMsg', 'true', '/');
+        });
+    }   
+}
+/* /顶部提示信息 */
+
+
 /* banner 轮播图 */
 
 // 待解决问题记录
-// hover当前图片对应的pointer时图片均不显示
 // IE8 opacity待兼容
 
 // 图片渐变: fadein,fadeout
@@ -69,10 +86,10 @@ function slider() {
         slide.fadeout(crtSlide,1/50,10);
 
         // 将下一节点更换为当前节点
-        crtSlide.className = "slide";
-        crtPoint.className = "";
-        afterSlide.className += " crt_slide";
-        afterPoint.className = "crt_point";
+        removeClass(crtSlide, 'crt_slide');
+        removeClass(crtPoint, 'crt_point');
+        addClass(afterSlide, 'crt_slide');
+        addClass(afterPoint, 'crt_point');
         crtSlide = afterSlide;
         crtPoint = afterPoint;
     }
@@ -93,12 +110,9 @@ function slider() {
     function clickPointer(event) {
         event = event || window.event;
         clearInterval(onload);
-        for (var i=0;i<3;i++) {
-            slides[i].className = "slide";
-            pointer[i].className = "";
-        }
+        removeClass(crtPoint, 'crt_point');
         crtPoint = event.target;
-        crtPoint.className = "crt_point";
+        addClass(crtPoint, 'crt_point');
 
         // 取出被click元素的索引值
         for (var i=0;i<pointer.length;i++) {
@@ -108,14 +122,16 @@ function slider() {
             }
         }
 
-        // 更改切换前后的 opacity
+        // 切换 slide
         if(crtSlide !== slides[pointIndex]) {
             slide.fadein(slides[pointIndex],1/50,10);
-            slide.fadeout(crtSlide,1/50,10);        
+            slide.fadeout(crtSlide,1/50,10); 
+            removeClass(crtSlide, 'crt_slide');     
             crtSlide = slides[pointIndex];
-            crtSlide.className = "slide crt_slide";
-        } else {
-            crtSlide.className = "slide crt_slide";
+            addClass(crtSlide, 'crt_slide');
+        } 
+        else {
+            addClass(crtSlide, 'crt_slide');
         }       
     }
 
@@ -132,13 +148,14 @@ function slider() {
 
     // 每隔5s进行一次轮播
     var onload = setInterval(animation,5000);    
-
 }
-
 
 /* /banner轮播图 */
 
 
 
+
+
+addLoadEvent(msgDisplay);
 addLoadEvent(slider);
 
