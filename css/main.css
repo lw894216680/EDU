@@ -91,6 +91,7 @@ body {
 }
 
 .m-logo h1 {
+	margin-top: -1px;
 	font-size: 22px;
 	font-weight: normal;
 }
@@ -162,24 +163,30 @@ body {
 .m-nav .topnav {
 	float: right;
 	margin: 0;
+	font-size: 0;
 	list-style: none;
+
 }
 
 .m-nav .topnav i {
 	margin-left: 30px;
-	width: 18px;
-	height: 18px;
+	width: 19px;
+	height: 19px;
 	cursor: pointer;
-	background-position: 0 -40px;
+	background-position: 0 -41px;
+	vertical-align: middle;		
 }
 
 .m-nav .topnav i:hover {
-	background-position: -24px -40px;	
+	background-position: -24px -41px;	
 }
 
-.m-nav li {
+.m-nav .topnav li {
 	display: inline;
+	font-size: 16px;
+	line-height: 89px;
 	margin-left: 55px;
+	vertical-align: middle;
 }
 
 .m-nav a {
