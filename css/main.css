@@ -32,12 +32,16 @@ body {
 	display: inline-block;
 }
 
+/* 完全消失 */
+.f-dn {
+	display: none;
+}
 
 /* sprite */
 .m-msg i,
 .m-logo i,
 .m-nav .flw-btn i,
-.m-nav .topnav i,
+.m-nav .topnav i,  /*搜索重新切图*/
 .m-intro .intro i,
 .m-card-video i,
 .m-list-1 i,

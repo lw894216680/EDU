@@ -1,4 +1,4 @@
-// 事件加载
+/* 事件加载 */
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -10,8 +10,15 @@ function addLoadEvent(func) {
     	}
   	}
 }
+/* /事件加载 */
 
-// 由类名获取元素节点
+
+
+
+
+
+/* 类名相关 */
+// 由类名获取节点
 function getByClass(clsName,elm){
 	var elm = elm ? elm : document;
 	if(elm.getElementsByClassName){
@@ -28,7 +35,38 @@ function getByClass(clsName,elm){
 	}
 }
 
-// 事件处理封装
+// 类名存在判断
+function hasClass( elm,clsName ){    
+    return !!elm.className.match( new RegExp( "(\\s|^)" + clsName + "(\\s|$)") );   
+}
+
+
+// 添加类名
+function addClass(elm, newClsName) {
+    if(elm.className == '') {
+        elm.className = newClsName;    
+    } 
+    if(!hasClass(elm,newClsName)) {
+        elm.className += ' ' + newClsName;            
+    }
+}
+
+// 移除类名
+function removeClass(elm,oldClsName) {
+    if(hasClass(elm,oldClsName)) {
+	    var reg = new RegExp('(\\s|^)' + oldClsName + '(\\s|$)');
+	    elm.className = elm.className.replace(reg, '');
+    }
+}
+
+/* /类名相关 */
+
+
+
+
+
+
+/* 事件处理封装 */
 var eventUtil = {
 	// 添加事件
 	addHandler: function(element, type, handler) {
@@ -67,3 +105,48 @@ var eventUtil = {
 		}
 	}
 }
+
+/* /事件处理封装 */
+
+
+
+
+/* Cookie */ 
+function getCookie() {
+	var cookie = {};
+	var all = document.cookie;
+	if (all === '') return cookie;
+	var list = all.split('; ');
+	for (var i = 0, len = list.length; i < len; i++) {
+		var item = list[i];
+		var p = item.indexOf('=');
+		var name = item.substring(0, p);
+		name = decodeURIComponent(name);
+		var value = item.substring(p + 1);		
+		value = decodeURIComponent(value);
+		cookie[name] = value;
+	}
+	return cookie;
+}
+
+function setCookie(name, value, path, domain, expires, secure) {
+	var cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+	if (expires) {
+		cookie += '; expires=' + expires.toGMTString();
+	}
+	if (path) {
+		cookie += '; path=' + path;
+	}
+	if (domain) { 
+		cookie += '; domain=' + domain;
+	}
+	if (secure) {
+		cookie += '; secure=' + secure;
+	}
+	document.cookie = cookie;
+}
+
+function removeCookie(name, path, domain) {
+	document.cookie = 'name=' + name + '; path=' + path +';domain=' + domain + '; max-age=' + maxAge;
+}
+/* /Cookie */ 
