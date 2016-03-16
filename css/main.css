@@ -49,10 +49,17 @@ body {
 .u-btn-2 .ic2,
 .m-nav .topnav i,  /*搜索重新切图*/
 .m-intro .intro i,
-.m-card-video i,
 .m-list-1 i,
-.m-pager i {
+.m-pager i,
+.m-login .close_login,
+.m-content .nums span,
+.u-num span {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
+}
+
+.m-card-video i,
+.u-smbtn {
+	background: url(../img/sprite24.png) 9999px 9999px no-repeat;
 }
 
 /* 顶部提示信息 */
@@ -353,7 +360,7 @@ body {
 }
 
 .m-intro i.mooclogo {
-	background-position: -109px -172px;
+	background-position: -200px 0;
 }
 
 /* /头部(导航及轮播图) */
@@ -362,7 +369,6 @@ body {
 /* 主体（课程） */
 .g-body {
 	width: 100%;
-	height: 1771px;
 	padding-top: 2px;
 	overflow: hidden;
 	background: #f8f8f8;
@@ -388,7 +394,8 @@ body {
 
 .m-content {
 	float: left;
-	width: 980px;	
+	width: 980px;
+	padding-bottom: 120px;	
 }
 
 .m-content .tab {
@@ -423,56 +430,124 @@ body {
 	height: 1240px;
 }
 
-.m-content .course {
+.m-course {
+	position: relative;
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 20px;
-	padding: 1px;
-	width: 223px;
-	height: 226px;
+	width: 225px;
+	height: 228px;
 	font-size: 0;  /* 消除图片与文字的间距 */ 
+	background: #fff;
 	-webkit-box-shadow: 0 1px 1px #e6e6e6;
 	-moz-box-shadow: 0 1px 1px #e6e6e6;
 	-o-box-shadow: 0 1px 1px #e6e6e6;
-	box-shadow: 0 1px 1px #e6e6e6;
-	background: #fff;
+	box-shadow: 0 1px 1px #e6e6e6;		
 } 
 
-.m-content .course > div {
-	padding: 0 4px;
+.m-course .summary {
+	padding: 1px;
+	color: #999;		
 }
 
-.m-content h5,
-.m-content p {
-	margin: 10px 0;
-	font-size: 12px;
+.m-course .summary_txt {
+	padding: 10px 4px 9px;
 }
 
-.m-content h5 {
+.m-course h5 {
+	margin: 0 0 10px 0;	
 	font-weight: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	font-size: 12px;	
 	line-height: 12px;
 	color: #333;	
 }
 
-.m-content p {
-	line-height: 12px;	
-	color: #999;	
+.m-course p {
+	margin: 0;
+	font-size: 12px;	
+	line-height: 12px;		
 }
 
-.m-content .nums {
-	width: 38px;
+.m-course img {
+	width: 223px;
+	height: 124px;
+}
+
+.m-course .nums {
+	padding: 0 3px;
+	margin: 10px 0 9px;	
 	height: 16px;
+	font-size: 8px;
 	line-height: 16px;
 	border: 1px solid #999;
 	border-radius: 2px;
 }
 
-.m-content .cost {
+.m-course .nums span {
+	margin-right: 5px;
+	width: 9px;
+	height: 10px;
+	background-position: -43px -106px;
+}
+
+.m-course .cost {
 	font-weight: bold;		
 	color: #ff3f00;
+}
+
+
+
+.m-course:hover .detail {
+	display: block;
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	padding-top: 11px;
+	width: 480px;
+	height: 228px;
+	background: #fff;
+	-webkit-box-shadow: 0 0 3px 1px #d4d3d3;
+	-moz-box-shadow: 0 0 3px 1px #d4d3d3;
+	-o-box-shadow: 0 0 3px 1px #d4d3d3;
+	box-shadow: 0 0 3px 1px #d4d3d3;
+	color: #666;
+	z-index: 1;
+	overflow: hidden;			
+}
+
+.m-course:hover .detail img {
+	float: left;
+	margin-bottom: 20px;
+	margin-left: 11px;
+}
+
+
+.m-course:hover .dtltxt_1 {
+	margin-left: 257px;
+}
+
+.m-course:hover .dtltxt_1 h5 {
+	margin: 4px 0 16px -4px;
+	font-size: 18px;
+	line-height: 18px;
+}
+
+.m-course:hover .author {
+	margin: 13px 0 8px 0;
+}
+
+.m-course:hover .dtltxt_2 {
+	padding: 10px 20px 0;
+	height: 84px;
+	background: #f8f8f8;
+}
+
+.m-course:hover .dtltxt_2 p {
+	font-size: 14px;
+	line-height: 24px;	
 }
 
 .m-pager {
@@ -511,6 +586,7 @@ body {
 }
 
 .m-pager .pgnum:hover {
+	color: #fff;
 	background: #9dd8b1;		
 }
 
@@ -534,7 +610,7 @@ body {
 	-o-box-shadow: 0 1px 1px #d4d3d3;
 	box-shadow: 0 1px 1px #d4d3d3;
 	font-size: 0;
-	background: #fff;
+	background: #fff;	
 }
 
 .m-card h4 {
@@ -575,8 +651,8 @@ body {
 	left: 89px;
 	width: 46px;
 	height: 46px;
-	background-position: 0 -171px;
 	cursor: pointer;
+	background-position: 0 0;
 }
 
 .m-card-top .top_course {
@@ -587,8 +663,7 @@ body {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	line-height: 14px;
-	color: #999;	
+	line-height: 14px;	
 }
 
 .top_course .course_name {
@@ -600,6 +675,24 @@ body {
 .m-card-top .top_course img {
 	float: left;
 	margin-right: 12px;	
+}
+
+.u-num {
+	font-size: 10px;
+	line-height: 10px;
+	color: #666;		
+}
+
+.u-num span {
+	margin-right: 5px;
+	width: 9px;
+	height: 10px;
+	background-position: -43px -106px; 
+}
+
+.u-num-1 {
+	font-size: 12px;
+	line-height: 12px;
 }
 
 /* /主体（课程） */
@@ -619,10 +712,12 @@ body {
 	font-size: 12.5px;
 	line-height: 25px;
 	color: #fff;
+	letter-spacing: 0.5px;
 }
 
 .m-foot .ftrt {
 	padding: 80px 0 80px;
+	letter-spacing: 0.5px;
 }
 
 .m-list {
@@ -660,7 +755,7 @@ body {
 	margin: 0 0 -3px 11px;
 	width: 20px;
 	height: 16px;
-	background-position: 0 -102px;
+	background-position: 0 -106px;
 }
 
 /* /页脚 */
@@ -697,6 +792,8 @@ body {
 	padding-top: 30px;
 	padding-bottom: 40px;
 	padding-left: 40px;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .m-login p {
@@ -706,27 +803,51 @@ body {
 	color: #444;
 }
 
+.m-login .close_login {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 23px;
+	height: 22px;
+	cursor: pointer;	
+	background-position:  0 -139px;
+}
+
 .u-ipt {
+	position: relative;	
+}
+
+.u-ipt input {
 	width: 293px;
 	height: 43px;
 	border: 1px solid #dfdfdf;
+    box-shadow: 1px 1px 1px #f1f1f1 inset;	
+	text-indent: 7px;
+	color: #333;
 }
 
-.u-ipt-u {
+.u-ipt .plhd {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	color: #ccc;
+	cursor: text;
+}
+
+.u-ipt-u input {
 	margin-bottom: 15px;
 }
 
-.u-ipt-p {
+.u-ipt-p input {
 	margin-bottom: 29px;
 }
 
 .u-smbtn {
-	margin-left: 1px;
 	padding: 0;
-	width: 293px;
-	height: 46px;
-	background: #1ea740;
+	width: 295px;
+	height: 48px;
 	border: none;
-	font-size: 16px;
 	color: #fff;
+	background-position: 0 -56px;
+	letter-spacing: 2px;
 }
