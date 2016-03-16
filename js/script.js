@@ -3,7 +3,7 @@
 function msgDisplay() {
     var cookie = getCookie();
     var msg = getByClass('m-msg')[0],
-        close = getByClass('close')[0];
+        close = getByClass('close_msg')[0];
     if (cookie.hiddenMsg) {
         addClass(msg, 'f-dn');
     } else {
@@ -156,17 +156,29 @@ function slider() {
 
 
 /* 登录框 */
-function login() {
+function signin() {
+    var flwBtn = getByClass('u-btn-1')[0];
+
     var plhdUser = getByClass('plhd_user')[0],
         plhdPswd = getByClass('plhd_pswd')[0],
         user = document.getElementById('user'),
         pswd = document.getElementById('pswd');
 
+    var mask = getByClass('m-mask')[0],
+        login = getByClass('m-login')[0],
+        closeLogin = getByClass('close_login')[0];
+
+    // 弹出登录框
+    eventUtil.addHandler(flwBtn, 'click', function(){
+        removeClass(mask, 'f-dn');
+        removeClass(login, 'f-dn');
+    });
+
     // 输入框获得焦点，隐藏占位符
-    eventUtil.addHandler(user, 'focus', function(){
+    eventUtil.addHandler(user, 'keydown', function(){
         addClass(plhdUser, 'f-dn');
     });
-    eventUtil.addHandler(pswd, 'focus', function(){
+    eventUtil.addHandler(pswd, 'keydown', function(){
         addClass(plhdPswd, 'f-dn');
     });
 
@@ -181,10 +193,19 @@ function login() {
             removeClass(plhdPswd, 'f-dn');
         };
     });
+
+
+    // 关闭登录框
+    eventUtil.addHandler(closeLogin, 'click', function(){
+        addClass(mask, 'f-dn');
+        addClass(login, 'f-dn');
+    });
 }
+
+/* /登录框 */
 
 
 addLoadEvent(msgDisplay);
 addLoadEvent(slider);
-addLoadEvent(login);
+addLoadEvent(signin);
 

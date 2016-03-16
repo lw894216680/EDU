@@ -50,7 +50,9 @@ body {
 .m-nav .topnav i,  /*搜索重新切图*/
 .m-intro .intro i,
 .m-list-1 i,
-.m-pager i {
+.m-pager i,
+.u-smbtn,
+.m-login .close_login {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
 }
 
@@ -710,6 +712,16 @@ body {
 	color: #444;
 }
 
+.m-login .close_login {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 23px;
+	height: 22px;
+	cursor: pointer;	
+	background-position:  -270px -155px;
+}
+
 .u-ipt {
 	position: relative;	
 }
@@ -718,6 +730,8 @@ body {
 	width: 293px;
 	height: 43px;
 	border: 1px solid #dfdfdf;
+    box-shadow: 2px 2px 1px #f1f1f1 inset;	
+	text-indent: 7px;
 	color: #333;
 }
 
@@ -726,6 +740,7 @@ body {
 	top: 15px;
 	left: 10px;
 	color: #ccc;
+	cursor: text;
 }
 
 .u-ipt-u input {
@@ -737,11 +752,11 @@ body {
 }
 
 .u-smbtn {
-	margin-left: 1px;
 	padding: 0;
 	width: 293px;
 	height: 46px;
-	background: #1ea740;
 	border: none;
 	color: #fff;
+	background-position: 0 -180px;
+	box-shadow: 2px 2px 0 #d5e3da;
 }
