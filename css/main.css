@@ -49,7 +49,6 @@ body {
 .u-btn-2 .ic2,
 .m-nav .topnav i,  /*搜索重新切图*/
 .m-intro .intro i,
-.m-card-video i,
 .m-list-1 i,
 .m-pager i {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
@@ -353,7 +352,7 @@ body {
 }
 
 .m-intro i.mooclogo {
-	background-position: -109px -172px;
+	background-position: -200px 0;
 }
 
 /* /头部(导航及轮播图) */
@@ -511,6 +510,7 @@ body {
 }
 
 .m-pager .pgnum:hover {
+	color: #fff;
 	background: #9dd8b1;		
 }
 
@@ -575,7 +575,7 @@ body {
 	left: 89px;
 	width: 46px;
 	height: 46px;
-	background-position: 0 -171px;
+	background: url(../img/ic-video.png) no-repeat;
 	cursor: pointer;
 }
 
@@ -619,10 +619,12 @@ body {
 	font-size: 12.5px;
 	line-height: 25px;
 	color: #fff;
+	letter-spacing: 0.5px;
 }
 
 .m-foot .ftrt {
 	padding: 80px 0 80px;
+	letter-spacing: 0.5px;
 }
 
 .m-list {
@@ -660,7 +662,7 @@ body {
 	margin: 0 0 -3px 11px;
 	width: 20px;
 	height: 16px;
-	background-position: 0 -102px;
+	background-position: 0 -106px;
 }
 
 /* /页脚 */
@@ -697,6 +699,8 @@ body {
 	padding-top: 30px;
 	padding-bottom: 40px;
 	padding-left: 40px;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .m-login p {
@@ -707,16 +711,28 @@ body {
 }
 
 .u-ipt {
+	position: relative;	
+}
+
+.u-ipt input {
 	width: 293px;
 	height: 43px;
 	border: 1px solid #dfdfdf;
+	color: #333;
 }
 
-.u-ipt-u {
+.u-ipt .plhd {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	color: #ccc;
+}
+
+.u-ipt-u input {
 	margin-bottom: 15px;
 }
 
-.u-ipt-p {
+.u-ipt-p input {
 	margin-bottom: 29px;
 }
 
@@ -727,6 +743,5 @@ body {
 	height: 46px;
 	background: #1ea740;
 	border: none;
-	font-size: 16px;
 	color: #fff;
 }

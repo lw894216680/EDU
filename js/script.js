@@ -155,7 +155,36 @@ function slider() {
 
 
 
+/* 登录框 */
+function login() {
+    var plhdUser = getByClass('plhd_user')[0],
+        plhdPswd = getByClass('plhd_pswd')[0],
+        user = document.getElementById('user'),
+        pswd = document.getElementById('pswd');
+
+    // 输入框获得焦点，隐藏占位符
+    eventUtil.addHandler(user, 'focus', function(){
+        addClass(plhdUser, 'f-dn');
+    });
+    eventUtil.addHandler(pswd, 'focus', function(){
+        addClass(plhdPswd, 'f-dn');
+    });
+
+    // 输入框失去焦点，且为空时显示占位符
+    eventUtil.addHandler(user, 'blur', function(){
+        if (!user.value) {
+            removeClass(plhdUser, 'f-dn');
+        };
+    });    
+    eventUtil.addHandler(pswd, 'blur', function(){
+        if (!pswd.value) {
+            removeClass(plhdPswd, 'f-dn');
+        };
+    });
+}
+
 
 addLoadEvent(msgDisplay);
 addLoadEvent(slider);
+addLoadEvent(login);
 
