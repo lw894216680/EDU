@@ -32,6 +32,7 @@ var slide = {
                 ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
             } else {
                 ele.style.opacity = 0;
+                // removeClass(ele, 'crt_slide'); 
                 clearInterval(setfadeout);
             }
         }
@@ -46,6 +47,7 @@ var slide = {
                 ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
             } else {
                 ele.style.opacity = 1;
+                // addClass(ele, 'crt_slide')
                 clearInterval(setfadein);
             }           
         }
