@@ -32,6 +32,7 @@ var slide = {
                 ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
             } else {
                 ele.style.opacity = 0;
+                // removeClass(ele, 'crt_slide'); 
                 clearInterval(setfadeout);
             }
         }
@@ -46,6 +47,7 @@ var slide = {
                 ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
             } else {
                 ele.style.opacity = 1;
+                // addClass(ele, 'crt_slide')
                 clearInterval(setfadein);
             }           
         }
@@ -205,6 +207,33 @@ function signin() {
 /* /登录框 */
 
 
+
+/* 课程 */
+function showCourse(courseData) {  
+    var courses = getByClass('courses')[0],
+        courseHtml = '';
+    for(var i=0; i<courseData.list.length; i++) {
+        var course = document.createElement('div');
+        course.setAttribute('class','m-course');
+
+        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">¥ ' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
+
+        course.innerHTML = courseHtml;
+        courses.appendChild(course);
+    }  
+}
+
+function getByAjax(){
+    var url = url || 'http://study.163.com/webDev/couresByCategory.htm';
+    var options = options || {pageNo:1,psize:20,type:10};
+    get(url, options, showCourse);
+}
+
+
+
+/* 课程 */
+
+addLoadEvent(getByAjax);
 addLoadEvent(msgDisplay);
 addLoadEvent(slider);
 addLoadEvent(signin);

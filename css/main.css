@@ -49,8 +49,9 @@ body {
 .u-btn-2 .ic2,
 .m-nav .topnav i,  /*搜索重新切图*/
 .m-intro .intro i,
-.m-list-1 i,
-.m-pager i,
+.m-list-1 pre,
+.m-pager .prevs_page,
+.m-pager .next_page,
 .m-login .close_login,
 .m-content .nums span,
 .u-num span {
@@ -279,7 +280,7 @@ body {
 	height: 10px;
 	font-size: 0;  
 	line-height: 0;
-	z-index: 1;
+	z-index: 10;
 }
 
 .m-slider i {
@@ -552,7 +553,7 @@ body {
 
 .m-pager {
 	float: right;
-	margin-right: 20px;
+	margin-right: 16px;
 }
 
 .m-pager ul {
@@ -565,40 +566,47 @@ body {
 
 .m-pager li {
 	display: block;
-	margin: 0 5px;
-	width: 20px;
-	height: 20px;
+	float: left;
 	font-size: 14px;
 	line-height: 20px;
 	text-align: center;
-	color: #666;
 	cursor: pointer;		
+}
+
+.m-pager a {
+	display: block;
+	margin: 0 4px;	
+	width: 20px;
+	height: 20px;
+	color: #666;
+	text-decoration: none;
 }
 
 .m-pager .prevs_page,
 .m-pager .next_page {
 	width: 30px;
-	margin: 0;
 }
 
-.m-pager .crt_page {
-	color: #39a030;
-}
-
-.m-pager .pgnum:hover {
+.m-pager .pgr:hover {
 	color: #fff;
 	background: #9dd8b1;		
 }
 
-.m-pager .prevs_page i {
-	width: 30px;
-	height: 20px;
+.m-pager .crt_page {
+	cursor: default;
+	color: #39a030;
+}
+
+.m-pager .crt_page:hover {
+	color: #39a030;	
+	background: none;
+}
+
+.m-pager .prevs_page {
 	background-position: 0 -73px;
 }
 
-.m-pager .next_page i {
-	width: 30px;
-	height: 20px;
+.m-pager .next_page {
 	background-position: -44px -73px;
 }
 

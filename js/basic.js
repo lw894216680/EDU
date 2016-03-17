@@ -150,3 +150,65 @@ function removeCookie(name, path, domain) {
 	document.cookie = 'name=' + name + '; path=' + path +';domain=' + domain + '; max-age=' + maxAge;
 }
 /* /Cookie */ 
+
+
+
+/* Ajax */
+
+// 请求GET方法
+function get(url, options, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+				var data = JSON.parse(xhr.responseText);
+					callback(data);			
+			} else {
+				console.error('Request was unsuccessful: ' + xhr.status);
+			}
+		}
+	}
+	xhr.open('get', url+'?'+serialize(options), true);
+	xhr.send(null);
+}
+
+
+// 请求POST方法
+function post(url, options, callback) {
+	var xhr;
+	if (window.XMLHttpRequest) {
+		xhr = new XMLHttpRequest();
+	} else {
+		xhr = new ActiveObject('Microsoft.XMLHTTP');
+	}
+
+	xhr.onreadystatechange = function (callback) {
+		if (xhr.readyState === 4) {
+			if ((xhr.status >= 200 && xhr.status <300) || xhr.status == 304) {
+				callback(xhr.responseText);
+			} else {
+				console.error('Request was unsuccessful: ' + xhr.status);
+			}
+		}
+	}
+
+	xhr.open('post', url, true);
+	xhr.send(serialize(options));
+}
+
+function serialize(data) {
+	if (!data) return '';
+	var pairs = [];
+	for (var name in data) {
+		if (!data.hasOwnProperty(name)) continue;
+		if (typeof data[name] === 'function') continue;
+		var value = data[name].toString(),
+			name = encodeURIComponent(name),
+			value = encodeURIComponent(value);
+		pairs.push(name + '=' + value);
+	}
+	return pairs.join('&');
+}
+
+/* /Ajax */
+
