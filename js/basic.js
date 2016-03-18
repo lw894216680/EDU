@@ -216,3 +216,8 @@ function serialize(data) {
 
 /* /Ajax */
 
+/* 删除节点 */
+function remove(elm) {
+	elm.parentNode.removeChild(elm);
+}
+

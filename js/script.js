@@ -296,11 +296,12 @@ function clickTab(event) {
 /* /课程 */
 
 /* 热门课程排行 */
+// 获取课程数据
 function getHotCourse(){
     var url = 'http://study.163.com/webDev/hotcouresByCategory.htm';
     get(url, '', showHotCourse);
 }
-
+// 展示热门课程
 function showHotCourse(data) {
     var cardTop = getByClass('m-card-top')[0],
         topCourse = document.createElement('div'),
@@ -320,6 +321,40 @@ function showHotCourse(data) {
         topCourse.innerHTML = courseHTML;
         cardTop.appendChild(topCourse);
     }
+    replaceHot(data);
+}
+// 隔5秒替换一个热门课程
+function replaceHot (data) {
+    // 未显示课程索引值
+    var restList = [10,11,12,13,14,15,16,17,18,19];
+
+    function change() {
+        // 取出第一个未显示课程索引值
+        var add = restList.shift();
+        // 将被移除的课程索引值重新添加到 restList，即可无限循环
+        if(add >= 10) {
+            restList.push(add-10);
+        }else {
+            restList.push(add+10);
+        }
+
+        // 取出课程数据
+        var courseData = data[add];
+        // 新建节点
+        var topCourse = getByClass('top_course');
+        var cardTop = topCourse[0].parentNode;
+        var newCourse = document.createElement('div');
+        addClass(newCourse, 'top_course f-cb');
+
+        var courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+        // 移出课程
+        remove(topCourse[0]);
+        // 添加课程
+        newCourse.innerHTML = courseHTML;
+        cardTop.appendChild(newCourse);  
+    }
+    // 5s更换一门课程
+    setInterval(change, 5000);
 }
 
 /* /热门课程排行 */
