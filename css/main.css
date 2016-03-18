@@ -41,6 +41,16 @@ body {
 	display: none;
 }
 
+/* 隐藏元素 */
+.f-vh {
+	visibility: hidden;
+}
+
+/* 不可用 */
+.z-dis {
+	cursor: default;
+}
+
 /* sprite */
 .m-msg i,
 .m-logo i,
@@ -419,6 +429,7 @@ body {
 	text-align: center;
 	font-size: 20px;
 	font-weight: normal;
+	cursor: pointer;
 }
 
 .m-content .crt_tab {
@@ -595,10 +606,6 @@ body {
 .m-pager .pgr:hover {
 	color: #fff;
 	background: #9dd8b1;		
-}
-
-.f-dn .pgr:hover {
-	background: none;
 }
 
 .m-pager .crt_page {
