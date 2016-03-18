@@ -41,6 +41,16 @@ body {
 	display: none;
 }
 
+/* 隐藏元素 */
+.f-vh {
+	visibility: hidden;
+}
+
+/* 不可用 */
+.z-dis {
+	cursor: default;
+}
+
 /* sprite */
 .m-msg i,
 .m-logo i,
@@ -419,6 +429,7 @@ body {
 	text-align: center;
 	font-size: 20px;
 	font-weight: normal;
+	cursor: pointer;
 }
 
 .m-content .crt_tab {
@@ -428,7 +439,8 @@ body {
 
 .m-content .courses {
 	margin-bottom: 10px;
-	height: 1240px;
+	/*height: 1240px;*/
+	min-height: 400px;
 }
 
 .m-course {
@@ -582,6 +594,10 @@ body {
 	text-decoration: none;
 }
 
+.m-pager span {
+	font-size: 14px;
+}
+
 .m-pager .prevs_page,
 .m-pager .next_page {
 	width: 30px;
@@ -663,8 +679,34 @@ body {
 	background-position: 0 0;
 }
 
+.m-card-video .video {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -338px;
+	margin-left: -475px;
+	width: 950px;
+	z-index: 1000;
+	background: #fff;
+}
+
+.m-card-video .video p {
+	font-size: 18px;
+	line-height: 18px;
+	padding: 29px 0 22px 31px;
+	color: #444;
+}
+.m-card-video video {
+	padding: 0 31px 40px;
+	width:889px;
+}
+
+.m-card-top {
+	margin-bottom: 200px;
+}
+
 .m-card-top .top_course {
-	padding: 20px 20px 0;
+	padding: 20px 15px 0 20px;
 }
 
 .m-card-top p {
@@ -682,7 +724,9 @@ body {
 
 .m-card-top .top_course img {
 	float: left;
-	margin-right: 12px;	
+	margin-right: 12px;
+	width: 50px;
+	height: 50px;	
 }
 
 .u-num {
@@ -818,7 +862,7 @@ body {
 	width: 23px;
 	height: 22px;
 	cursor: pointer;	
-	background-position:  0 -139px;
+	background-position:  -264px -154px;
 }
 
 .u-ipt {

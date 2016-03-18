@@ -103,6 +103,10 @@ var eventUtil = {
 		}else {
 			event.cancelBubble = true;
 		}
+	},
+	// 获取节点
+	getElement: function(event) {
+		return event.target || event.srcElement;
 	}
 }
 
@@ -162,7 +166,7 @@ function get(url, options, callback) {
 		if (xhr.readyState === 4) {
 			if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
 				var data = JSON.parse(xhr.responseText);
-					callback(data);			
+					callback(data, options);			
 			} else {
 				console.error('Request was unsuccessful: ' + xhr.status);
 			}
@@ -182,7 +186,7 @@ function post(url, options, callback) {
 		xhr = new ActiveObject('Microsoft.XMLHTTP');
 	}
 
-	xhr.onreadystatechange = function (callback) {
+	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if ((xhr.status >= 200 && xhr.status <300) || xhr.status == 304) {
 				callback(xhr.responseText);
@@ -211,4 +215,9 @@ function serialize(data) {
 }
 
 /* /Ajax */
+
+/* 删除节点 */
+function remove(elm) {
+	elm.parentNode.removeChild(elm);
+}
 
