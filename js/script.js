@@ -1,6 +1,5 @@
 // 待解决问题记录
 // IE8 opacity待兼容
-// eventUtil.getElement(event) event.srcElement
 
 
 
@@ -112,7 +111,7 @@ function slider() {
         onload = setInterval(animation,5000);
     }
 
-    // 点击poniter后的切换
+    // hover poniter后的切换
     function clickPointer(event) {
         event = event || window.event;
         clearInterval(onload);
@@ -212,6 +211,7 @@ function signin() {
 
 
 
+
 /* 课程 */
 
 // 展示课程
@@ -223,7 +223,7 @@ function showCourse(courseData, options) {
     // 遍历课程数据
     for(var i=0; i<courseData.list.length; i++) {
         var course = document.createElement('div');
-        course.setAttribute('class','m-course');
+        addClass(course, 'm-course');
 
         // 课程数据输入HTML中
         courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">¥ ' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
@@ -295,6 +295,35 @@ function clickTab(event) {
 
 /* /课程 */
 
+/* 热门课程排行 */
+function getHotCourse(){
+    var url = 'http://study.163.com/webDev/hotcouresByCategory.htm';
+    get(url, '', showHotCourse);
+}
+
+function showHotCourse(data) {
+    var cardTop = getByClass('m-card-top')[0],
+        topCourse = document.createElement('div'),
+        courseHTML = '';
+
+    // 取到课程数据后显示热门排行
+    removeClass(cardTop, 'f-vh');
+
+    // 遍历前10门课程
+    for(var i=0; i<10; i++) {
+        var courseData = data[i];
+        var  topCourse = document.createElement('div');
+        addClass(topCourse, 'top_course f-cb');
+
+        courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+
+        topCourse.innerHTML = courseHTML;
+        cardTop.appendChild(topCourse);
+    }
+}
+
+/* /热门课程排行 */
+
 
 /* 翻页器 */
 // 点击事件注册
@@ -325,16 +354,25 @@ function pager () {
 
 }
 
+// 翻页后上移
+function returnTop() {
+    window.scrollBy(0,-50);
+    if(document.body.scrollTop>1150) { 
+        var sdelay= setTimeout('returnTop()',10);
+    }
+}
+
 // 换页
 function clickPage (event) {
     event = event || window.event;
+
     var pageBtn = eventUtil.getElement(event);
     var crtPage = getByClass('crt_page')[0]; 
     var oClick = eventUtil.getElement(event);
 
     // 点击对象非当前对象时继续进行
     if (oClick != crtPage) {
-
+        returnTop();
         // 获取get请求参数pageNo、type
         var num = parseInt(pageBtn.firstChild.nodeValue);
 
@@ -355,8 +393,8 @@ function clickPage (event) {
 function prevsPage() {
     var  crtPage = getByClass('crt_page')[0];
 
-    if (crtPage.firstChild.nodeValue !== 1) {
-
+    if (crtPage.firstChild.nodeValue !== '1') {
+        returnTop();
         // 取出前一页页码
         var reg = /pgr([0-9])/;
         var crtClass = crtPage.getAttribute('class');
@@ -392,6 +430,7 @@ function nextPage() {
 
     // 若当前页为最后一页，则不进行
     if (crtIndex != 7 || judge) {
+        returnTop();
         var nextIndex = parseInt(crtIndex) + 1;
         var nextClass = "pgr" + nextIndex;
         var next = getByClass(nextClass)[0];
@@ -496,7 +535,7 @@ function renewPager(num,totlePage) {
 }
 /* 翻页器 */
 
-
+addLoadEvent(getHotCourse);
 addLoadEvent(tab);
 addLoadEvent(pager);
 addLoadEvent(getCourse);

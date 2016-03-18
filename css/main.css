@@ -679,8 +679,12 @@ body {
 	background-position: 0 0;
 }
 
+.m-card-top {
+	margin-bottom: 200px;
+}
+
 .m-card-top .top_course {
-	padding: 20px 20px 0;
+	padding: 20px 15px 0 20px;
 }
 
 .m-card-top p {
@@ -698,7 +702,9 @@ body {
 
 .m-card-top .top_course img {
 	float: left;
-	margin-right: 12px;	
+	margin-right: 12px;
+	width: 50px;
+	height: 50px;	
 }
 
 .u-num {
