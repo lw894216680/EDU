@@ -22,38 +22,40 @@ function msgDisplay() {
 // IE8 opacity待兼容
 
 // 图片渐变: fadein,fadeout
-var slide = {
-    fadeout: function (ele,stepLength,stepTime) {
-        if (!parseFloat(ele.style.opacity)) {
-            ele.style.opacity = 1;
-        }
-        function step () {
-            if (parseFloat(ele.style.opacity)-stepLength > 0) {
-                ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
-            } else {
-                ele.style.opacity = 0;
-                // removeClass(ele, 'crt_slide'); 
-                clearInterval(setfadeout);
-            }
-        }
-        var setfadeout = setInterval(step, stepTime);
-    },
-    fadein: function (ele,stepLength,stepTime) {
-        if (!parseFloat(ele.style.opacity)) {
-            ele.style.opacity = 0;
-        }     
-        function step () {
-            if (parseFloat(ele.style.opacity)+ stepLength < 1) {
-                ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
-            } else {
-                ele.style.opacity = 1;
-                // addClass(ele, 'crt_slide')
-                clearInterval(setfadein);
-            }           
-        }
-        var setfadein = setInterval(step, stepTime);
+function fadeout (ele,stepLength,stepTime) {
+    if (!parseFloat(ele.style.opacity)) {
+        ele.style.opacity = 1;
     }
+    function step () {
+        if (parseFloat(ele.style.opacity)-stepLength > 0) {
+            ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
+        } else {
+            ele.style.opacity = 0;
+            // removeClass(ele, 'crt_slide'); 
+            clearInterval(setfadeout);
+        }
+    }
+    var setfadeout = setInterval(step, stepTime);
 }
+
+function fadein (ele,stepLength,stepTime) {
+    if (!parseFloat(ele.style.opacity)) {
+        ele.style.opacity = 0;
+    }     
+    function step () {
+        if (parseFloat(ele.style.opacity)+ stepLength < 1) {
+            ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
+        } else {
+            ele.style.opacity = 1;
+            // addClass(ele, 'crt_slide')
+            clearInterval(setfadein);
+        }           
+    }
+    var setfadein = setInterval(step, stepTime);
+}
+
+
+
 
 // 获取下一张轮播图节点
 function getAfterNode(arr,crtNode) {
@@ -84,8 +86,8 @@ function slider() {
         var afterSlide = getAfterNode(slides, crtSlide),
             afterPoint = getAfterNode(pointer, crtPoint);
         // 调用 slide
-        slide.fadein(afterSlide,1/50,10);
-        slide.fadeout(crtSlide,1/50,10);
+        fadein(afterSlide,1/50,10);
+        fadeout(crtSlide,1/50,10);
 
         // 将下一节点更换为当前节点
         removeClass(crtSlide, 'crt_slide');
@@ -126,8 +128,8 @@ function slider() {
 
         // 切换 slide
         if(crtSlide !== slides[pointIndex]) {
-            slide.fadein(slides[pointIndex],1/50,10);
-            slide.fadeout(crtSlide,1/50,10); 
+            fadein(slides[pointIndex],1/50,10);
+            fadeout(crtSlide,1/50,10); 
             removeClass(crtSlide, 'crt_slide');     
             crtSlide = slides[pointIndex];
             addClass(crtSlide, 'crt_slide');
@@ -209,31 +211,237 @@ function signin() {
 
 
 /* 课程 */
+
+// 显示课程
 function showCourse(courseData) {  
     var courses = getByClass('courses')[0],
         courseHtml = '';
+    var mPager = getByClass('m-pager')[0];
+
+    // 遍历课程数据
     for(var i=0; i<courseData.list.length; i++) {
         var course = document.createElement('div');
         course.setAttribute('class','m-course');
+
+        // courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">¥ ' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
 
         courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">¥ ' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
 
         course.innerHTML = courseHtml;
         courses.appendChild(course);
-    }  
+    }
+
+    // 课程加载后显示翻页器
+    removeClass(mPager, 'f-dn');  
 }
 
-function getByAjax(){
-    var url = url || 'http://study.163.com/webDev/couresByCategory.htm';
-    var options = options || {pageNo:1,psize:20,type:10};
+//获取课程 
+function getCourse(num, cType){
+    // 清除原有课程
+    var courses = getByClass('courses')[0];
+        courses.innerHTML = '';
+
+    var url = 'http://study.163.com/webDev/couresByCategory.htm';
+    num = num || 1;
+    cType = cType || 10;
+    var options =  {pageNo:num, psize:20, type:cType};
     get(url, options, showCourse);
+
+    renewPager(num);
+}
+
+/* /课程 */
+
+
+/* 翻页器 */
+// 点击事件注册
+function pager () {
+    var pPage = getByClass('prevs_page')[0],
+        nPage = getByClass('next_page')[0];
+    var pgr = getByClass('pgr');
+
+    // 点击页码 
+    for(var i=0; i<pgr.length; i++) {
+        pgr[i].onclick = function(event) {
+            eventUtil.preventDefault(event);
+        }
+        eventUtil.addHandler(pgr[i], 'click', changePage);
+    }
+
+    // 上一页
+    pPage.onclick = function(event) {
+        eventUtil.preventDefault(event);
+    }
+    eventUtil.addHandler(pPage, 'click', prevsPage);
+
+    // 下一页
+    nPage.onclick = function(event) {
+        eventUtil.preventDefault(event);
+    }
+    eventUtil.addHandler(nPage, 'click', nextPage); 
+
+}
+
+// 换页
+function changePage (event) {
+    event = event || window.event;
+    var pageBtn = event.target;
+
+    var crtPage = getByClass('crt_page')[0];   
+
+    var mPager = getByClass('m-pager')[0];
+
+
+    // 换页成功前隐藏翻页器
+    addClass(mPager, 'f-dn');
+
+    // 获取get请求参数pageNo、type
+    var num = parseInt(pageBtn.firstChild.nodeValue);
+
+    // 更换当前页码
+    if (num < 7) {
+        removeClass(crtPage, 'crt_page');
+        addClass(pageBtn, 'crt_page');
+    } 
+
+    var tab = getByClass('tab')[0],
+        crtTab = getByClass('crt_tab')[0],
+        cType;       
+    if(crtTab == tab.firstElementChild) {
+        cType = 10;
+    } else {
+        cType = 20;
+    }
+
+    // 获取课程
+    getCourse(num, cType);
+}
+
+// 上一页
+function prevsPage() {
+    var  crtPage = getByClass('crt_page')[0];
+
+    if (crtPage.firstChild.nodeValue !== 1) {
+        var reg = /pgr([0-9])/;
+        var crtClass = crtPage.getAttribute('class');
+        var crtIndex = crtClass.match(reg)[1];
+        var prevsIndex = crtIndex - 1;
+        var prevsClass = "pgr" + prevsIndex;
+        var prevs = getByClass(prevsClass)[0];
+        var prevsNum = parseInt(prevs.firstChild.nodeValue);
+
+
+      // 更换当前页码
+        if (prevsNum < 7) {
+            var prevsClass = 'pgr' + prevsNum;
+            var prevs = getByClass(prevsClass)[0];
+            removeClass(crtPage, 'crt_page');
+            addClass(prevs, 'crt_page');
+        } 
+
+
+        var tab = getByClass('tab')[0],
+            crtTab = getByClass('crt_tab')[0],
+            cType;       
+        if(crtTab == tab.firstElementChild) {
+            cType = 10;
+        } else {
+            cType = 20;
+        }
+        getCourse(prevsNum, cType);
+
+        // 换页成功前隐藏翻页器
+        var mPager = getByClass('m-pager')[0]; 
+        addClass(mPager, 'f-dn');        
+
+    }
+
+}
+
+// 下一页
+function nextPage() {
+    var  crtPage = getByClass('crt_page')[0];
+    // if (crtPage.firstChild.nodeValue !== 1) {
+
+        var reg = /pgr([0-9])/;
+        var crtClass = crtPage.getAttribute('class');
+        var crtIndex = crtClass.match(reg)[1];
+        var nextIndex = parseInt(crtIndex) + 1;
+        var nextClass = "pgr" + nextIndex;
+        var next = getByClass(nextClass)[0];
+        var nextNum = parseInt(next.firstChild.nodeValue);
+
+        // 更换当前页码
+        if (nextNum < 7) {
+            var nextClass = 'pgr' + nextNum;
+            var next = getByClass(nextClass)[0];
+            removeClass(crtPage, 'crt_page');
+            addClass(next, 'crt_page');
+        } 
+
+        var tab = getByClass('tab')[0],
+            crtTab = getByClass('crt_tab')[0],
+            cType;       
+        if(crtTab == tab.firstElementChild) {
+            cType = 10;
+        } else {
+            cType = 20;
+        }
+        getCourse(nextNum, cType);
+
+        // 换页成功前隐藏翻页器
+        var mPager = getByClass('m-pager')[0];
+        addClass(mPager, 'f-dn');        
+
+    // }
+}
+
+// 页码大于7
+function renewPager(num) {
+    var pgr1 = getByClass('pgr1')[0],
+        pgr2 = getByClass('pgr2')[0],
+        pgr3 = getByClass('pgr3')[0],
+        pgr4 = getByClass('pgr4')[0],
+        pgr5 = getByClass('pgr5')[0],
+        pgr6 = getByClass('pgr6')[0],
+        pgr7 = getByClass('pgr7')[0];
+
+    var crtPage = getByClass('crt_page')[0];
+    var dot1 = getByClass('dot1')[0];
+
+    if (num >= 7) {
+        // 更换当前页
+        removeClass(crtPage, 'crt_page');
+        addClass(pgr5, 'crt_page');
+
+        // 前往页码大于等于7时，显示页码1旁的省略符号
+        removeClass(dot1, 'f-dn');
+
+        pgr2.innerHTML = num - 3;
+        pgr3.innerHTML = num - 2;
+        pgr4.innerHTML = num - 1;
+        pgr5.innerHTML = num;
+        pgr6.innerHTML = num + 1;
+        pgr7.innerHTML = num + 2;
+    } else {
+        // 前往页码小于7时，隐藏页码1旁的省略符号
+        addClass(dot1, 'f-dn');
+
+        pgr2.innerHTML = 2;
+        pgr3.innerHTML = 3;
+        pgr4.innerHTML = 4;
+        pgr5.innerHTML = 5;      
+        pgr6.innerHTML = 6;
+        pgr7.innerHTML = 7;        
+    }
 }
 
 
+/* 翻页器 */
 
-/* 课程 */
 
-addLoadEvent(getByAjax);
+addLoadEvent(pager)
+addLoadEvent(getCourse);
 addLoadEvent(msgDisplay);
 addLoadEvent(slider);
 addLoadEvent(signin);

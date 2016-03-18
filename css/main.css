@@ -428,7 +428,8 @@ body {
 
 .m-content .courses {
 	margin-bottom: 10px;
-	height: 1240px;
+	/*height: 1240px;*/
+	min-height: 400px;
 }
 
 .m-course {
@@ -582,6 +583,10 @@ body {
 	text-decoration: none;
 }
 
+.m-pager span {
+	font-size: 14px;
+}
+
 .m-pager .prevs_page,
 .m-pager .next_page {
 	width: 30px;
@@ -590,6 +595,10 @@ body {
 .m-pager .pgr:hover {
 	color: #fff;
 	background: #9dd8b1;		
+}
+
+.f-dn .pgr:hover {
+	background: none;
 }
 
 .m-pager .crt_page {
