@@ -247,6 +247,10 @@ function getCourse(num, cType){
     var courses = getByClass('courses')[0];
         courses.innerHTML = '';
 
+    // 换页成功前隐藏翻页器
+    var mPager = getByClass('m-pager')[0]; 
+    addClass(mPager, 'f-vh'); 
+
     var url = 'http://study.163.com/webDev/couresByCategory.htm';
     num = num || 1;
     cType = cType || 10;
@@ -497,10 +501,6 @@ function renewPager(num,totlePage) {
     var crtPage = getByClass('crt_page')[0];
     var dot1 = getByClass('dot1')[0],
         dot2 = getByClass('dot2')[0];
-
-    // 换页成功前隐藏翻页器
-    var mPager = getByClass('m-pager')[0]; 
-    addClass(mPager, 'f-vh');  
 
     // 获取页为最后一页
     if (num === totlePage) {

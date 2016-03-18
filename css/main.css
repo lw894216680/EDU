@@ -679,6 +679,28 @@ body {
 	background-position: 0 0;
 }
 
+.m-card-video .video {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -338px;
+	margin-left: -475px;
+	width: 950px;
+	z-index: 1000;
+	background: #fff;
+}
+
+.m-card-video .video p {
+	font-size: 18px;
+	line-height: 18px;
+	padding: 29px 0 22px 31px;
+	color: #444;
+}
+.m-card-video video {
+	padding: 0 31px 40px;
+	width:889px;
+}
+
 .m-card-top {
 	margin-bottom: 200px;
 }
@@ -840,7 +862,7 @@ body {
 	width: 23px;
 	height: 22px;
 	cursor: pointer;	
-	background-position:  0 -139px;
+	background-position:  -264px -154px;
 }
 
 .u-ipt {
