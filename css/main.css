@@ -62,9 +62,15 @@ body {
 .m-list-1 pre,
 .m-pager .prevs_page,
 .m-pager .next_page,
-.m-login .close_login,
+.u-clsbtn,
 .m-content .nums span,
-.u-num span {
+.u-num span,
+.m-video .bar1,
+.m-video .played span,
+.m-video .pause_btn,
+.m-video .start_btn,
+.m-video .big_btn,
+.m-video .ne_logo {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
 }
 
@@ -664,9 +670,14 @@ body {
 	line-height: 14px;	
 }
 
+.m-card-video .show_video {
+	margin: 0 auto;	
+	width: 180px;
+	cursor: pointer;	
+}
+
 .m-card-video img {
-	padding-left: 22px;
-	cursor: pointer;
+	width: 180px;
 }
 
 .m-card-video i {
@@ -675,31 +686,135 @@ body {
 	left: 89px;
 	width: 46px;
 	height: 46px;
-	cursor: pointer;
 	background-position: 0 0;
 }
 
-.m-card-video .video {
+/* 视频播放模块 */
+.m-video {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	margin-top: -338px;
+	/*margin-top: -338px;*/
+	margin-top: -320px;
 	margin-left: -475px;
 	width: 950px;
 	z-index: 1000;
 	background: #fff;
 }
 
-.m-card-video .video p {
+.m-video p {
 	font-size: 18px;
 	line-height: 18px;
 	padding: 29px 0 22px 31px;
 	color: #444;
 }
-.m-card-video video {
-	padding: 0 31px 40px;
+.m-video video {
+	padding: 0 31px;
 	width:889px;
+	font-size: 0;
 }
+
+.m-video .control {
+	padding: 0 31px 40px;
+	width: 889px; 
+}
+
+.m-video .bar1 {
+	position: relative;
+	width: 100%;
+	height: 22px;
+	background-position: 0 -233px;
+	background-repeat: repeat-x;
+}
+
+.m-video .video_btn {
+	position: absolute;
+	top: 1px;
+	left: 0;
+	width: 20px;
+	height: 21px;
+	border-right: 1px solid #2a2a2a;
+}
+
+.m-video .big_btn {
+	position: absolute;
+	top: -79px;
+	left: 20px;
+	width: 60px;
+	height: 60px;
+	background-position: -216px -89px;
+	cursor: pointer;
+}
+
+.m-video .pause_btn,
+.m-video .start_btn {
+	position: absolute;
+	top: 6px;
+	left: 7px;
+	width: 7px;
+	height: 10px;
+	cursor: pointer; 	
+}
+
+.m-video .pause_btn {
+	background-position: 0 -261px; 	
+}
+
+.m-video .start_btn {
+	background-position: -12px -261px; 	
+}
+
+.m-video .time {
+	padding-left: 30px;
+	height: 22px;
+	line-height: 22px;
+	font-size: 8px;
+	color: #b6b6b6;
+}
+		
+.m-video .total_time {
+	color: #575757;
+} 
+
+.m-video .ne_logo {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 54px;
+	height: 22px;
+	background-position: 0 -277px;
+}
+
+.m-video .bar2 {
+	position: relative;
+	width: 100%;
+	height: 7px;
+	background: #393939;
+	cursor: pointer;
+}
+
+.m-video .loaded {
+	/*width: 200px;*/
+	height: 7px;
+	background: #555;
+}
+
+.m-video .played {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 8px;
+	height: 7px;
+	background: #00a750;
+}
+
+.m-video .played span {
+	width: 8px;
+	height: 7px;
+	background-position: -27px -261px;	
+}
+
+
 
 .m-card-top {
 	margin-bottom: 200px;
@@ -739,7 +854,7 @@ body {
 	margin-right: 5px;
 	width: 9px;
 	height: 10px;
-	background-position: -43px -106px; 
+	background-position: -43px -106px;
 }
 
 .u-num-1 {
@@ -848,6 +963,14 @@ body {
 	line-height: 16px;
 }
 
+.m-login .wrong_tip {
+	margin-top: -12px;
+	margin-bottom: 5px;
+	font-size: 12px;
+	line-height: 12px;
+	color: #D80000;
+}
+
 .m-login p {
 	margin: 0 0 20px;
 	font-size: 18px;
@@ -855,7 +978,7 @@ body {
 	color: #444;
 }
 
-.m-login .close_login {
+.u-clsbtn {
 	position: absolute;
 	top: 0;
 	right: 0;
