@@ -157,6 +157,25 @@ function slider() {
 
 
 /* 登录框 */
+function signinOrFocus() {
+    var cookie = getCookie();
+    var btn1 = getByClass('u-btn-1')[0],
+        btn2 = getByClass('u-btn-2')[0];
+
+    var mask = getByClass('m-mask')[0],
+        login = getByClass('m-login')[0];
+
+    if (cookie.loginSuc) {
+        addClass(btn1, 'f-dn');
+        addClass(mask, 'f-dn');
+        removeClass(btn2, 'f-dn');
+    } else {
+        loginDiv();
+        removeClass(mask, 'f-dn');
+        removeClass(login, 'f-dn');       
+    }    
+}
+
 function signin() {
     var flwBtn = getByClass('u-btn-1')[0];
 
@@ -169,11 +188,20 @@ function signin() {
         login = getByClass('m-login')[0],
         closeLogin = getByClass('u-clsbtn-1')[0];
 
-    // 弹出登录框
-    eventUtil.addHandler(flwBtn, 'click', function(){
-        removeClass(mask, 'f-dn');
-        removeClass(login, 'f-dn');
-    });
+    eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
+}
+
+function loginDiv() {
+    var flwBtn = getByClass('u-btn-1')[0];
+
+    var plhdUser = getByClass('plhd_user')[0],
+        plhdPswd = getByClass('plhd_pswd')[0],
+        user = document.getElementById('user'),
+        pswd = document.getElementById('pswd');
+
+    var mask = getByClass('m-mask')[0],
+        login = getByClass('m-login')[0],
+        closeLogin = getByClass('u-clsbtn-1')[0];
 
     // 输入框获得焦点，隐藏占位符
     eventUtil.addHandler(user, 'keydown', function(){
@@ -200,7 +228,36 @@ function signin() {
         addClass(mask, 'f-dn');
         addClass(login, 'f-dn');
     });
+
+    // 提交
+    var loginForm = document.querySelector('.m-login form');
+    eventUtil.addHandler(loginForm, 'submit', toSubmit);
 }
+
+function toSubmit(event) {
+    event = event || window.event;
+    var login = getByClass('m-login')[0],
+        mask = getByClass('m-mask')[0]
+
+    var userName = document.getElementById('user'),
+        password = document.getElementById('pswd');
+    eventUtil.preventDefault(event);
+
+    var url = 'http://study.163.com/webDev/login.htm';
+    var options = {userName:md5(userName.value),password:md5(pswd.value)};
+
+    function oSubmit(data) {
+        if(data == 1) {
+            addClass(login, 'f-dn');
+            setCookie('loginSuc', 'ture', '/');
+            signinOrFocus();
+        } else {
+            var wrongTip = getByClass('wrong_tip')[0];
+            removeClass(wrongTip, 'f-dn');
+        }
+    }
+    get(url, options, oSubmit);    
+} 
 
 /* /登录框 */
 
@@ -641,32 +698,39 @@ function setVideo() {
         // 插入视频时间文本
         totalTime.innerHTML = convertTime(video.duration);
         function change() {
-            var bf = video.buffered.end(0)/video.duration*889,
-                bfLength = bf + 'px',
-                crt = video.currentTime/video.duration*889,
+            var crt = video.currentTime/video.duration*889,
                 crtLength = crt + 'px';
-            // 插入已播放时间文本
-            crtTime.innerHTML = convertTime(video.currentTime) + '/';
 
-            // 改变已播放进度条
-            if (crt > 7) {
-                played.style.width = crtLength;              
-            }
-            // 改变已加载进度条
-            if (newLength === 0) {
-                loaded.style.width = bfLength;
-            } else {
-                // 点击进度条时
-                var newbf = video.buffered.end(video.buffered.length - 1)/video.duration*889;
-                if (parseInt(loaded.style.width) < 889) {
-                    loaded.style.width = newbf + 'px';
-                } else {
-                    loaded.style.width = '889px'
+            if (video.buffered.length) {
+                var bf = video.buffered.end(0)/video.duration*889,
+                    bfLength = bf + 'px';
+
+                // 插入已播放时间文本
+                crtTime.innerHTML = convertTime(video.currentTime) + '/';
+
+                // 改变已播放进度条
+                if (crt > 7) {
+                    played.style.width = crtLength;              
                 }
-            } 
+                // 改变已加载进度条
+                if (newLength === 0) {
+                    loaded.style.width = bfLength;
+                } else {
+                    // 点击进度条时
+                    var newbf = video.buffered.end(video.buffered.length - 1)/video.duration*889;
+                    if (parseInt(loaded.style.width) < 889) {
+                        loaded.style.width = newbf + 'px';
+                    } else {
+                        loaded.style.width = '889px'
+                    }
+                }
+            } else {
+                clearInterval(change, 300);
+            }
+
         }
         // 每300毫秒改变一次进度条
-        setInterval(change, 300);
+        var cg = setInterval(change, 300);
     }
     eventUtil.addHandler(video, 'canplay', changeBar);
 
@@ -694,10 +758,9 @@ function setVideo() {
         video.currentTime = toTime;
     }
     eventUtil.addHandler(bar2, 'click', modify);
-
 }
 
-
+/* /视频播放 */
 
 
 addLoadEvent(setVideo);

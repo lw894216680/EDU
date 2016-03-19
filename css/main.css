@@ -963,6 +963,14 @@ body {
 	line-height: 16px;
 }
 
+.m-login .wrong_tip {
+	margin-top: -12px;
+	margin-bottom: 5px;
+	font-size: 12px;
+	line-height: 12px;
+	color: #D80000;
+}
+
 .m-login p {
 	margin: 0 0 20px;
 	font-size: 18px;
