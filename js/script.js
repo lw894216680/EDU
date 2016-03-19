@@ -605,6 +605,7 @@ function setVideo() {
     function showVideo() {
         var url = 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4';
         video.setAttribute('src', url);
+        // 移出 display:none 属性
         removeClass(mask, 'f-dn');
         removeClass(mVideo, 'f-dn');
     }
@@ -613,6 +614,7 @@ function setVideo() {
     // 播放
     function start() {
         video.play();
+        // 开始按钮隐藏，暂停按钮显示
         addClass(bigBtn, 'f-dn');
         addClass(startBtn, 'f-dn');
         removeClass(pauseBtn, 'f-dn');
@@ -621,6 +623,7 @@ function setVideo() {
     // 暂停
     function pause() {
         video.pause();
+        // 开始按钮显示，暂停按钮隐藏
         removeClass(bigBtn, 'f-dn');
         removeClass(startBtn, 'f-dn');
         addClass(pauseBtn, 'f-dn');
@@ -632,21 +635,38 @@ function setVideo() {
     // 进度
     var loaded = getByClass('loaded')[0],
         played = getByClass('played')[0];
+    var newLength = 0;
 
     function changeBar() {
+        // 插入视频时间文本
         totalTime.innerHTML = convertTime(video.duration);
         function change() {
-            var bfLength = video.buffered.end(0)/video.duration*889 + 'px',
+            var bf = video.buffered.end(0)/video.duration*889,
+                bfLength = bf + 'px',
                 crt = video.currentTime/video.duration*889,
                 crtLength = crt + 'px';
+            // 插入已播放时间文本
             crtTime.innerHTML = convertTime(video.currentTime) + '/';
 
-            if (crt > 7 ) {
+            // 改变已播放进度条
+            if (crt > 7) {
                 played.style.width = crtLength;              
-            }    
-            loaded.style.width = bfLength; 
+            }
+            // 改变已加载进度条
+            if (newLength === 0) {
+                loaded.style.width = bfLength;
+            } else {
+                // 点击进度条时
+                var newbf = video.buffered.end(video.buffered.length - 1)/video.duration*889;
+                if (parseInt(loaded.style.width) < 889) {
+                    loaded.style.width = newbf + 'px';
+                } else {
+                    loaded.style.width = '889px'
+                }
+            } 
         }
-        setInterval(change, 200);
+        // 每300毫秒改变一次进度条
+        setInterval(change, 300);
     }
     eventUtil.addHandler(video, 'canplay', changeBar);
 
@@ -655,8 +675,26 @@ function setVideo() {
         video.setAttribute('src', '');
         addClass(mVideo, 'f-dn');
         addClass(mask, 'f-dn');
+        removeClass(bigBtn, 'f-dn');
+        removeClass(startBtn, 'f-dn');
+        addClass(pauseBtn, 'f-dn');
+        played.style.width = 7 + 'px';
+        crtTime.innerHTML = '00'+ ':' + '00';
     }
     eventUtil.addHandler(clsBtn, 'click', close);
+
+    // 点击更改进度
+    var bar2 = getByClass('bar2')[0];
+    function modify(event) {
+        event = event || window.event;
+        // 获取点击位置
+        newLength = event.clientX - getElementLeft(bar2); 
+        // 转换为相应时间
+        var toTime = (newLength)/889*video.duration;
+        video.currentTime = toTime;
+    }
+    eventUtil.addHandler(bar2, 'click', modify);
+
 }
 
 
