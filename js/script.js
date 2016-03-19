@@ -167,7 +167,7 @@ function signin() {
 
     var mask = getByClass('m-mask')[0],
         login = getByClass('m-login')[0],
-        closeLogin = getByClass('close_login')[0];
+        closeLogin = getByClass('u-clsbtn-1')[0];
 
     // 弹出登录框
     eventUtil.addHandler(flwBtn, 'click', function(){
@@ -565,6 +565,104 @@ function renewPager(num,totlePage) {
 }
 /* 翻页器 */
 
+
+/* 视频播放 */
+function getElementLeft(elm){
+    var actualLeft = elm.offsetLeft;
+    var current = elm.offsetParent;
+
+    while (current !== null){
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
+    }
+    return actualLeft;
+}
+
+function convertTime(time) {
+    var time = Math.ceil(time);
+    var scd = time%60;
+    scd = scd<10 ? '0'+scd : scd;
+
+    var mnt = parseInt(time/60);
+    mnt = mnt<10 ? '0'+mnt : mnt;
+
+    return mnt + ':' + scd;    
+}
+
+function setVideo() {
+    var mVideo = getByClass('m-video')[0],
+        video = document.querySelector('.m-video video'),
+        bigBtn = getByClass('big_btn')[0],
+        startBtn = getByClass('start_btn')[0],
+        pauseBtn = getByClass('pause_btn')[0],
+        show = document.querySelector('.m-card-video div'),
+        mask = getByClass('m-mask')[0],
+        crtTime = getByClass('crt_time')[0],
+        totalTime = getByClass('total_time')[0],
+        clsBtn = getByClass('u-clsbtn-2')[0];
+
+    // 显示视频界面
+    function showVideo() {
+        var url = 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4';
+        video.setAttribute('src', url);
+        removeClass(mask, 'f-dn');
+        removeClass(mVideo, 'f-dn');
+    }
+    eventUtil.addHandler(show, 'click', showVideo);
+
+    // 播放
+    function start() {
+        video.play();
+        addClass(bigBtn, 'f-dn');
+        addClass(startBtn, 'f-dn');
+        removeClass(pauseBtn, 'f-dn');
+    }
+
+    // 暂停
+    function pause() {
+        video.pause();
+        removeClass(bigBtn, 'f-dn');
+        removeClass(startBtn, 'f-dn');
+        addClass(pauseBtn, 'f-dn');
+    }
+    eventUtil.addHandler(bigBtn, 'click', start);
+    eventUtil.addHandler(startBtn, 'click', start);
+    eventUtil.addHandler(pauseBtn, 'click', pause);
+
+    // 进度
+    var loaded = getByClass('loaded')[0],
+        played = getByClass('played')[0];
+
+    function changeBar() {
+        totalTime.innerHTML = convertTime(video.duration);
+        function change() {
+            var bfLength = video.buffered.end(0)/video.duration*889 + 'px',
+                crt = video.currentTime/video.duration*889,
+                crtLength = crt + 'px';
+            crtTime.innerHTML = convertTime(video.currentTime) + '/';
+
+            if (crt > 7 ) {
+                played.style.width = crtLength;              
+            }    
+            loaded.style.width = bfLength; 
+        }
+        setInterval(change, 200);
+    }
+    eventUtil.addHandler(video, 'canplay', changeBar);
+
+    // 关闭视频
+    function close() {
+        video.setAttribute('src', '');
+        addClass(mVideo, 'f-dn');
+        addClass(mask, 'f-dn');
+    }
+    eventUtil.addHandler(clsBtn, 'click', close);
+}
+
+
+
+
+addLoadEvent(setVideo);
 addLoadEvent(getHotCourse);
 addLoadEvent(tab);
 addLoadEvent(pager);
