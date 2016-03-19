@@ -24,15 +24,14 @@ function msgDisplay() {
 /* banner 轮播图 */
 // 图片渐变: fadein,fadeout
 function fadeout (ele,stepLength,stepTime) {
-    if (!parseFloat(ele.style.opacity)) {
-        ele.style.opacity = 1;
-    }
+    // 重置opacity及z-index
+    ele.style.opacity = 1;
+    ele.style.zIndex = 0;
     function step () {
         if (parseFloat(ele.style.opacity)-stepLength > 0) {
             ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
         } else {
-            ele.style.opacity = 0;
-            // removeClass(ele, 'crt_slide'); 
+            ele.style.opacity = 0; 
             clearInterval(setfadeout);
         }
     }
@@ -40,15 +39,14 @@ function fadeout (ele,stepLength,stepTime) {
 }
 
 function fadein (ele,stepLength,stepTime) {
-    if (!parseFloat(ele.style.opacity)) {
-        ele.style.opacity = 0;
-    }     
+    // 重置opacity及z-index
+    ele.style.opacity = 0;
+    ele.style.zIndex = 1;     
     function step () {
         if (parseFloat(ele.style.opacity)+ stepLength < 1) {
             ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
         } else {
             ele.style.opacity = 1;
-            // addClass(ele, 'crt_slide')
             clearInterval(setfadein);
         }           
     }
@@ -101,13 +99,11 @@ function slider() {
 
     // 鼠标悬停
     function msover(event) {
-        event = event || window.event;
-        eventUtil.getElement(event).style.opacity = 1;      
+        // 清除 animation 
         clearInterval(onload);
     }
-    function msout(event) {
-        event = event || window.event;
-        eventUtil.getElement(event).style.opacity = 1;        
+    function msout(event) { 
+        // 重置 nimation 
         onload = setInterval(animation,5000);
     }
 
@@ -198,7 +194,6 @@ function signin() {
             removeClass(plhdPswd, 'f-dn');
         };
     });
-
 
     // 关闭登录框
     eventUtil.addHandler(closeLogin, 'click', function(){
