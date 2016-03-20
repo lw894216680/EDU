@@ -70,7 +70,8 @@ body {
 .m-video .pause_btn,
 .m-video .start_btn,
 .m-video .big_btn,
-.m-video .ne_logo {
+.m-video .ne_logo,
+.m-video .vlm_icon {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
 }
 
@@ -88,12 +89,10 @@ body {
 	font-size: 12px;
 	color: #333;
 }
-
 .m-msg a {
 	text-decoration: none;
 	color: #21a557;
 }
-
 .m-msg i {
 	margin-right: 6px;
 	width: 9px;
@@ -119,13 +118,11 @@ body {
 	font-weight: bold;
 	color: #39a030;
 }
-
 .m-logo h1 {
 	margin-top: -1px;
 	font-size: 22px;
 	font-weight: normal;
 }
-
 .m-logo i {
 	position: relative;
 	top: 35px;
@@ -140,24 +137,11 @@ body {
 	margin-bottom: 14px;	
 	line-height: 28px;
 }
-
 .m-logo-1 h1 {
 	color: #39a030;	
 }
-
 .m-logo-1 i {
 	top: 5px;
-}
-
-.m-nav {
-	line-height: 89px;
-	font-family: "HiraginoSansGB W3";
-}
-
-.m-nav .follow {
-	float: left;
-	font-size: 0;
-	font-family: "宋体";	
 }
 
 .u-btn {
@@ -176,14 +160,12 @@ body {
 	background: #21a557;		
 	color: #fff;
 }
-
 .u-btn-1 span {
 	margin-right: 5px;
 	width: 8px;
 	height: 8px;
 	background-position: 0 -20px;
 }
-
 .u-btn-1:hover {
 	background: #2fb556;
 }
@@ -196,30 +178,35 @@ body {
 	background-color: #f8f8f8;
 	color: #333;
 }
-
 .u-btn-2 .ic1 {
 	margin-right: 5px;
 	width: 11px;
 	height: 9px;
 	background-position: -24px -20px;	
 }
-
 .u-btn-2 .ic2 {
 	margin: 0 8px;
 	width: 1px;
 	height: 10px;
 	background-position: -53px -20px;
 }
-
 .u-btn-2 a {
 	color: #999;
 }
-
 .u-btn-2 a:hover {
 	text-decoration: underline;
 	color: #21a557;
 }
 
+.m-nav {
+	line-height: 89px;
+	font-family: "HiraginoSansGB W3";
+}
+.m-nav .follow {
+	float: left;
+	font-size: 0;
+	font-family: "宋体";	
+}
 .m-nav .fans {
 	height: 21px;
 	font-size: 12px;	
@@ -227,7 +214,6 @@ body {
 	vertical-align: middle;
 	color: #666;
 }
-
 .m-nav .topnav {
 	float: right;
 	margin: 0;
@@ -235,7 +221,6 @@ body {
 	list-style: none;
 
 }
-
 .m-nav .topnav i {
 	margin-left: 30px;
 	width: 19px;
@@ -244,11 +229,9 @@ body {
 	background-position: 0 -41px;
 	vertical-align: middle;		
 }
-
 .m-nav .topnav i:hover {
 	background-position: -24px -41px;	
 }
-
 .m-nav .topnav li {
 	display: inline;
 	font-size: 16px;
@@ -256,12 +239,10 @@ body {
 	margin-left: 55px;
 	vertical-align: middle;
 }
-
 .m-nav a {
 	text-decoration: none;
 	color: #666;
 }
-
 .m-nav a:hover {
 	color: #39a030;
 }
@@ -272,7 +253,6 @@ body {
 	height: 460px;
 	overflow: hidden;
 }
-
 .m-slider .slide {
 	position: absolute;
 	top: 0;
@@ -280,13 +260,11 @@ body {
 	opacity: 0;
 	filter: "alpha(opacity=0)";
 }
-
 .m-slider .crt_slide {
 	opacity: 1;
 	filter: "alpha(opacity=100)";	
 	z-index: 1;
 }
-
 .m-slider .pointer {
 	position: absolute;
 	bottom: 20px;
@@ -298,7 +276,6 @@ body {
 	line-height: 0;
 	z-index: 10;
 }
-
 .m-slider i {
 	display: inline-block;
 	margin-left: 11px;
@@ -308,11 +285,9 @@ body {
 	cursor: pointer;
 	background: #fff;
 }
-
 .m-slider .crt_point {
 	background: #000;
 }
-
 .m-slider i:first-child {
 	margin-left: 0;
 }
@@ -320,7 +295,6 @@ body {
 .m-intro {
 	height: 295px;
 }
-
 .m-intro .intro {
 	float: left;
 	width: 344px;
@@ -328,15 +302,12 @@ body {
 	margin-top: 60px;
 	margin-left: 80px;
 }
-
 .m-intro .intro:first-child{
 	margin-left: 5px;
 }
-
 .m-intro .irwrap {
 	padding-left: 100px;
 }
-
 .m-intro h3 {
 	margin: 0;	
 	font-size: 22px;
@@ -344,7 +315,6 @@ body {
 	line-height: 20px;
 	color: #333;
 }
-
 .m-intro p,
 .m-intro a {
 	margin: 15px 0 24px;
@@ -352,30 +322,24 @@ body {
 	line-height: 24px;
 	color: #666;
 }
-
 .m-intro a {
 	text-decoration: none;
 	color: #39a030;
 }
-
 .m-intro a:hover {
 	text-decoration: underline;
 }
-
 .m-intro .intro i {
 	margin-top: 7px;
 	width: 80px;
 	height: 80px;
 }
-
 .m-intro i.openlogo {
 	background-position: -109px 0;
 }
-
 .m-intro i.studylogo {
 	background-position: -109px -86px;
 }
-
 .m-intro i.mooclogo {
 	background-position: -200px 0;
 }
@@ -399,12 +363,10 @@ body {
 	width: 1616px;
 	height: 220px;
 }
-
 .m-imgcolm img {
 	float: left;
 	margin-left: 4px;
 }
-
 .m-imgcolm img:first-child {
 	margin-left: 0;
 }
@@ -414,7 +376,6 @@ body {
 	width: 980px;
 	padding-bottom: 120px;	
 }
-
 .m-content .tab {
 	margin-bottom: 30px;
 	width: 400px;
@@ -427,7 +388,6 @@ body {
 	-o-box-shadow: 0 2px 1px #d4d3d3;;
 	box-shadow: 0 2px 1px #d4d3d3;;	
 }
-
 .m-content .tab h4 {
 	float: left;	
 	margin: 0;
@@ -437,12 +397,10 @@ body {
 	font-weight: normal;
 	cursor: pointer;
 }
-
 .m-content .crt_tab {
 	background: #39a030;
 	color: #fff;
 }
-
 .m-content .courses {
 	margin-bottom: 10px;
 	/*height: 1240px;*/
@@ -463,16 +421,13 @@ body {
 	-o-box-shadow: 0 1px 1px #e6e6e6;
 	box-shadow: 0 1px 1px #e6e6e6;		
 } 
-
 .m-course .summary {
 	padding: 1px;
 	color: #999;		
 }
-
 .m-course .summary_txt {
 	padding: 10px 4px 9px;
 }
-
 .m-course h5 {
 	margin: 0 0 10px 0;	
 	font-weight: normal;
@@ -483,18 +438,15 @@ body {
 	line-height: 12px;
 	color: #333;	
 }
-
 .m-course p {
 	margin: 0;
 	font-size: 12px;	
 	line-height: 12px;		
 }
-
 .m-course img {
 	width: 223px;
 	height: 124px;
 }
-
 .m-course .nums {
 	padding: 0 3px;
 	margin: 10px 0 9px;	
@@ -504,21 +456,16 @@ body {
 	border: 1px solid #999;
 	border-radius: 2px;
 }
-
 .m-course .nums span {
 	margin-right: 5px;
 	width: 9px;
 	height: 10px;
 	background-position: -43px -106px;
 }
-
 .m-course .cost {
 	font-weight: bold;		
 	color: #ff3f00;
 }
-
-
-
 .m-course:hover .detail {
 	display: block;
 	position: absolute;
@@ -536,34 +483,27 @@ body {
 	z-index: 1;
 	overflow: hidden;			
 }
-
 .m-course:hover .detail img {
 	float: left;
 	margin-bottom: 20px;
 	margin-left: 11px;
 }
-
-
 .m-course:hover .dtltxt_1 {
 	margin-left: 257px;
 }
-
 .m-course:hover .dtltxt_1 h5 {
 	margin: 4px 0 16px -4px;
 	font-size: 18px;
 	line-height: 18px;
 }
-
 .m-course:hover .author {
 	margin: 13px 0 8px 0;
 }
-
 .m-course:hover .dtltxt_2 {
 	padding: 10px 20px 0;
 	height: 84px;
 	background: #f8f8f8;
 }
-
 .m-course:hover .dtltxt_2 p {
 	font-size: 14px;
 	line-height: 24px;	
@@ -573,7 +513,6 @@ body {
 	float: right;
 	margin-right: 16px;
 }
-
 .m-pager ul {
 	margin: 0;
     padding: 0;
@@ -581,7 +520,6 @@ body {
 	font-size: 0px;
 
 }
-
 .m-pager li {
 	display: block;
 	float: left;
@@ -590,7 +528,6 @@ body {
 	text-align: center;
 	cursor: pointer;		
 }
-
 .m-pager a {
 	display: block;
 	margin: 0 4px;	
@@ -599,35 +536,28 @@ body {
 	color: #666;
 	text-decoration: none;
 }
-
 .m-pager span {
 	font-size: 14px;
 }
-
 .m-pager .prevs_page,
 .m-pager .next_page {
 	width: 30px;
 }
-
 .m-pager .pgr:hover {
 	color: #fff;
 	background: #9dd8b1;		
 }
-
 .m-pager .crt_page {
 	cursor: default;
 	color: #39a030;
 }
-
 .m-pager .crt_page:hover {
 	color: #39a030;	
 	background: none;
 }
-
 .m-pager .prevs_page {
 	background-position: 0 -73px;
 }
-
 .m-pager .next_page {
 	background-position: -44px -73px;
 }
@@ -642,7 +572,6 @@ body {
 	font-size: 0;
 	background: #fff;	
 }
-
 .m-card h4 {
 	margin: 0;
 	padding-left: 20px;	
@@ -653,7 +582,6 @@ body {
 	line-height: 55px;
 	color: #333;
 }
-
 .m-card p {
 	margin: 0;
 	font-size: 14px;
@@ -664,22 +592,18 @@ body {
 	position: relative;
 	margin: 3px 0 21px;
 }
-
 .m-card-video p {
 	padding: 20px 0 9px 22px;
 	line-height: 14px;	
 }
-
 .m-card-video .show_video {
 	margin: 0 auto;	
 	width: 180px;
 	cursor: pointer;	
 }
-
 .m-card-video img {
 	width: 180px;
 }
-
 .m-card-video i {
 	position: absolute;
 	bottom: 53px;
@@ -701,7 +625,6 @@ body {
 	z-index: 1000;
 	background: #fff;
 }
-
 .m-video p {
 	font-size: 18px;
 	line-height: 18px;
@@ -713,12 +636,10 @@ body {
 	width:889px;
 	font-size: 0;
 }
-
 .m-video .control {
 	padding: 0 31px 40px;
 	width: 889px; 
 }
-
 .m-video .bar1 {
 	position: relative;
 	width: 100%;
@@ -726,7 +647,6 @@ body {
 	background-position: 0 -233px;
 	background-repeat: repeat-x;
 }
-
 .m-video .video_btn {
 	position: absolute;
 	top: 1px;
@@ -735,7 +655,6 @@ body {
 	height: 21px;
 	border-right: 1px solid #2a2a2a;
 }
-
 .m-video .big_btn {
 	position: absolute;
 	top: -79px;
@@ -745,7 +664,6 @@ body {
 	background-position: -216px -89px;
 	cursor: pointer;
 }
-
 .m-video .pause_btn,
 .m-video .start_btn {
 	position: absolute;
@@ -755,26 +673,53 @@ body {
 	height: 10px;
 	cursor: pointer; 	
 }
-
 .m-video .pause_btn {
 	background-position: 0 -261px; 	
 }
-
 .m-video .start_btn {
 	background-position: -12px -261px; 	
 }
-
 .m-video .time {
 	padding-left: 30px;
 	height: 22px;
 	line-height: 22px;
 	font-size: 8px;
 	color: #b6b6b6;
-}
-		
+}		
 .m-video .total_time {
 	color: #575757;
-} 
+}
+.m-video .volume_bar {
+	position: absolute;
+	top: 0;
+	right: 60px;
+	padding: 9px 0;
+	width: 70px;
+	height: 4px;
+	cursor: pointer;
+}
+.m-video .volume_bar .vbar {
+	width: 70px;
+	height: 4px;
+	background: #171616;
+}
+.m-video .volume_bar .crt_vlm {
+	width: 28px;
+	height: 4px;	
+	background: #717171;
+}
+.m-video .volume_bar:hover .crt_vlm {
+	background: #159C12;
+}
+
+.m-video .vlm_icon {
+	position: absolute;
+	top: 1px;
+	right: 135px;
+	width: 10px;
+	height: 21px;
+	background-position: -39px -255px;
+}
 
 .m-video .ne_logo {
 	position: absolute;
@@ -784,7 +729,6 @@ body {
 	height: 22px;
 	background-position: 0 -277px;
 }
-
 .m-video .bar2 {
 	position: relative;
 	width: 100%;
@@ -792,51 +736,40 @@ body {
 	background: #393939;
 	cursor: pointer;
 }
-
 .m-video .loaded {
-	/*width: 200px;*/
 	height: 7px;
 	background: #555;
 }
-
 .m-video .played {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 8px;
+	width: 7px;
 	height: 7px;
 	background: #00a750;
 }
-
 .m-video .played span {
-	width: 8px;
+	width: 7px;
 	height: 7px;
-	background-position: -27px -261px;	
+	background-position: -26px -261px;	
 }
-
-
 
 .m-card-top {
 	margin-bottom: 200px;
 }
-
 .m-card-top .top_course {
 	padding: 20px 15px 0 20px;
 }
-
 .m-card-top p {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	line-height: 14px;	
 }
-
 .top_course .course_name {
 	margin-bottom: 13px;
 	color: #333;	
 }
-
-
 .m-card-top .top_course img {
 	float: left;
 	margin-right: 12px;
@@ -849,14 +782,12 @@ body {
 	line-height: 10px;
 	color: #666;		
 }
-
 .u-num span {
 	margin-right: 5px;
 	width: 9px;
 	height: 10px;
 	background-position: -43px -106px;
 }
-
 .u-num-1 {
 	font-size: 12px;
 	line-height: 12px;
@@ -873,7 +804,6 @@ body {
 	padding: 90px 0 80px 50px;
 	margin-right: 150px;
 }
-
 .m-foot .copy p {
 	margin: 0;
 	font-size: 12.5px;
@@ -881,7 +811,6 @@ body {
 	color: #fff;
 	letter-spacing: 0.5px;
 }
-
 .m-foot .ftrt {
 	padding: 80px 0 80px;
 	letter-spacing: 0.5px;
@@ -896,7 +825,6 @@ body {
 	font-size: 13px;
 	line-height: 13px;
 }
-
 .m-list ul {
 	margin: 0;
 	padding: 0;
@@ -904,12 +832,10 @@ body {
 	font-size: 15px;
 	line-height: 28px;
 }
-
 .m-list a {
 	color: #fff;
 	text-decoration: none;
 }
-
 .m-list a:hover {
 	text-decoration: underline;
 }
@@ -917,14 +843,12 @@ body {
 .m-list-1 {
 	margin-right: 72px;
 }
-
 .m-list-1 i {
 	margin: 0 0 -3px 11px;
 	width: 20px;
 	height: 16px;
 	background-position: 0 -106px;
 }
-
 /* /页脚 */
 
 
@@ -954,7 +878,6 @@ body {
 	z-index: 1000;	
 	background: #fff;
 }
-
 .m-login .loginwrap {
 	padding-top: 30px;
 	padding-bottom: 40px;
@@ -962,7 +885,6 @@ body {
 	font-size: 16px;
 	line-height: 16px;
 }
-
 .m-login .wrong_tip {
 	margin-top: -12px;
 	margin-bottom: 5px;
@@ -970,7 +892,6 @@ body {
 	line-height: 12px;
 	color: #D80000;
 }
-
 .m-login p {
 	margin: 0 0 20px;
 	font-size: 18px;
@@ -987,11 +908,9 @@ body {
 	cursor: pointer;	
 	background-position:  -264px -154px;
 }
-
 .u-ipt {
 	position: relative;	
 }
-
 .u-ipt input {
 	width: 293px;
 	height: 43px;
@@ -1000,7 +919,6 @@ body {
 	text-indent: 7px;
 	color: #333;
 }
-
 .u-ipt .plhd {
 	position: absolute;
 	top: 15px;
@@ -1008,15 +926,12 @@ body {
 	color: #ccc;
 	cursor: text;
 }
-
 .u-ipt-u input {
 	margin-bottom: 15px;
 }
-
 .u-ipt-p input {
 	margin-bottom: 29px;
 }
-
 .u-smbtn {
 	padding: 0;
 	width: 295px;

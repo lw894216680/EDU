@@ -154,8 +154,6 @@ function slider() {
 /* /banner轮播图 */
 
 
-
-
 /* 登录框与关注 */
 function signin() {
     var flwBtn = getByClass('u-btn-1')[0];
@@ -180,7 +178,7 @@ function signin() {
         removeClass(btn1, 'f-dn');
     });
 }
-
+// 登陆情形处理
 function signinOrFocus() {
     var cookie = getCookie();
     var btn1 = getByClass('u-btn-1')[0],
@@ -188,18 +186,19 @@ function signinOrFocus() {
 
     var mask = getByClass('m-mask')[0],
         login = getByClass('m-login')[0];
-
+    // 已登录时
     if (cookie.loginSuc) {
         addClass(btn1, 'f-dn');
         setCookie('followSuc', 'true', '/');        
         removeClass(btn2, 'f-dn');
     } else {
+        // 未登陆时，弹出登录框
         loginDiv();
         removeClass(mask, 'f-dn');
         removeClass(login, 'f-dn');       
     }    
 }
-
+// 登陆框设置
 function loginDiv() {
     var flwBtn = getByClass('u-btn-1')[0];
 
@@ -242,7 +241,7 @@ function loginDiv() {
     var loginForm = document.querySelector('.m-login form');
     eventUtil.addHandler(loginForm, 'submit', toSubmit);
 }
-
+// 验证账户密码
 function toSubmit(event) {
     event = event || window.event;
     eventUtil.preventDefault(event);    
@@ -256,26 +255,28 @@ function toSubmit(event) {
     var options = {userName:md5(userName.value),password:md5(pswd.value)};
 
     function oSubmit(data) {
+        // get 返回1，登陆成功
         if(data == 1) {
             addClass(login, 'f-dn');
             addClass(mask, 'f-dn');
             setCookie('loginSuc', 'ture', '/');
             signinOrFocus();
         } else {
+            // 登陆不成功
             var wrongTip = getByClass('wrong_tip')[0];
             removeClass(wrongTip, 'f-dn');
         }
     }
+    // 登陆验证
     get(url, options, oSubmit);    
 } 
 
-/* /登录框 */
+/* /登录框与关注 */
 
 
 
 
 /* 课程 */
-
 // 展示课程
 function showCourse(courseData, options) {  
     var courses = getByClass('courses')[0],
@@ -302,7 +303,6 @@ function showCourse(courseData, options) {
     removeClass(mPager, 'f-vh');  
 }
 
-
 // 获取课程 
 function getCourse(num, cType){
     // 清除原有课程
@@ -319,7 +319,6 @@ function getCourse(num, cType){
     var options =  {pageNo:num, psize:20, type:cType};
     get(url, options, showCourse);
 }
-
 
 // 切换标签
 function tab() {
@@ -340,7 +339,7 @@ function getCType() {
         return cType = 20;
     }
 }
-// 点击tab
+// 点击标签
 function clickTab(event) {
     event = event || window.event;
     var crtTab = getByClass('crt_tab')[0];
@@ -422,7 +421,6 @@ function replaceHot (data) {
     // 5s更换一门课程
     setInterval(change, 5000);
 }
-
 /* /热门课程排行 */
 
 
@@ -731,7 +729,7 @@ function setVideo() {
                     if (parseInt(loaded.style.width) < 889) {
                         loaded.style.width = newbf + 'px';
                     } else {
-                        loaded.style.width = '889px'
+                        loaded.style.width = '889px';
                     }
                 }
             } else {
@@ -743,6 +741,22 @@ function setVideo() {
         var cg = setInterval(change, 300);
     }
     eventUtil.addHandler(video, 'canplay', changeBar);
+
+    // 音量调整
+    video.volume = 0.4;
+    var volumeBar = getByClass('volume_bar')[0];
+    function changeVlm(event) {
+        var vbar = getByClass('vbar')[0],
+            crtVlm = getByClass('crt_vlm')[0];
+
+        var crtWidth = event.clientX - getElementLeft(volumeBar);
+        var tovlm = (crtWidth/70).toFixed(2);
+
+        crtVlm.style.width = crtWidth + 'px';
+        video.volume = tovlm;
+    }
+    eventUtil.addHandler(volumeBar, 'click', changeVlm);
+
 
     // 关闭视频
     function close() {
