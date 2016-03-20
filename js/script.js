@@ -156,7 +156,31 @@ function slider() {
 
 
 
-/* 登录框 */
+/* 登录框与关注 */
+function signin() {
+    var flwBtn = getByClass('u-btn-1')[0];
+
+    var cookie = getCookie();
+    var btn1 = getByClass('u-btn-1')[0],
+        btn2 = getByClass('u-btn-2')[0];
+    // 如果已关注则显示已关注按钮 
+    if(cookie.followSuc) {
+        addClass(btn1, 'f-dn');    
+        removeClass(btn2, 'f-dn');                
+    }
+    // 点击关注按钮事件处理
+    eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
+
+    // 点击取消按钮事件处理
+    var cancel = document.querySelector('.u-btn-2 a');
+    eventUtil.addHandler(cancel, 'click', function(){
+        eventUtil.preventDefault(event);
+        removeCookie('followSuc');
+        addClass(btn2, 'f-dn');    
+        removeClass(btn1, 'f-dn');
+    });
+}
+
 function signinOrFocus() {
     var cookie = getCookie();
     var btn1 = getByClass('u-btn-1')[0],
@@ -167,28 +191,13 @@ function signinOrFocus() {
 
     if (cookie.loginSuc) {
         addClass(btn1, 'f-dn');
-        addClass(mask, 'f-dn');
+        setCookie('followSuc', 'true', '/');        
         removeClass(btn2, 'f-dn');
     } else {
         loginDiv();
         removeClass(mask, 'f-dn');
         removeClass(login, 'f-dn');       
     }    
-}
-
-function signin() {
-    var flwBtn = getByClass('u-btn-1')[0];
-
-    var plhdUser = getByClass('plhd_user')[0],
-        plhdPswd = getByClass('plhd_pswd')[0],
-        user = document.getElementById('user'),
-        pswd = document.getElementById('pswd');
-
-    var mask = getByClass('m-mask')[0],
-        login = getByClass('m-login')[0],
-        closeLogin = getByClass('u-clsbtn-1')[0];
-
-    eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
 }
 
 function loginDiv() {
@@ -236,12 +245,12 @@ function loginDiv() {
 
 function toSubmit(event) {
     event = event || window.event;
+    eventUtil.preventDefault(event);    
     var login = getByClass('m-login')[0],
         mask = getByClass('m-mask')[0]
 
     var userName = document.getElementById('user'),
         password = document.getElementById('pswd');
-    eventUtil.preventDefault(event);
 
     var url = 'http://study.163.com/webDev/login.htm';
     var options = {userName:md5(userName.value),password:md5(pswd.value)};
@@ -249,6 +258,7 @@ function toSubmit(event) {
     function oSubmit(data) {
         if(data == 1) {
             addClass(login, 'f-dn');
+            addClass(mask, 'f-dn');
             setCookie('loginSuc', 'ture', '/');
             signinOrFocus();
         } else {

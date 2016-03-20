@@ -150,8 +150,14 @@ function setCookie(name, value, path, domain, expires, secure) {
 	document.cookie = cookie;
 }
 
-function removeCookie(name, path, domain) {
-	document.cookie = 'name=' + name + '; path=' + path +';domain=' + domain + '; max-age=' + maxAge;
+function removeCookie(name) {
+	var expires = new Date();
+	expires.setTime(expires.getTime() - 1000);
+	var value = 1;
+	var path = '/';
+	var domain = '';
+	setCookie(name, value, path, domain, expires);
+	// document.cookie = 'name=' + name + '; path=' + path +';domain=' + domain + '; max-age=' + maxAge;
 }
 /* /Cookie */ 
 
