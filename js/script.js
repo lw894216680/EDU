@@ -1,8 +1,6 @@
 // 待解决问题记录
 // IE8 opacity待兼容
 
-
-
 /* 顶部提示信息 */
 // 点击后再刷新会先显示再隐藏，不友好，待解决
 function msgDisplay() {
@@ -20,7 +18,7 @@ function msgDisplay() {
 }
 /* /顶部提示信息 */
 
-
+    filter: "alpha(opacity=0)";
 /* banner 轮播图 */
 // 图片渐变: fadein,fadeout
 function fadeout (ele,stepLength,stepTime) {
@@ -94,18 +92,18 @@ function slider() {
         crtPoint = afterPoint;
     }
     // 每隔5s进行一次轮播
-    var onload = setInterval(animation,5000);      
+    var amn = setInterval(animation,5000);      
 
     // 鼠标悬停
     function msover() {
         // 清除 animation 
-        clearInterval(onload);
+        clearInterval(amn);
     }
     function msout() { 
         // 重置 nimation 
-        onload = setInterval(animation,5000);
+        amn = setInterval(animation,5000);
     }
-    // 鼠标悬停事件注册
+
     for (var i=0;i<slides.length;i++) {
         eventUtil.addHandler(slides[i], 'mouseover', msover);
         eventUtil.addHandler(slides[i], 'mouseout', msout);       
@@ -114,7 +112,7 @@ function slider() {
     // hover poniter后的切换
     function clickPointer(event) {
         event = event || window.event;
-        clearInterval(onload);
+        clearInterval(amn);
         removeClass(crtPoint, 'crt_point');
         crtPoint = eventUtil.getElement(event);
         addClass(crtPoint, 'crt_point');
@@ -156,10 +154,11 @@ function signin() {
     var cookie = getCookie();
     var btn1 = getByClass('u-btn-1')[0],
         btn2 = getByClass('u-btn-2')[0];
+    
     // 如果已关注则显示已关注按钮 
     if(cookie.followSuc) {
         addClass(btn1, 'f-dn');    
-        removeClass(btn2, 'f-dn');                
+        removeClass(btn2, 'f-dn');               
     }
     // 点击关注按钮事件处理
     eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
@@ -456,12 +455,12 @@ function pager () {
 }
 
 // 翻页后上移
-function returnTop() {
-    window.scrollBy(0,-50);
-    if(document.body.scrollTop>1150) { 
-        var sdelay= setTimeout('returnTop()',10);
-    }
-}
+// function returnTop() {
+//     window.scrollBy(0,-50);
+//     if(document.body.scrollTop>1150) { 
+//         var sdelay= setTimeout('returnTop()',10);
+//     }
+// }
 
 // 换页
 function clickPage (event) {
@@ -473,7 +472,7 @@ function clickPage (event) {
 
     // 点击对象非当前对象时继续进行
     if (oClick != crtPage) {
-        returnTop();
+        // returnTop();
         // 获取get请求参数pageNo、type
         var num = parseInt(pageBtn.firstChild.nodeValue);
 
@@ -495,7 +494,7 @@ function prevsPage() {
     var  crtPage = getByClass('crt_page')[0];
 
     if (crtPage.firstChild.nodeValue !== '1') {
-        returnTop();
+        // returnTop();
         // 取出前一页页码
         var reg = /pgr([0-9])/;
         var crtClass = crtPage.getAttribute('class');
@@ -531,7 +530,7 @@ function nextPage() {
 
     // 若当前页为最后一页，则不进行
     if (crtIndex != 7 || judge) {
-        returnTop();
+        // returnTop();
         var nextIndex = parseInt(crtIndex) + 1;
         var nextClass = "pgr" + nextIndex;
         var next = getByClass(nextClass)[0];
