@@ -53,9 +53,6 @@ function fadein (ele,stepLength,stepTime) {
     var setfadein = setInterval(step, stepTime);
 }
 
-
-
-
 // 获取下一张轮播图节点
 function getAfterNode(arr,crtNode) {
     for (var i=0;i<arr.length;i++) {
@@ -96,15 +93,22 @@ function slider() {
         crtSlide = afterSlide;
         crtPoint = afterPoint;
     }
+    // 每隔5s进行一次轮播
+    var onload = setInterval(animation,5000);      
 
     // 鼠标悬停
-    function msover(event) {
+    function msover() {
         // 清除 animation 
         clearInterval(onload);
     }
-    function msout(event) { 
+    function msout() { 
         // 重置 nimation 
         onload = setInterval(animation,5000);
+    }
+    // 鼠标悬停事件注册
+    for (var i=0;i<slides.length;i++) {
+        eventUtil.addHandler(slides[i], 'mouseover', msover);
+        eventUtil.addHandler(slides[i], 'mouseout', msout);       
     }
 
     // hover poniter后的切换
@@ -136,19 +140,10 @@ function slider() {
         }       
     }
 
-    // 鼠标悬停事件注册
-    for (var i=0;i<slides.length;i++) {
-        eventUtil.addHandler(slides[i], 'mouseover', msover);
-        eventUtil.addHandler(slides[i], 'mouseout', msout);       
-    }
-
     // pointer切换事件注册
     for (var i=0;i<pointer.length;i++) {
         eventUtil.addHandler(pointer[i], 'mouseover',clickPointer);
-    }
-
-    // 每隔5s进行一次轮播
-    var onload = setInterval(animation,5000);    
+    }  
 }
 
 /* /banner轮播图 */
@@ -288,8 +283,15 @@ function showCourse(courseData, options) {
         var course = document.createElement('div');
         addClass(course, 'm-course');
 
-        // 课程数据输入HTML中
-        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">¥ ' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
+        // 课程数据输入HTML中        
+        var price = courseData.list[i].price;
+        if( price == 0) {
+            courseData.list[i].price = '免费';
+            addClass(course, 'free');
+        } else {
+            courseData.list[i].price = '¥ ' + price;              
+        }
+        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
         course.innerHTML = courseHtml;
         // 将新建节点出入 div.courses 内
         courses.appendChild(course);

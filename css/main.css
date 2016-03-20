@@ -57,9 +57,9 @@ body {
 .u-btn-1 span,
 .u-btn-2 .ic1,
 .u-btn-2 .ic2,
-.m-nav .topnav i,  /*搜索重新切图*/
-.m-intro .intro i,
-.m-list-1 pre,
+.m-nav .topnav span, 
+.m-intro .intro span,
+.m-list-1 i,
 .m-pager .prevs_page,
 .m-pager .next_page,
 .u-clsbtn,
@@ -75,7 +75,7 @@ body {
 	background: url(../img/sprite.png) 9999px 9999px no-repeat;
 }
 
-.m-card-video i,
+.m-card-video span,
 .u-smbtn {
 	background: url(../img/sprite24.png) 9999px 9999px no-repeat;
 }
@@ -103,7 +103,12 @@ body {
 
 .g-wrap {
 	margin: 0 auto;
-	width: 1206px;
+	width: 1205px;
+}
+@media screen and (max-width: 1204px) {
+	.g-wrap {
+		width: 958px;
+	}
 }
 
 /* /顶部提示信息 */
@@ -221,7 +226,7 @@ body {
 	list-style: none;
 
 }
-.m-nav .topnav i {
+.m-nav .topnav span {
 	margin-left: 30px;
 	width: 19px;
 	height: 19px;
@@ -229,7 +234,7 @@ body {
 	background-position: 0 -41px;
 	vertical-align: middle;		
 }
-.m-nav .topnav i:hover {
+.m-nav .topnav span:hover {
 	background-position: -24px -41px;	
 }
 .m-nav .topnav li {
@@ -257,6 +262,8 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 100%;
 	opacity: 0;
 	filter: "alpha(opacity=0)";
 }
@@ -293,13 +300,13 @@ body {
 }
 
 .m-intro {
-	height: 295px;
+	padding-top: 60px;
+	height: 235px;
 }
 .m-intro .intro {
 	float: left;
 	width: 344px;
 	height: 180px;
-	margin-top: 60px;
 	margin-left: 80px;
 }
 .m-intro .intro:first-child{
@@ -329,19 +336,28 @@ body {
 .m-intro a:hover {
 	text-decoration: underline;
 }
-.m-intro .intro i {
+.m-intro .intro span {
 	margin-top: 7px;
 	width: 80px;
 	height: 80px;
 }
-.m-intro i.openlogo {
+.m-intro span.openlogo {
 	background-position: -109px 0;
 }
-.m-intro i.studylogo {
+.m-intro span.studylogo {
 	background-position: -109px -86px;
 }
-.m-intro i.mooclogo {
+.m-intro span.mooclogo {
 	background-position: -200px 0;
+}
+@media screen and (max-width: 1204px){
+	.m-intro .intro {
+		width: 272px;
+		margin-left: 71px;
+	}
+	.m-intro .intro:first-child{
+		margin-left: 0;
+	}	
 }
 
 /* /头部(导航及轮播图) */
@@ -359,7 +375,6 @@ body {
 	position: relative;
 	left: 50%;
 	margin-left: -808px;
-	margin-bottom: 81px;
 	width: 1616px;
 	height: 220px;
 }
@@ -371,10 +386,18 @@ body {
 	margin-left: 0;
 }
 
+.g-body > .g-wrap{
+	padding-top: 80px;
+}
 .m-content {
 	float: left;
 	width: 980px;
 	padding-bottom: 120px;	
+}
+@media screen and (max-width: 1204px) {
+	.m-content {
+		width: 735px;
+	}
 }
 .m-content .tab {
 	margin-bottom: 30px;
@@ -403,8 +426,7 @@ body {
 }
 .m-content .courses {
 	margin-bottom: 10px;
-	/*height: 1240px;*/
-	min-height: 400px;
+	/*min-height: 400px;*/
 }
 
 .m-course {
@@ -442,6 +464,9 @@ body {
 	margin: 0;
 	font-size: 12px;	
 	line-height: 12px;		
+}
+.m-course.free .cost {
+	color: #48BB33;
 }
 .m-course img {
 	width: 223px;
@@ -508,6 +533,7 @@ body {
 	font-size: 14px;
 	line-height: 24px;	
 }
+
 
 .m-pager {
 	float: right;
@@ -604,13 +630,16 @@ body {
 .m-card-video img {
 	width: 180px;
 }
-.m-card-video i {
+.m-card-video .show_video span {
 	position: absolute;
 	bottom: 53px;
 	left: 89px;
 	width: 46px;
 	height: 46px;
 	background-position: 0 0;
+}
+.m-card-video .show_video:hover span {
+	visibility: visible;
 }
 
 /* 视频播放模块 */
@@ -804,6 +833,11 @@ body {
 	padding: 90px 0 80px 50px;
 	margin-right: 150px;
 }
+@media screen and (max-width: 1204px) {
+	.m-foot .ftlf {
+		padding-left: 0;
+	}
+}
 .m-foot .copy p {
 	margin: 0;
 	font-size: 12.5px;
@@ -849,6 +883,9 @@ body {
 	height: 16px;
 	background-position: 0 -106px;
 }
+.m-list-2 {
+	margin-right: 0;
+}
 /* /页脚 */
 
 
@@ -868,7 +905,7 @@ body {
 
 /* 登入框 */
 .m-login {
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	margin-left: -193.5px;
