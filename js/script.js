@@ -678,26 +678,27 @@ function setVideo() {
     }
     eventUtil.addHandler(show, 'click', showVideo);
 
-    // 播放
-    function start() {
-        video.play();
-        // 开始按钮隐藏，暂停按钮显示
-        addClass(bigBtn, 'f-dn');
-        addClass(startBtn, 'f-dn');
-        removeClass(pauseBtn, 'f-dn');
+    // 点击按钮开始或暂停视频
+    function startOrPause(){
+        if(video.paused) {
+            video.play();
+            // 开始按钮隐藏，暂停按钮显示
+            addClass(bigBtn, 'f-dn');
+            addClass(startBtn, 'f-dn');
+            removeClass(pauseBtn, 'f-dn');            
+        }else {
+            video.pause();
+            // 开始按钮显示，暂停按钮隐藏
+            removeClass(bigBtn, 'f-dn');
+            removeClass(startBtn, 'f-dn');
+            addClass(pauseBtn, 'f-dn');            
+        }
     }
+    eventUtil.addHandler(bigBtn, 'click', startOrPause);
+    eventUtil.addHandler(startBtn, 'click', startOrPause);
+    eventUtil.addHandler(pauseBtn, 'click', startOrPause);
+    eventUtil.addHandler(video, 'click', startOrPause);    
 
-    // 暂停
-    function pause() {
-        video.pause();
-        // 开始按钮显示，暂停按钮隐藏
-        removeClass(bigBtn, 'f-dn');
-        removeClass(startBtn, 'f-dn');
-        addClass(pauseBtn, 'f-dn');
-    }
-    eventUtil.addHandler(bigBtn, 'click', start);
-    eventUtil.addHandler(startBtn, 'click', start);
-    eventUtil.addHandler(pauseBtn, 'click', pause);
 
     // 进度
     var loaded = getByClass('loaded')[0],

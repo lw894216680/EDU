@@ -458,7 +458,8 @@ body {
 	white-space: nowrap;
 	font-size: 12px;	
 	line-height: 12px;
-	color: #333;	
+	color: #333;
+	cursor: pointer;	
 }
 .m-course p {
 	margin: 0;
@@ -471,6 +472,7 @@ body {
 .m-course img {
 	width: 223px;
 	height: 124px;
+	cursor: pointer;
 }
 .m-course .nums {
 	padding: 0 3px;
@@ -664,6 +666,7 @@ body {
 	padding: 0 31px;
 	width:889px;
 	font-size: 0;
+	cursor: pointer;
 }
 .m-video .control {
 	padding: 0 31px 40px;
@@ -793,7 +796,8 @@ body {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	line-height: 14px;	
+	line-height: 14px;
+	cursor: pointer;	
 }
 .top_course .course_name {
 	margin-bottom: 13px;
@@ -803,7 +807,8 @@ body {
 	float: left;
 	margin-right: 12px;
 	width: 50px;
-	height: 50px;	
+	height: 50px;
+	cursor: pointer;		
 }
 
 .u-num {
