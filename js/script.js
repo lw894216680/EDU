@@ -205,7 +205,7 @@ function loginDiv() {
         login = getByClass('m-login')[0],
         closeLogin = getByClass('u-clsbtn-1')[0];
 
-    // 输入框获得焦点，隐藏占位符
+    // 按键时，输入框隐藏占位符
     eventUtil.addHandler(user, 'keydown', function(){
         addClass(plhdUser, 'f-dn');
     });
@@ -296,10 +296,11 @@ function showCourse(courseData, options) {
         courses.appendChild(course);
     }
 
-    // 重置翻页器页码
+    // 重置翻页器页码，传入总页数
     var num = options.pageNo;
     var totlePage = courseData.pagination.totlePageCount;
     renewPager(num, totlePage);
+
     // 课程加载后显示翻页器
     removeClass(mPager, 'f-vh');  
 }
@@ -315,9 +316,18 @@ function getCourse(num, cType){
     addClass(mPager, 'f-vh'); 
 
     var url = 'http://study.163.com/webDev/couresByCategory.htm';
+    // 首次加载num:1 , cType:10
     num = num || 1;
     cType = cType || 10;
-    var options =  {pageNo:num, psize:20, type:cType};
+
+    var wdh = document.body.clientWidth;
+    var psz;
+    if (wdh >= 1205) {
+        psz = 20;
+    } else {
+        psz = 15;
+    }
+    var options =  {pageNo: num, psize: psz, type: cType};
     get(url, options, showCourse);
 }
 
@@ -360,70 +370,6 @@ function clickTab(event) {
 }
 
 /* /课程 */
-
-/* 热门课程排行 */
-// 获取课程数据
-function getHotCourse(){
-    var url = 'http://study.163.com/webDev/hotcouresByCategory.htm';
-    get(url, '', showHotCourse);
-}
-// 展示热门课程
-function showHotCourse(data) {
-    var cardTop = getByClass('m-card-top')[0],
-        topCourse = document.createElement('div'),
-        courseHTML = '';
-
-    // 取到课程数据后显示热门排行
-    removeClass(cardTop, 'f-vh');
-
-    // 遍历前10门课程
-    for(var i=0; i<10; i++) {
-        var courseData = data[i];
-        var  topCourse = document.createElement('div');
-        addClass(topCourse, 'top_course f-cb');
-
-        courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
-
-        topCourse.innerHTML = courseHTML;
-        cardTop.appendChild(topCourse);
-    }
-    replaceHot(data);
-}
-// 隔5秒替换一个热门课程
-function replaceHot (data) {
-    // 未显示课程索引值
-    var restList = [10,11,12,13,14,15,16,17,18,19];
-
-    function change() {
-        // 取出第一个未显示课程索引值
-        var add = restList.shift();
-        // 将被移除的课程索引值重新添加到 restList，即可无限循环
-        if(add >= 10) {
-            restList.push(add-10);
-        }else {
-            restList.push(add+10);
-        }
-
-        // 取出课程数据
-        var courseData = data[add];
-        // 新建节点
-        var topCourse = getByClass('top_course');
-        var cardTop = topCourse[0].parentNode;
-        var newCourse = document.createElement('div');
-        addClass(newCourse, 'top_course f-cb');
-
-        var courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
-        // 移出课程
-        remove(topCourse[0]);
-        // 添加课程
-        newCourse.innerHTML = courseHTML;
-        cardTop.appendChild(newCourse);  
-    }
-    // 5s更换一门课程
-    setInterval(change, 5000);
-}
-/* /热门课程排行 */
-
 
 /* 翻页器 */
 // 点击事件注册
@@ -563,35 +509,32 @@ function renewPager(num,totlePage) {
     var dot1 = getByClass('dot1')[0],
         dot2 = getByClass('dot2')[0];
 
-    // 获取页为最后一页
-    if (num === totlePage) {
-        // 更新当前页
-        removeClass(crtPage, 'crt_page');
-        addClass(pgr7, 'crt_page'); 
-        // 隐藏省略号
-        addClass(dot2, 'f-dn');       
-        // 重置页码
+
+    if (num >= totlePage-2) {
+        if (num == totlePage) {
+            // 最后一页
+            removeClass(crtPage, 'crt_page');
+            addClass(pgr7, 'crt_page'); 
+        } else if (num == totlePage-1) {
+            // 获取页为倒数第二页
+            removeClass(crtPage, 'crt_page');
+            addClass(pgr6, 'crt_page');           
+        } else {
+            // 获取页为倒数第三页
+            removeClass(crtPage, 'crt_page');
+            addClass(pgr5, 'crt_page');   
+        }
+        // 不显示第二个省略号
+        addClass(dot2, 'f-dn');   
+
         pgr2.innerHTML = totlePage -5;
         pgr3.innerHTML = totlePage -4;
         pgr4.innerHTML = totlePage -3;
         pgr5.innerHTML = totlePage -2;      
         pgr6.innerHTML = totlePage -1;
         pgr7.innerHTML = totlePage;        
-    } else if (num === totlePage-1) {
-        // 获取页为倒数第二页
-        removeClass(crtPage, 'crt_page');
-        addClass(pgr6, 'crt_page');
-
-        addClass(dot2, 'f-dn');         
-
-        pgr2.innerHTML = totlePage -5;
-        pgr3.innerHTML = totlePage -4;
-        pgr4.innerHTML = totlePage -3;
-        pgr5.innerHTML = totlePage -2;      
-        pgr6.innerHTML = totlePage -1;
-        pgr7.innerHTML = totlePage; 
     } else if (num >= 7) {
-        // 获取页小于7
+        // 获取页大于7
         removeClass(crtPage, 'crt_page');
         addClass(pgr5, 'crt_page');
 
@@ -630,6 +573,71 @@ function renewPager(num,totlePage) {
     }
 }
 /* 翻页器 */
+
+
+/* 热门课程排行 */
+// 获取课程数据
+function getHotCourse(){
+    var url = 'http://study.163.com/webDev/hotcouresByCategory.htm';
+    get(url, '', showHotCourse);
+}
+// 展示热门课程
+function showHotCourse(data) {
+    var cardTop = getByClass('m-card-top')[0],
+        topCourse = document.createElement('div'),
+        courseHTML = '';
+
+    // 取到课程数据后显示热门排行
+    removeClass(cardTop, 'f-vh');
+
+    // 遍历前10门课程
+    for(var i=0; i<10; i++) {
+        var courseData = data[i];
+        var  topCourse = document.createElement('div');
+        addClass(topCourse, 'top_course f-cb');
+
+        courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+
+        topCourse.innerHTML = courseHTML;
+        cardTop.appendChild(topCourse);
+    }
+    replaceHot(data);
+}
+// 隔5秒替换一个热门课程
+function replaceHot (data) {
+    // 未显示课程索引值
+    var restList = [10,11,12,13,14,15,16,17,18,19];
+
+    function change() {
+        // 取出第一个未显示课程索引值
+        var add = restList.shift();
+        // 将被移除的课程索引值重新添加到 restList，即可无限循环
+        if(add >= 10) {
+            restList.push(add-10);
+        }else {
+            restList.push(add+10);
+        }
+
+        // 取出课程数据
+        var courseData = data[add];
+        // 新建节点
+        var topCourse = getByClass('top_course');
+        var cardTop = topCourse[0].parentNode;
+        var newCourse = document.createElement('div');
+        addClass(newCourse, 'top_course f-cb');
+
+        var courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+        // 移出课程
+        remove(topCourse[0]);
+        // 添加课程
+        newCourse.innerHTML = courseHTML;
+        cardTop.appendChild(newCourse);  
+    }
+    // 5s更换一门课程
+    setInterval(change, 5000);
+}
+/* /热门课程排行 */
+
 
 
 /* 视频播放 */
