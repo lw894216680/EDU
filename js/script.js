@@ -1,5 +1,8 @@
 // 待解决问题记录
 // IE8 opacity待兼容
+// video = document.querySelector('.m-video video') 在IE8下无效
+// IE8 下不支持@media媒体查询
+// IE8 下输入框光标位置
 
 /* 顶部提示信息 */
 // 点击后再刷新会先显示再隐藏，不友好，待解决
@@ -18,7 +21,7 @@ function msgDisplay() {
 }
 /* /顶部提示信息 */
 
-    filter: "alpha(opacity=0)";
+
 /* banner 轮播图 */
 // 图片渐变: fadein,fadeout
 function fadeout (ele,stepLength,stepTime) {
@@ -246,7 +249,7 @@ function toSubmit(event) {
         password = document.getElementById('pswd');
 
     var url = 'http://study.163.com/webDev/login.htm';
-    var options = {userName:md5(userName.value),password:md5(pswd.value)};
+    var options = {userName:md5(userName.value),password:md5(password.value)};
 
     function oSubmit(data) {
         // get 返回1，登陆成功
@@ -534,7 +537,7 @@ function renewPager(num,totlePage) {
         pgr6.innerHTML = totlePage -1;
         pgr7.innerHTML = totlePage;        
     } else if (num >= 7) {
-        // 获取页大于7
+        // 获取页大于等于7
         removeClass(crtPage, 'crt_page');
         addClass(pgr5, 'crt_page');
 
@@ -548,10 +551,17 @@ function renewPager(num,totlePage) {
         pgr5.innerHTML = num;
         pgr6.innerHTML = num + 1;
         pgr7.innerHTML = num + 2;
-    } else if (num > 1){
+    } else {
+        if (num == 1) {
+            // num==1时切换tab，重置为第一页
+            removeClass(crtPage, 'crt_page');
+            addClass(pgr1, 'crt_page');            
+        } else {
+            // 显示dot2
+            removeClass(dot2, 'f-dn');            
+        }
         // 前往页码小于7时，隐藏页码1旁的省略符号
-        addClass(dot1, 'f-dn');
-        removeClass(dot2, 'f-dn')
+        addClass(dot1, 'f-dn'); 
 
         pgr2.innerHTML = 2;
         pgr3.innerHTML = 3;
@@ -559,19 +569,9 @@ function renewPager(num,totlePage) {
         pgr5.innerHTML = 5;      
         pgr6.innerHTML = 6;
         pgr7.innerHTML = 7;        
-    } else {
-        // num==1时切换tab，重置为第一页
-        removeClass(crtPage, 'crt_page');
-        addClass(pgr1, 'crt_page');
-
-        pgr2.innerHTML = 2;
-        pgr3.innerHTML = 3;
-        pgr4.innerHTML = 4;
-        pgr5.innerHTML = 5;      
-        pgr6.innerHTML = 6;
-        pgr7.innerHTML = 7;         
     }
-}
+} 
+
 /* 翻页器 */
 
 
@@ -665,7 +665,8 @@ function convertTime(time) {
 
 function setVideo() {
     var mVideo = getByClass('m-video')[0],
-        video = document.querySelector('.m-video video'),
+        // video = document.querySelector('.m-video video'),
+        video = document.getElementsByTagName('video')[0],
         bigBtn = getByClass('big_btn')[0],
         startBtn = getByClass('start_btn')[0],
         pauseBtn = getByClass('pause_btn')[0],
@@ -756,6 +757,7 @@ function setVideo() {
     video.volume = 0.4;
     var volumeBar = getByClass('volume_bar')[0];
     function changeVlm(event) {
+        event = event || window.event;
         var vbar = getByClass('vbar')[0],
             crtVlm = getByClass('crt_vlm')[0];
 

@@ -14,9 +14,6 @@ function addLoadEvent(func) {
 
 
 
-
-
-
 /* 类名相关 */
 // 由类名获取节点
 function getByClass(clsName,elm){
@@ -60,9 +57,6 @@ function removeClass(elm,oldClsName) {
 }
 
 /* /类名相关 */
-
-
-
 
 
 
