@@ -1,8 +1,5 @@
 // 待解决问题记录
-// IE8 opacity待兼容
-// video = document.querySelector('.m-video video') 在IE8下无效
 // IE8 下不支持@media媒体查询
-// IE8 下输入框光标位置
 
 /* 顶部提示信息 */
 // 点击后再刷新会先显示再隐藏，不友好，待解决
@@ -28,29 +25,42 @@ function fadeout (ele,stepLength,stepTime) {
     // 重置opacity及z-index
     ele.style.opacity = 1;
     ele.style.zIndex = 0;
+    // 兼容IE8
+    ele.style.filter = "alpha(opacity=100)";
+
     function step () {
-        if (parseFloat(ele.style.opacity)-stepLength > 0) {
-            ele.style.opacity = parseFloat(ele.style.opacity)-stepLength;
+        var crtOpt = parseFloat(ele.style.opacity)-stepLength;
+        if (crtOpt > 0) {
+            ele.style.opacity = crtOpt;
+            ele.style.filter = "alpha(opacity=" + crtOpt*100 + ")";
         } else {
-            ele.style.opacity = 0; 
+            ele.style.opacity = 0;
+            ele.style.filter = "alpha(opacity=0)" 
             clearInterval(setfadeout);
         }
     }
+
     var setfadeout = setInterval(step, stepTime);
 }
 
 function fadein (ele,stepLength,stepTime) {
     // 重置opacity及z-index
     ele.style.opacity = 0;
-    ele.style.zIndex = 1;     
+    ele.style.zIndex = 1;
+    // 兼容IE8
+    ele.style.filter = "alpha(opacity=0)";     
+
     function step () {
-        if (parseFloat(ele.style.opacity)+ stepLength < 1) {
-            ele.style.opacity = parseFloat(ele.style.opacity)+stepLength;
+        var crtOpt = parseFloat(ele.style.opacity) + stepLength;    
+        if (crtOpt < 1) {
+            ele.style.opacity = crtOpt;
+            ele.style.filter = "alpha(opacity=" + crtOpt*100 + ")"; 
         } else {
             ele.style.opacity = 1;
+            ele.style.filter = "alpha(opacity=100)";
             clearInterval(setfadein);
         }           
-    }
+    }    
     var setfadein = setInterval(step, stepTime);
 }
 
@@ -97,23 +107,17 @@ function slider() {
     // 每隔5s进行一次轮播
     var amn = setInterval(animation,5000);      
 
-    // 鼠标悬停
-    function msover() {
-        // 清除 animation 
-        clearInterval(amn);
-    }
-    function msout() { 
-        // 重置 nimation 
-        amn = setInterval(animation,5000);
-    }
-
     for (var i=0;i<slides.length;i++) {
-        eventUtil.addHandler(slides[i], 'mouseover', msover);
-        eventUtil.addHandler(slides[i], 'mouseout', msout);       
+        eventUtil.addHandler(slides[i], 'mouseover', function(){
+            clearInterval(amn);            
+        });
+        eventUtil.addHandler(slides[i], 'mouseout', function(){
+            amn = setInterval(animation,5000);            
+        });       
     }
 
     // hover poniter后的切换
-    function clickPointer(event) {
+    function hoverPointer(event) {
         event = event || window.event;
         clearInterval(amn);
         removeClass(crtPoint, 'crt_point');
@@ -143,9 +147,10 @@ function slider() {
 
     // pointer切换事件注册
     for (var i=0;i<pointer.length;i++) {
-        eventUtil.addHandler(pointer[i], 'mouseover',clickPointer);
+        eventUtil.addHandler(pointer[i], 'mouseover',hoverPointer);
     }  
 }
+
 
 /* /banner轮播图 */
 
@@ -163,6 +168,23 @@ function signin() {
         addClass(btn1, 'f-dn');    
         removeClass(btn2, 'f-dn');               
     }
+    
+    // 登陆情形处理
+    function signinOrFocus() {
+        var mask = getByClass('m-mask')[0],
+            login = getByClass('m-login')[0];
+        // 已登录时
+        if (cookie.loginSuc) {
+            addClass(btn1, 'f-dn');
+            setCookie('followSuc', 'true', '/');        
+            removeClass(btn2, 'f-dn');
+        } else {
+            // 未登陆时，弹出登录框
+            loginDiv();
+            removeClass(mask, 'f-dn');
+            removeClass(login, 'f-dn');       
+        }    
+    }
     // 点击关注按钮事件处理
     eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
 
@@ -175,26 +197,7 @@ function signin() {
         removeClass(btn1, 'f-dn');
     });
 }
-// 登陆情形处理
-function signinOrFocus() {
-    var cookie = getCookie();
-    var btn1 = getByClass('u-btn-1')[0],
-        btn2 = getByClass('u-btn-2')[0];
 
-    var mask = getByClass('m-mask')[0],
-        login = getByClass('m-login')[0];
-    // 已登录时
-    if (cookie.loginSuc) {
-        addClass(btn1, 'f-dn');
-        setCookie('followSuc', 'true', '/');        
-        removeClass(btn2, 'f-dn');
-    } else {
-        // 未登陆时，弹出登录框
-        loginDiv();
-        removeClass(mask, 'f-dn');
-        removeClass(login, 'f-dn');       
-    }    
-}
 // 登陆框设置
 function loginDiv() {
     var flwBtn = getByClass('u-btn-1')[0];
@@ -208,7 +211,7 @@ function loginDiv() {
         login = getByClass('m-login')[0],
         closeLogin = getByClass('u-clsbtn-1')[0];
 
-    // 按键时，输入框隐藏占位符
+    // 输入时，输入框隐藏占位符
     eventUtil.addHandler(user, 'keydown', function(){
         addClass(plhdUser, 'f-dn');
     });
@@ -243,7 +246,7 @@ function toSubmit(event) {
     event = event || window.event;
     eventUtil.preventDefault(event);    
     var login = getByClass('m-login')[0],
-        mask = getByClass('m-mask')[0]
+        mask = getByClass('m-mask')[0];
 
     var userName = document.getElementById('user'),
         password = document.getElementById('pswd');
@@ -285,7 +288,7 @@ function showCourse(courseData, options) {
         var course = document.createElement('div');
         addClass(course, 'm-course');
 
-        // 课程数据输入HTML中        
+        // 把价格为0的课程显示为免费
         var price = courseData.list[i].price;
         if( price == 0) {
             courseData.list[i].price = '免费';
@@ -293,6 +296,7 @@ function showCourse(courseData, options) {
         } else {
             courseData.list[i].price = '¥ ' + price;              
         }
+        // 课程数据输入HTML中         
         courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
         course.innerHTML = courseHtml;
         // 将新建节点出入 div.courses 内
@@ -323,6 +327,7 @@ function getCourse(num, cType){
     num = num || 1;
     cType = cType || 10;
 
+    // 宽屏获取20门课程，窄屏15门
     var wdh = document.body.clientWidth;
     var psz;
     if (wdh >= 1205) {
@@ -337,10 +342,27 @@ function getCourse(num, cType){
 // 切换标签
 function tab() {
     var tab = document.querySelectorAll('.tab h4');
+
+    function clickTab(event) {
+        event = event || window.event;
+        var crtTab = getByClass('crt_tab')[0];
+        var cType;
+        oClick = eventUtil.getElement(event);
+        // 判断被点击tab是否为当前tab
+        if (oClick != crtTab) {
+            // 重置当前tab
+            removeClass(crtTab, 'crt_tab');
+            addClass(oClick, 'crt_tab');
+            var mPager = getByClass('m-pager')[0]; 
+            addClass(mPager, 'f-vh');
+            // 获取课程
+            getCourse(1, getCType());
+        }
+    }
     // 添加click事件
     for(var i=0; i<tab.length; i++) {
         eventUtil.addHandler(tab[i], 'click', clickTab);
-    }
+    }        
 }
 // 获取tab的筛选类型
 function getCType() {
@@ -351,24 +373,6 @@ function getCType() {
         return cType = 10;
     } else {
         return cType = 20;
-    }
-}
-// 点击标签
-function clickTab(event) {
-    event = event || window.event;
-    var crtTab = getByClass('crt_tab')[0];
-    var tab = document.querySelectorAll('.tab h4');
-    var cType;
-    oClick = eventUtil.getElement(event);
-    // 判断被点击tab是否为当前tab
-    if (oClick != crtTab) {
-        // 重置当前tab
-        removeClass(crtTab, 'crt_tab');
-        addClass(oClick, 'crt_tab');
-        var mPager = getByClass('m-pager')[0]; 
-        addClass(mPager, 'f-vh');
-        // 获取课程
-        getCourse(1, getCType());
     }
 }
 
@@ -421,15 +425,9 @@ function clickPage (event) {
 
     // 点击对象非当前对象时继续进行
     if (oClick != crtPage) {
-        // returnTop();
         // 获取get请求参数pageNo、type
         var num = parseInt(pageBtn.firstChild.nodeValue);
 
-        // 更换当前页码
-        if (num < 7) {
-            removeClass(crtPage, 'crt_page');
-            addClass(pageBtn, 'crt_page');
-        } 
         // 获取cType
         var cType = getCType();
 
@@ -440,26 +438,11 @@ function clickPage (event) {
 
 // 上一页
 function prevsPage() {
-    var  crtPage = getByClass('crt_page')[0];
+    var crtPage = getByClass('crt_page')[0];
+    var crtNum =  parseInt(crtPage.firstChild.nodeValue);
 
-    if (crtPage.firstChild.nodeValue !== '1') {
-        // returnTop();
-        // 取出前一页页码
-        var reg = /pgr([0-9])/;
-        var crtClass = crtPage.getAttribute('class');
-        var crtIndex = crtClass.match(reg)[1];
-        var prevsIndex = crtIndex - 1;
-        var prevsClass = "pgr" + prevsIndex;
-        var prevs = getByClass(prevsClass)[0];
-        var prevsNum = parseInt(prevs.firstChild.nodeValue);
-
-        // 页码小于7时更换当前页码（注：大于7时在 renewPager() 函数中进行处理）
-        if (prevsNum < 7) {
-            var prevsClass = 'pgr' + prevsNum;
-            var prevs = getByClass(prevsClass)[0];
-            removeClass(crtPage, 'crt_page');
-            addClass(prevs, 'crt_page');
-        } 
+    if (crtNum !== 1) {
+        var prevsNum = crtNum - 1;
 
         // 获取课程
         var cType = getCType();
@@ -469,109 +452,71 @@ function prevsPage() {
 
 // 下一页
 function nextPage() {
-    var  crtPage = getByClass('crt_page')[0];
+    var crtPage = getByClass('crt_page')[0];
+    var crtNum =  parseInt(crtPage.firstChild.nodeValue);
 
-    var reg = /pgr([0-9])/;
-    var crtClass = crtPage.getAttribute('class');
-    var crtIndex = crtClass.match(reg)[1];
-    var crtTxt = crtPage.firstChild.nodeValue; 
-    var judge = crtIndex == 7 && crtTxt == '7';
-
-    // 若当前页为最后一页，则不进行
-    if (crtIndex != 7 || judge) {
-        // returnTop();
-        var nextIndex = parseInt(crtIndex) + 1;
-        var nextClass = "pgr" + nextIndex;
-        var next = getByClass(nextClass)[0];
-        var nextNum = parseInt(next.firstChild.nodeValue);
-
-        // 更换当前页码
-        if (nextNum < 7) {
-            var nextClass = 'pgr' + nextNum;
-            var next = getByClass(nextClass)[0];
-            removeClass(crtPage, 'crt_page');
-            addClass(next, 'crt_page');
-        } 
-
-        var cType = getCType();
-        getCourse(nextNum, cType);      
+    var cType = getCType();
+    // 最后一页不进行操作
+    if (!hasClass(crtPage,'pgr7')) {
+        var nextNum = crtNum + 1;
+        getCourse(nextNum, cType);  
+    } else if (crtNum === 7) {
+        getCourse(8, cType);         
     }
 }
 
 // 更换显示页码
 function renewPager(num,totlePage) {
-    var pgr1 = getByClass('pgr1')[0],
-        pgr2 = getByClass('pgr2')[0],
-        pgr3 = getByClass('pgr3')[0],
-        pgr4 = getByClass('pgr4')[0],
-        pgr5 = getByClass('pgr5')[0],
-        pgr6 = getByClass('pgr6')[0],
-        pgr7 = getByClass('pgr7')[0];
+    var pgr = getByClass('pgr');
 
     var crtPage = getByClass('crt_page')[0];
     var dot1 = getByClass('dot1')[0],
         dot2 = getByClass('dot2')[0];
 
-
     if (num >= totlePage-2) {
         if (num == totlePage) {
             // 最后一页
-            removeClass(crtPage, 'crt_page');
-            addClass(pgr7, 'crt_page'); 
+            removeClass(crtPage, 'crt_page'); 
+            addClass(pgr[6],'crt_page')
         } else if (num == totlePage-1) {
             // 获取页为倒数第二页
-            removeClass(crtPage, 'crt_page');
-            addClass(pgr6, 'crt_page');           
+            removeClass(crtPage, 'crt_page');            
+            addClass(pgr[5],'crt_page')          
         } else {
             // 获取页为倒数第三页
-            removeClass(crtPage, 'crt_page');
-            addClass(pgr5, 'crt_page');   
+            removeClass(crtPage, 'crt_page');            
+            addClass(pgr[4],'crt_page')  
         }
         // 不显示第二个省略号
         addClass(dot2, 'f-dn');   
-
-        pgr2.innerHTML = totlePage -5;
-        pgr3.innerHTML = totlePage -4;
-        pgr4.innerHTML = totlePage -3;
-        pgr5.innerHTML = totlePage -2;      
-        pgr6.innerHTML = totlePage -1;
-        pgr7.innerHTML = totlePage;        
+        // 更改页码
+        for (var i=1; i<pgr.length; i++) {
+            pgr[i].innerHTML = totlePage -6 + i;
+        }        
     } else if (num >= 7) {
         // 获取页大于等于7
         removeClass(crtPage, 'crt_page');
-        addClass(pgr5, 'crt_page');
+        addClass(pgr[4], 'crt_page');
 
         // 前往页码大于等于7时，显示页码1旁的省略符号
         removeClass(dot1, 'f-dn');
         removeClass(dot2, 'f-dn')
-
-        pgr2.innerHTML = num - 3;
-        pgr3.innerHTML = num - 2;
-        pgr4.innerHTML = num - 1;
-        pgr5.innerHTML = num;
-        pgr6.innerHTML = num + 1;
-        pgr7.innerHTML = num + 2;
+        // 更改页码
+        for (var i=1; i<pgr.length; i++) {
+            pgr[i].innerHTML = num -4 + i;
+        }   
     } else {
-        if (num == 1) {
-            // num==1时切换tab，重置为第一页
-            removeClass(crtPage, 'crt_page');
-            addClass(pgr1, 'crt_page');            
-        } else {
-            // 显示dot2
-            removeClass(dot2, 'f-dn');            
-        }
-        // 前往页码小于7时，隐藏页码1旁的省略符号
-        addClass(dot1, 'f-dn'); 
+        // 获取页小于7
+        removeClass(crtPage, 'crt_page');
+        addClass(pgr[num-1], 'crt_page');
 
-        pgr2.innerHTML = 2;
-        pgr3.innerHTML = 3;
-        pgr4.innerHTML = 4;
-        pgr5.innerHTML = 5;      
-        pgr6.innerHTML = 6;
-        pgr7.innerHTML = 7;        
+        addClass(dot1, 'f-dn'); 
+        // 更改页码
+        for (var i=1; i<pgr.length; i++) {
+            pgr[i].innerHTML = i + 1;
+        }               
     }
 } 
-
 /* 翻页器 */
 
 
@@ -609,9 +554,9 @@ function replaceHot (data) {
     var restList = [10,11,12,13,14,15,16,17,18,19];
 
     function change() {
-        // 取出第一个未显示课程索引值
+        // 取出第一个值
         var add = restList.shift();
-        // 将被移除的课程索引值重新添加到 restList，即可无限循环
+        // 将被移除的值重新添加到 restList
         if(add >= 10) {
             restList.push(add-10);
         }else {
@@ -797,6 +742,12 @@ function setVideo() {
 }
 
 /* /视频播放 */
+
+
+/* IE8 */
+
+
+/* /IE8 */
 
 
 addLoadEvent(setVideo);

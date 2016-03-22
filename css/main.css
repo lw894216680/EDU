@@ -957,6 +957,7 @@ body {
 .u-ipt input {
 	width: 293px;
 	height: 43px;
+	line-height: 43px; /* 解决IE8光标错位 */
 	border: 1px solid #dfdfdf;
     box-shadow: 1px 1px 1px #f1f1f1 inset;	
 	text-indent: 7px;
