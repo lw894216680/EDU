@@ -297,7 +297,7 @@ function showCourse(courseData, options) {
             courseData.list[i].price = '¥ ' + price;              
         }
         // 课程数据输入HTML中         
-        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="f-ib"></span>' + courseData.list[i].learnerCount + '</div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
+        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="nums_icon f-ib"></span><span class="f-ib nums_txt">' + courseData.list[i].learnerCount + '</span></div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
         course.innerHTML = courseHtml;
         // 将新建节点出入 div.courses 内
         courses.appendChild(course);
@@ -387,24 +387,23 @@ function pager () {
 
     // 点击页码 
     for(var i=0; i<pgr.length; i++) {
-        pgr[i].onclick = function(event) {
+        eventUtil.addHandler(pgr[i], 'click', function(){
             eventUtil.preventDefault(event);
-        }
-        eventUtil.addHandler(pgr[i], 'click', clickPage);
+            clickPage();
+        });
     }
 
     // 上一页
-    pPage.onclick = function(event) {
+    eventUtil.addHandler(pPage, 'click', function(){
         eventUtil.preventDefault(event);
-    }
-    eventUtil.addHandler(pPage, 'click', prevsPage);
+        prevsPage();
+    });    
 
     // 下一页
-    nPage.onclick = function(event) {
+    eventUtil.addHandler(nPage, 'click', function(){
         eventUtil.preventDefault(event);
-    }
-    eventUtil.addHandler(nPage, 'click', nextPage); 
-
+        nextPage();
+    });
 }
 
 // 翻页后上移
@@ -623,11 +622,18 @@ function setVideo() {
 
     // 显示视频界面
     function showVideo() {
-        var url = 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4';
-        video.setAttribute('src', url);
-        // 移出 display:none 属性
+        if (navigator.userAgent.indexOf("MSIE 8.0")>0) {
+            var control = getByClass('control')[0],
+                para = document.querySelector('.m-video p');
+            para.innerHTML = '您所使用的浏览器版本过低，无法播放此视频；请升级浏览器或使用其他浏览器观看，谢谢！';
+            addClass(control, 'f-dn');        
+        } else {
+            var url = 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4';
+            video.setAttribute('src', url);
+        }
+        // 移出 display:none 属性    
         removeClass(mask, 'f-dn');
-        removeClass(mVideo, 'f-dn');
+        removeClass(mVideo, 'f-dn');        
     }
     eventUtil.addHandler(show, 'click', showVideo);
 

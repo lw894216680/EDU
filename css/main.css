@@ -51,6 +51,13 @@ body {
 	cursor: default;
 }
 
+/* chrome下8px无效解决 */
+/*.f-fs-chrome {
+	font-size: 8px;
+	-webkit-transform:scale(0.67);
+	-o-transform:scale(1); 
+}
+*/
 /* sprite */
 .m-msg i,
 .m-logo i,
@@ -63,7 +70,7 @@ body {
 .m-pager .prevs_page,
 .m-pager .next_page,
 .u-clsbtn,
-.m-content .nums span,
+.m-content .nums .nums_icon,
 .u-num span,
 .m-video .bar1,
 .m-video .played span,
@@ -110,6 +117,7 @@ body {
 		width: 958px;
 	}
 }
+
 
 /* /顶部提示信息 */
 
@@ -386,12 +394,13 @@ body {
 	margin-left: 0;
 }
 
-.g-body > .g-wrap{
+.g-body > div.g-wrap{
 	padding-top: 80px;
 }
 .m-content {
 	float: left;
 	width: 980px;
+	min-height: 275px;
 	padding-bottom: 120px;	
 }
 @media screen and (max-width: 1204px) {
@@ -426,7 +435,6 @@ body {
 }
 .m-content .courses {
 	margin-bottom: 10px;
-	/*min-height: 400px;*/
 }
 
 .m-course {
@@ -478,16 +486,26 @@ body {
 	padding: 0 3px;
 	margin: 10px 0 9px;	
 	height: 16px;
-	font-size: 8px;
+	/*font-size: 8px;*/
+	font-size: 0;
 	line-height: 16px;
 	border: 1px solid #999;
 	border-radius: 2px;
 }
-.m-course .nums span {
+.m-course .nums .nums_icon {
+	margin-top: 3px;
 	margin-right: 5px;
 	width: 9px;
 	height: 10px;
 	background-position: -43px -106px;
+}
+.m-course .nums .nums_txt{
+	vertical-align: top;
+	font-size: 8px;
+	-webkit-transform:scale(0.67);
+	-o-transform:scale(1);
+	-webkit-margin-start: -5px;
+    -webkit-margin-end: -3px;
 }
 .m-course .cost {
 	font-weight: bold;		
@@ -843,6 +861,7 @@ body {
 		padding-left: 0;
 	}
 }
+
 .m-foot .copy p {
 	margin: 0;
 	font-size: 12.5px;
