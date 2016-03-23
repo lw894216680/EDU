@@ -107,14 +107,22 @@ function slider() {
     // 每隔5s进行一次轮播
     var amn = setInterval(animation,5000);      
 
-    for (var i=0;i<slides.length;i++) {
-        eventUtil.addHandler(slides[i], 'mouseover', function(){
-            clearInterval(amn);            
-        });
-        eventUtil.addHandler(slides[i], 'mouseout', function(){
-            amn = setInterval(animation,5000);            
-        });       
-    }
+    var mSlider = getByClass('m-slider')[0];
+    eventUtil.addHandler(mSlider, 'mouseover', function(){
+        clearInterval(amn);            
+    });
+    eventUtil.addHandler(mSlider, 'mouseout', function(){
+        amn = setInterval(animation,5000);            
+    });         
+
+    // for (var i=0;i<slides.length;i++) {
+    //     eventUtil.addHandler(slides[i], 'mouseover', function(){
+    //         clearInterval(amn);            
+    //     });
+    //     eventUtil.addHandler(slides[i], 'mouseout', function(){
+    //         amn = setInterval(animation,5000);            
+    //     });       
+    // }
 
     // hover poniter后的切换
     function hoverPointer(event) {
@@ -130,7 +138,6 @@ function slider() {
                 break;
             }
         }
-
         // 切换 slide
         if(crtSlide !== slides[pointIndex]) {
             fadein(slides[pointIndex],1/50,10);
