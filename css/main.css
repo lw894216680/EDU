@@ -70,8 +70,7 @@ body {
 .m-pager .prevs_page,
 .m-pager .next_page,
 .u-clsbtn,
-.m-content .nums .nums_icon,
-.u-num span,
+.u-num .num_icon,
 .m-video .bar1,
 .m-video .played span,
 .m-video .pause_btn,
@@ -415,10 +414,10 @@ body {
 	line-height: 50px;
 	background: #fff;
 	color: #666;
-	-webkit-box-shadow: 0 2px 1px #d4d3d3;;
-	-moz-box-shadow: 0 2px 1px #d4d3d3;;
-	-o-box-shadow: 0 2px 1px #d4d3d3;;
-	box-shadow: 0 2px 1px #d4d3d3;;	
+	-webkit-box-shadow: 0 1px 1px #d4d3d3;;
+	-moz-box-shadow: 0 1px 1px #d4d3d3;;
+	-o-box-shadow: 0 1px 1px #d4d3d3;;
+	box-shadow: 0 1px 1px #d4d3d3;;	
 }
 .m-content .tab h4 {
 	float: left;	
@@ -481,31 +480,6 @@ body {
 	width: 223px;
 	height: 124px;
 	cursor: pointer;
-}
-.m-course .nums {
-	padding: 0 3px;
-	margin: 10px 0 9px;	
-	height: 16px;
-	/*font-size: 8px;*/
-	font-size: 0;
-	line-height: 16px;
-	border: 1px solid #999;
-	border-radius: 2px;
-}
-.m-course .nums .nums_icon {
-	margin-top: 3px;
-	margin-right: 5px;
-	width: 9px;
-	height: 10px;
-	background-position: -43px -106px;
-}
-.m-course .nums .nums_txt{
-	vertical-align: top;
-	font-size: 8px;
-	-webkit-transform:scale(0.67);
-	-o-transform:scale(1);
-	-webkit-margin-start: -5px;
-    -webkit-margin-end: -3px;
 }
 .m-course .cost {
 	font-weight: bold;		
@@ -830,19 +804,50 @@ body {
 }
 
 .u-num {
-	font-size: 10px;
-	line-height: 10px;
+	font-size: 0;
 	color: #666;		
 }
-.u-num span {
+.u-num .num_icon {
 	margin-right: 5px;
 	width: 9px;
 	height: 10px;
 	background-position: -43px -106px;
 }
-.u-num-1 {
+.u-num .num_txt {
+	display: inline-block;	
+	font-size: 10px;
+	line-height: 10px;
+	-webkit-transform: scale(0.83);
+	-o-transform: scale(1);
+	-webkit-margin-start: -2px;
+}
+.u-num-1 .num_txt {
+	display: inline-block;	
 	font-size: 12px;
 	line-height: 12px;
+	-webkit-transform: scale(1);
+	-o-transform: scale(1);
+	-webkit-margin-start: 0;		
+}
+.u-num-2 {
+	padding: 0 3px;
+	margin: 10px 0 9px;	
+	height: 16px;
+	line-height: 16px;
+	border: 1px solid #999;
+	border-radius: 2px;
+}
+.u-num-2 .num_icon {
+	margin-top: 3px;
+}
+.u-num-2 .num_txt{
+	vertical-align: top;
+	font-size: 8px;
+	line-height: 16px;
+	-webkit-transform: scale(0.67);
+	-o-transform: scale(1);
+	-webkit-margin-start: -4px;
+    -webkit-margin-end: -3px;
 }
 
 /* /主体（课程） */
