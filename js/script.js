@@ -107,18 +107,25 @@ function slider() {
     // 每隔5s进行一次轮播
     var amn = setInterval(animation,5000);      
 
-    for (var i=0;i<slides.length;i++) {
-        eventUtil.addHandler(slides[i], 'mouseover', function(){
-            clearInterval(amn);            
-        });
-        eventUtil.addHandler(slides[i], 'mouseout', function(){
-            amn = setInterval(animation,5000);            
-        });       
-    }
+    var mSlider = getByClass('m-slider')[0];
+    eventUtil.addHandler(mSlider, 'mouseover', function(){
+        clearInterval(amn);            
+    });
+    eventUtil.addHandler(mSlider, 'mouseout', function(){
+        amn = setInterval(animation,5000);            
+    });         
+
+    // for (var i=0;i<slides.length;i++) {
+    //     eventUtil.addHandler(slides[i], 'mouseover', function(){
+    //         clearInterval(amn);            
+    //     });
+    //     eventUtil.addHandler(slides[i], 'mouseout', function(){
+    //         amn = setInterval(animation,5000);            
+    //     });       
+    // }
 
     // hover poniter后的切换
     function hoverPointer(event) {
-        event = event || window.event;
         clearInterval(amn);
         removeClass(crtPoint, 'crt_point');
         crtPoint = eventUtil.getElement(event);
@@ -131,7 +138,6 @@ function slider() {
                 break;
             }
         }
-
         // 切换 slide
         if(crtSlide !== slides[pointIndex]) {
             fadein(slides[pointIndex],1/50,10);
@@ -147,7 +153,10 @@ function slider() {
 
     // pointer切换事件注册
     for (var i=0;i<pointer.length;i++) {
-        eventUtil.addHandler(pointer[i], 'mouseover',hoverPointer);
+        eventUtil.addHandler(pointer[i], 'mouseover',function(event){
+            event = event || window.event;
+            hoverPointer(event);
+        });
     }  
 }
 
@@ -167,35 +176,39 @@ function signin() {
     if(cookie.followSuc) {
         addClass(btn1, 'f-dn');    
         removeClass(btn2, 'f-dn');               
-    }
-    
-    // 登陆情形处理
-    function signinOrFocus() {
-        var mask = getByClass('m-mask')[0],
-            login = getByClass('m-login')[0];
-        // 已登录时
-        if (cookie.loginSuc) {
-            addClass(btn1, 'f-dn');
-            setCookie('followSuc', 'true', '/');        
-            removeClass(btn2, 'f-dn');
-        } else {
-            // 未登陆时，弹出登录框
-            loginDiv();
-            removeClass(mask, 'f-dn');
-            removeClass(login, 'f-dn');       
-        }    
-    }
+    }    
+
     // 点击关注按钮事件处理
     eventUtil.addHandler(flwBtn, 'click', signinOrFocus);
 
     // 点击取消按钮事件处理
     var cancel = document.querySelector('.u-btn-2 a');
-    eventUtil.addHandler(cancel, 'click', function(){
+    eventUtil.addHandler(cancel, 'click', function(event){
         eventUtil.preventDefault(event);
         removeCookie('followSuc');
         addClass(btn2, 'f-dn');    
         removeClass(btn1, 'f-dn');
     });
+}
+
+// 登陆情形处理
+function signinOrFocus() {
+    var mask = getByClass('m-mask')[0],
+        login = getByClass('m-login')[0];
+    var cookie = getCookie();
+    var btn1 = getByClass('u-btn-1')[0],
+        btn2 = getByClass('u-btn-2')[0];        
+    // 已登录时
+    if (cookie.loginSuc) {
+        addClass(btn1, 'f-dn');
+        setCookie('followSuc', 'true', '/');        
+        removeClass(btn2, 'f-dn');
+    } else {
+        // 未登陆时，弹出登录框
+        loginDiv();
+        removeClass(mask, 'f-dn');
+        removeClass(login, 'f-dn');       
+    }    
 }
 
 // 登陆框设置
@@ -239,11 +252,13 @@ function loginDiv() {
 
     // 提交
     var loginForm = document.querySelector('.m-login form');
-    eventUtil.addHandler(loginForm, 'submit', toSubmit);
+    eventUtil.addHandler(loginForm, 'submit', function(event){
+        event = event || window.event;
+        toSubmit(event);
+    });
 }
 // 验证账户密码
 function toSubmit(event) {
-    event = event || window.event;
     eventUtil.preventDefault(event);    
     var login = getByClass('m-login')[0],
         mask = getByClass('m-mask')[0];
@@ -297,7 +312,7 @@ function showCourse(courseData, options) {
             courseData.list[i].price = '¥ ' + price;              
         }
         // 课程数据输入HTML中         
-        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="nums f-ib"><span class="nums_icon f-ib"></span><span class="f-ib nums_txt">' + courseData.list[i].learnerCount + '</span></div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="f-ib"></span>57人在学</div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
+        courseHtml = '<div class="summary"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="summary_txt"><h5>' + courseData.list[i].name + '</h5><p>' + courseData.list[i].provider + '</p><div class="u-num u-num-2 f-ib"><span class="num_icon f-ib"></span><span class="f-ib num_txt">' + courseData.list[i].learnerCount + '</span></div><p class="cost">' + courseData.list[i].price + '</p></div></div><div class="detail f-dn"><img src="' + courseData.list[i].middlePhotoUrl + '" alt="课程图片"><div class="f-cb dtltxt_1"><h5>' + courseData.list[i].name + '</h5><div class="u-num u-num-1"><span class="num_icon f-ib"></span><span class="num_txt">' + courseData.list[i].learnerCount +'人在学</span></div><p class="author">发布者：' + courseData.list[i].provider + '</p><p>分类：' + courseData.list[i].categoryName + '</p></div><div class="dtltxt_2"><p>' + courseData.list[i].description + '</p></div></div>';
         course.innerHTML = courseHtml;
         // 将新建节点出入 div.courses 内
         courses.appendChild(course);
@@ -344,7 +359,6 @@ function tab() {
     var tab = document.querySelectorAll('.tab h4');
 
     function clickTab(event) {
-        event = event || window.event;
         var crtTab = getByClass('crt_tab')[0];
         var cType;
         oClick = eventUtil.getElement(event);
@@ -361,7 +375,10 @@ function tab() {
     }
     // 添加click事件
     for(var i=0; i<tab.length; i++) {
-        eventUtil.addHandler(tab[i], 'click', clickTab);
+        eventUtil.addHandler(tab[i], 'click', function(event){
+            event = event || window.event;
+            clickTab(event);
+        });
     }        
 }
 // 获取tab的筛选类型
@@ -387,20 +404,23 @@ function pager () {
 
     // 点击页码 
     for(var i=0; i<pgr.length; i++) {
-        eventUtil.addHandler(pgr[i], 'click', function(){
+        eventUtil.addHandler(pgr[i], 'click', function(event){
+            event = event || window.event;
             eventUtil.preventDefault(event);
-            clickPage();
+            clickPage(event);
         });
     }
 
     // 上一页
-    eventUtil.addHandler(pPage, 'click', function(){
+    eventUtil.addHandler(pPage, 'click', function(event){
+        event = event || window.event;
         eventUtil.preventDefault(event);
         prevsPage();
     });    
 
     // 下一页
-    eventUtil.addHandler(nPage, 'click', function(){
+    eventUtil.addHandler(nPage, 'click', function(event){
+        event = event || window.event;
         eventUtil.preventDefault(event);
         nextPage();
     });
@@ -416,8 +436,6 @@ function pager () {
 
 // 换页
 function clickPage (event) {
-    event = event || window.event;
-
     var pageBtn = eventUtil.getElement(event);
     var crtPage = getByClass('crt_page')[0]; 
     var oClick = eventUtil.getElement(event);
@@ -540,7 +558,7 @@ function showHotCourse(data) {
         var  topCourse = document.createElement('div');
         addClass(topCourse, 'top_course f-cb');
 
-        courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+        courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="num_icon f-ib"></span><span class="num_txt">' + courseData.learnerCount + '</span></div>';
 
         topCourse.innerHTML = courseHTML;
         cardTop.appendChild(topCourse);
@@ -570,7 +588,7 @@ function replaceHot (data) {
         var newCourse = document.createElement('div');
         addClass(newCourse, 'top_course f-cb');
 
-        var courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="f-ib"></span>' + courseData.learnerCount + '</div>';
+        var courseHTML = '<img src="' + courseData.smallPhotoUrl + '" alt="' + courseData.name + '"><p class="course_name">' + courseData.name + '</p><div class="u-num"><span class="num_icon f-ib"></span><span class="num_txt">' + courseData.learnerCount + '</span></div>';
         // 移出课程
         remove(topCourse[0]);
         // 添加课程
@@ -708,7 +726,6 @@ function setVideo() {
     video.volume = 0.4;
     var volumeBar = getByClass('volume_bar')[0];
     function changeVlm(event) {
-        event = event || window.event;
         var vbar = getByClass('vbar')[0],
             crtVlm = getByClass('crt_vlm')[0];
 
@@ -718,7 +735,10 @@ function setVideo() {
         crtVlm.style.width = crtWidth + 'px';
         video.volume = tovlm;
     }
-    eventUtil.addHandler(volumeBar, 'click', changeVlm);
+    eventUtil.addHandler(volumeBar, 'click', function(event){
+        event = event || window.event;
+        changeVlm(event);
+    });
 
 
     // 关闭视频
@@ -737,14 +757,16 @@ function setVideo() {
     // 点击更改进度
     var bar2 = getByClass('bar2')[0];
     function modify(event) {
-        event = event || window.event;
         // 获取点击位置
         newLength = event.clientX - getElementLeft(bar2); 
         // 转换为相应时间
         var toTime = (newLength)/889*video.duration;
         video.currentTime = toTime;
     }
-    eventUtil.addHandler(bar2, 'click', modify);
+    eventUtil.addHandler(bar2, 'click', function(event){
+        event = event || window.event;
+        modify(event);
+    });
 }
 
 /* /视频播放 */
