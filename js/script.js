@@ -1,5 +1,6 @@
 // 待解决问题记录
 // IE8 下不支持@media媒体查询
+// 关注 重写
 
 /* 顶部提示信息 */
 // 点击后再刷新会先显示再隐藏，不友好，待解决
@@ -115,14 +116,6 @@ function slider() {
         amn = setInterval(animation,5000);            
     });         
 
-    // for (var i=0;i<slides.length;i++) {
-    //     eventUtil.addHandler(slides[i], 'mouseover', function(){
-    //         clearInterval(amn);            
-    //     });
-    //     eventUtil.addHandler(slides[i], 'mouseout', function(){
-    //         amn = setInterval(animation,5000);            
-    //     });       
-    // }
 
     // hover poniter后的切换
     function hoverPointer(event) {
@@ -201,7 +194,8 @@ function signinOrFocus() {
     // 已登录时
     if (cookie.loginSuc) {
         addClass(btn1, 'f-dn');
-        setCookie('followSuc', 'true', '/');        
+        setCookie('followSuc', 'true', '/'); 
+        // followSuc();     
         removeClass(btn2, 'f-dn');
     } else {
         // 未登陆时，弹出登录框
@@ -210,6 +204,20 @@ function signinOrFocus() {
         removeClass(login, 'f-dn');       
     }    
 }
+
+// function followSuc() {
+//     var url = 'http://study.163.com/webDev/attention.htm';
+//     var options = '';
+
+//     get(url, options, follow);
+
+//     // get 返回1，登陆成功
+//     function follow(data) {
+//         if(data == 1) {
+//             setCookie('loginSuc', 'ture', '/');
+//         }
+//     }       
+// }
 
 // 登陆框设置
 function loginDiv() {
@@ -627,7 +635,6 @@ function convertTime(time) {
 
 function setVideo() {
     var mVideo = getByClass('m-video')[0],
-        // video = document.querySelector('.m-video video'),
         video = document.getElementsByTagName('video')[0],
         bigBtn = getByClass('big_btn')[0],
         startBtn = getByClass('start_btn')[0],
@@ -772,10 +779,6 @@ function setVideo() {
 /* /视频播放 */
 
 
-/* IE8 */
-
-
-/* /IE8 */
 
 
 addLoadEvent(setVideo);
@@ -786,4 +789,3 @@ addLoadEvent(getCourse);
 addLoadEvent(msgDisplay);
 addLoadEvent(slider);
 addLoadEvent(signin);
-
