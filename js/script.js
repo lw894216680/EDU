@@ -194,8 +194,8 @@ function signinOrFocus() {
     // 已登录时
     if (cookie.loginSuc) {
         addClass(btn1, 'f-dn');
-        setCookie('followSuc', 'true', '/'); 
-        // followSuc();     
+        // setCookie('followSuc', 'true', '/'); 
+        follow();     
         removeClass(btn2, 'f-dn');
     } else {
         // 未登陆时，弹出登录框
@@ -205,19 +205,19 @@ function signinOrFocus() {
     }    
 }
 
-// function followSuc() {
-//     var url = 'http://study.163.com/webDev/attention.htm';
-//     var options = '';
+function follow() {
+    var url = 'http://study.163.com/webDev/attention.htm';
+    var options = '';
 
-//     get(url, options, follow);
+    get(url, options, followSuc);
 
-//     // get 返回1，登陆成功
-//     function follow(data) {
-//         if(data == 1) {
-//             setCookie('loginSuc', 'ture', '/');
-//         }
-//     }       
-// }
+    // get 返回1，关注成功
+    function followSuc(data) {
+        if(data == 1) {
+            setCookie('followSuc', 'true', '/');
+        }
+    }       
+}
 
 // 登陆框设置
 function loginDiv() {
