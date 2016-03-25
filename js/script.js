@@ -3,19 +3,27 @@
 // 关注 重写
 
 /* 顶部提示信息 */
-// 点击后再刷新会先显示再隐藏，不友好，待解决
 function msgDisplay() {
     var cookie = getCookie();
     var msg = getByClass('m-msg')[0],
         close = getByClass('close_msg')[0];
-    if (cookie.hiddenMsg) {
-        addClass(msg, 'f-dn');
-    } else {
-        eventUtil.addHandler(close, 'click', function(){
-            addClass(msg, 'f-dn');            
-            setCookie('hiddenMsg', 'true', '/');
-        });
-    }   
+    // if (cookie.hiddenMsg) {
+    //     addClass(msg, 'f-dn');
+    // } else {
+    //     removeClass(msg, 'f-dn');
+
+    //     eventUtil.addHandler(close, 'click', function(){
+    //         addClass(msg, 'f-dn');            
+    //         setCookie('hiddenMsg', 'true', '/');
+    //     });
+    // }
+    if (!cookie.hiddenMsg) {
+        removeClass(msg, 'f-dn');
+    }
+    eventUtil.addHandler(close, 'click', function(){
+        addClass(msg, 'f-dn');            
+        setCookie('hiddenMsg', 'true', '/');
+    });       
 }
 /* /顶部提示信息 */
 
@@ -193,8 +201,7 @@ function signinOrFocus() {
         btn2 = getByClass('u-btn-2')[0];        
     // 已登录时
     if (cookie.loginSuc) {
-        addClass(btn1, 'f-dn');
-        // setCookie('followSuc', 'true', '/'); 
+        addClass(btn1, 'f-dn'); 
         follow();     
         removeClass(btn2, 'f-dn');
     } else {
