@@ -46,18 +46,7 @@ body {
 	visibility: hidden;
 }
 
-/* 不可用 */
-.z-dis {
-	cursor: default;
-}
 
-/* chrome下8px无效解决 */
-/*.f-fs-chrome {
-	font-size: 8px;
-	-webkit-transform:scale(0.67);
-	-o-transform:scale(1); 
-}
-*/
 /* sprite */
 .m-msg i,
 .m-logo i,
@@ -85,8 +74,9 @@ body {
 .u-smbtn {
 	background: url(../img/sprite24.png) 9999px 9999px no-repeat;
 }
+/* /sprite */
 
-/* 顶部提示信息 */
+/* 顶部提示信息模块 */
 .m-msg {
 	width: 100%;	
 	height: 36px;
@@ -106,6 +96,7 @@ body {
 	background-position: 0 0;
 	cursor: pointer;
 }
+/* /顶部提示信息模块 */
 
 .g-wrap {
 	margin: 0 auto;
@@ -117,14 +108,12 @@ body {
 	}
 }
 
-
-/* /顶部提示信息 */
-
 /* 头部(导航及轮播图) */
 .g-head {
 	background: #fff;
 }
 
+/* logo模块 */
 .m-logo span {
 	font-size: 28px;
 	font-weight: bold;
@@ -144,7 +133,6 @@ body {
 	vertical-align: middle;
 	background-position: -74px -20px;
 }
-
 .m-logo-1 {
 	margin-bottom: 14px;	
 	line-height: 28px;
@@ -155,7 +143,9 @@ body {
 .m-logo-1 i {
 	top: 5px;
 }
+/* /logo模块 */
 
+/* 关注及取消按钮 */
 .u-btn {
 	height: 21px;
 	margin: 0 14px 0 30px;	
@@ -166,7 +156,6 @@ body {
 	text-align: center;
 	cursor: pointer;			
 }
-
 .u-btn-1 {
 	width: 54px;			
 	background: #21a557;		
@@ -181,7 +170,6 @@ body {
 .u-btn-1:hover {
 	background: #2fb556;
 }
-
 .u-btn-2 {
 	width: 106px;
 	box-sizing: border-box;
@@ -209,7 +197,9 @@ body {
 	text-decoration: underline;
 	color: #21a557;
 }
+/* /关注及取消按钮 */
 
+/* 导航栏模块 */
 .m-nav {
 	line-height: 89px;
 	font-family: "HiraginoSansGB W3","Microsoft YaHei", "Arial";
@@ -258,7 +248,9 @@ body {
 .m-nav a:hover {
 	color: #39a030;
 }
+/* /导航栏模块 */
 
+/* 轮播图模块 */
 .m-slider {
 	position: relative;
 	width: 100%;
@@ -305,7 +297,9 @@ body {
 .m-slider i:first-child {
 	margin-left: 0;
 }
+/* /轮播图模块 */
 
+/* 门户介绍模块 */
 .m-intro {
 	padding-top: 60px;
 	height: 235px;
@@ -366,18 +360,23 @@ body {
 		margin-left: 0;
 	}	
 }
+/* /门户介绍模块 */
 
 /* /头部(导航及轮播图) */
 
 
-/* 主体（课程） */
+/* 主体（课程）*/
 .g-body {
 	width: 100%;
 	padding-top: 2px;
 	overflow: hidden;
 	background: #f8f8f8;
 }
+.g-body > div.g-wrap{
+	padding-top: 80px;
+}
 
+/* 图片栏模块 */
 .m-imgcolm {
 	position: relative;
 	left: 50%;
@@ -392,10 +391,9 @@ body {
 .m-imgcolm img:first-child {
 	margin-left: 0;
 }
+/* /图片栏模块 */
 
-.g-body > div.g-wrap{
-	padding-top: 80px;
-}
+/* 课程展示模块 */
 .m-content {
 	float: left;
 	width: 980px;
@@ -435,7 +433,9 @@ body {
 .m-content .courses {
 	margin-bottom: 10px;
 }
+/* /课程展示模块 */
 
+/* 单个课程 */
 .m-course {
 	position: relative;
 	float: left;
@@ -527,8 +527,10 @@ body {
 	font-size: 14px;
 	line-height: 24px;	
 }
+/* /单个课程 */
 
 
+/* 翻页器模块 */
 .m-pager {
 	float: right;
 	margin-right: 16px;
@@ -538,7 +540,6 @@ body {
     padding: 0;
 	list-style: none;
 	font-size: 0px;
-
 }
 .m-pager li {
 	display: block;
@@ -581,7 +582,9 @@ body {
 .m-pager .next_page {
 	background-position: -44px -73px;
 }
+/* /翻页器模块 */
 
+/* 右侧信息展示模块 */
 .m-card {
 	width: 223px;
 	padding-bottom: 20px;
@@ -607,7 +610,9 @@ body {
 	font-size: 14px;
 	color: #666;
 }
+/* /右侧信息展示模块 */
 
+/* 视频展示模块 */
 .m-card-video {
 	position: relative;
 	margin: 3px 0 21px;
@@ -635,13 +640,13 @@ body {
 .m-card-video .show_video:hover span {
 	visibility: visible;
 }
+/* /视频展示模块 */
 
 /* 视频播放模块 */
 .m-video {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	/*margin-top: -338px;*/
 	margin-top: -320px;
 	margin-left: -475px;
 	width: 950px;
@@ -735,7 +740,6 @@ body {
 .m-video .volume_bar:hover .crt_vlm {
 	background: #159C12;
 }
-
 .m-video .vlm_icon {
 	position: absolute;
 	top: 1px;
@@ -744,7 +748,6 @@ body {
 	height: 21px;
 	background-position: -39px -255px;
 }
-
 .m-video .ne_logo {
 	position: absolute;
 	top: 0;
@@ -777,7 +780,9 @@ body {
 	height: 7px;
 	background-position: -26px -261px;	
 }
+/* /视频播放模块 */
 
+/* 热门课程展示模块 */
 .m-card-top {
 	margin-bottom: 200px;
 }
@@ -802,7 +807,9 @@ body {
 	height: 50px;
 	cursor: pointer;		
 }
+/* /热门课程展示模块 */ 
 
+/* 人数显示元件 */
 .u-num {
 	font-size: 0;
 	color: #666;		
@@ -849,14 +856,17 @@ body {
 	-webkit-margin-start: -4px;
     -webkit-margin-end: -3px;
 }
+/* /人数显示元件 */
 
 /* /主体（课程） */
+
+
 
 /* 页脚 */
 .g-foot {
 	background: #2c3339;
 }
-
+/* 页脚模块 */
 .m-foot .ftlf {
 	padding: 90px 0 80px 50px;
 	margin-right: 150px;
@@ -866,7 +876,6 @@ body {
 		padding-left: 0;
 	}
 }
-
 .m-foot .copy p {
 	margin: 0;
 	font-size: 12.5px;
@@ -878,7 +887,9 @@ body {
 	padding: 80px 0 80px;
 	letter-spacing: 0.5px;
 }
+/* /页脚模块 */
 
+/* 链接列表模块 */
 .m-list {
 	margin-right: 98px;
 	color: #fff;
@@ -915,6 +926,7 @@ body {
 .m-list-2 {
 	margin-right: 0;
 }
+/* /链接列表模块 */
 /* /页脚 */
 
 
@@ -933,7 +945,7 @@ body {
 	filter: "alpha(opacity=70)";
 }
 
-/* 登入框 */
+/* 登入框模块 */
 .m-login {
 	position: fixed;
 	top: 50%;
@@ -965,7 +977,9 @@ body {
 	line-height: 18px;
 	color: #444;
 }
+/* /登录框 */
 
+/* 输入框、提交按钮、关闭按钮元件 */
 .u-clsbtn {
 	position: absolute;
 	top: 0;
@@ -1009,3 +1023,4 @@ body {
 	background-position: 0 -56px;
 	letter-spacing: 2px;
 }
+/* /输入框、提交按钮、关闭按钮元件 */
