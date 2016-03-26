@@ -221,3 +221,10 @@ function remove(elm) {
 	elm.parentNode.removeChild(elm);
 }
 
+
+/* 判断IE低版本(IE10以下) */
+function isIE(ver) {
+	var b = document.createElement('b');
+	b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->';
+	return b.getElementsByTagName('i').length === 1;
+}

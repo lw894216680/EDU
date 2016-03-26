@@ -712,9 +712,18 @@ body {
 	padding-left: 30px;
 	height: 22px;
 	line-height: 22px;
-	font-size: 8px;
+	font-size: 0;
 	color: #b6b6b6;
-}		
+}
+.m-video .time span {
+	display: inline-block;
+	font-size: 8px;
+	-webkit-transform: scale(0.67); /* 兼容chorme字体 */
+	-o-transform: scale(1);		
+	-webkit-margin-start: -5px;	
+	-webkit-margin-end: -4px;		
+}
+		
 .m-video .total_time {
 	color: #575757;
 }

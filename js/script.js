@@ -654,7 +654,8 @@ function setVideo() {
 
     // 显示视频界面
     function showVideo() {
-        if (navigator.userAgent.indexOf("MSIE 8.0")>0) {
+        // IE8不支持
+        if (isIE(8)) {
             var control = getByClass('control')[0],
                 para = document.querySelector('.m-video p');
             para.innerHTML = '您所使用的浏览器版本过低，无法播放此视频；请升级浏览器或使用其他浏览器观看，谢谢！';
@@ -708,7 +709,7 @@ function setVideo() {
                     bfLength = bf + 'px';
 
                 // 插入已播放时间文本
-                crtTime.innerHTML = convertTime(video.currentTime) + '/';
+                crtTime.innerHTML = convertTime(video.currentTime) + ' /';
 
                 // 改变已播放进度条
                 if (crt > 7) {
