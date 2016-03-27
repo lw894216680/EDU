@@ -148,8 +148,6 @@ function slider() {
         });
     }  
 }
-
-
 /* /banner轮播图 */
 
 
@@ -200,6 +198,7 @@ function signinOrFocus() {
     }    
 }
 
+// 关注
 function follow() {
     var url = 'http://study.163.com/webDev/attention.htm';
     var options = '';
@@ -288,9 +287,7 @@ function toSubmit(event) {
     // 登陆验证
     get(url, options, oSubmit);    
 } 
-
 /* /登录框与关注 */
-
 
 
 
@@ -334,7 +331,7 @@ function showCourse(courseData, options) {
 function getCourse(num, cType){
     // 清除原有课程
     var courses = getByClass('courses')[0];
-        courses.innerHTML = '';
+    courses.innerHTML = '';
 
     // 换页成功前隐藏翻页器
     var mPager = getByClass('m-pager')[0]; 
@@ -395,8 +392,8 @@ function getCType() {
         return cType = 20;
     }
 }
-
 /* /课程 */
+
 
 /* 翻页器 */
 // 点击事件注册
@@ -429,13 +426,6 @@ function pager () {
     });
 }
 
-// 翻页后上移
-// function returnTop() {
-//     window.scrollBy(0,-50);
-//     if(document.body.scrollTop>1150) { 
-//         var sdelay= setTimeout('returnTop()',10);
-//     }
-// }
 
 // 换页
 function clickPage (event) {
@@ -577,7 +567,7 @@ function replaceHot (data) {
         // 取出第一个值
         var add = restList.shift();
         // 将被移除的值重新添加到 restList
-        if(add >= 10) {
+        if (add >= 10) {
             restList.push(add-10);
         }else {
             restList.push(add+10);
@@ -617,6 +607,7 @@ function getElementLeft(elm){
     return actualLeft;
 }
 
+// 转换时间
 function convertTime(time) {
     var time = Math.ceil(time);
     var scd = time%60;
@@ -716,16 +707,17 @@ function setVideo() {
                     }
                 }
             } else {
-                clearInterval(change, 300);
+                clearInterval(change, 100);
             }
 
         }
-        // 每300毫秒改变一次进度条
-        var cg = setInterval(change, 300);
+        // 每100毫秒改变一次进度条
+        var cg = setInterval(change, 100);
     }
     eventUtil.addHandler(video, 'canplay', changeBar);
 
     // 音量调整
+    // 初始音量0.4
     video.volume = 0.4;
     var volumeBar = getByClass('volume_bar')[0];
     function changeVlm(event) {
@@ -777,8 +769,12 @@ function setVideo() {
 
 /* IE8不兼容媒体查询解决方法 */
 function forIE () {
+    var html = document.getElementsByTagName('html')[0];    
     // IE8下进行兼容
     if (isIE(8)) {
+        // html标签添加 ie8 类名
+        addClass(html, 'ie8'); 
+                
         var wdh = document.body.clientWidth;
         // 初次打开宽度小于1205px，执行reponsive函数
         if (wdh < 1205) {
@@ -788,50 +784,27 @@ function forIE () {
         eventUtil.addHandler(window, 'resize', function(){
             var cWidth = document.body.clientWidth;
             responsive(cWidth);           
-        });        
+        });       
     }
+
     // 更换@media媒体查询（IE8不兼容）下的样式
     function responsive(cWidth) {
-        var gWrap = getByClass('g-wrap'),
-            intro = getByClass('intro'),
-            mContent = getByClass('m-content')[0],
-            ftlf = getByClass('ftlf')[0],
-            ftrt = getByClass('ftrt')[0],
+        var ftrt = getByClass('ftrt')[0],
             p = document.querySelectorAll('.m-foot .copy p');
 
-        // 窗口宽度小于1205px时
+        // 由于小数数值问题，IE8不设置letter-spacing
+        for(var i=0; i<p.length; i++) {
+            p[i].style.letterSpacing = 0;
+        }
+        ftrt.style.letterSpacing = 0;            
+
+        // 窗口小于1205时，html标签添加 ie8-s 类名
         if (cWidth < 1205) {
-            for(var i=0; i<gWrap.length; i++) {
-                gWrap[i].style.width = 958 + 'px';
-            }
-            for(var i=0; i<intro.length; i++) {
-                intro[i].style.width = 272 + 'px';
-                intro[i].style.marginLeft = 71 + 'px';  
-            }
-            for(var i=0; i<p.length; i++) {
-                p[i].style.letterSpacing = 0;
-            }
-            intro[0].style.marginLeft = 0;
-            mContent.style.width = 735 + 'px';
-            ftlf.style.paddingLeft = 0;
-            ftrt.style.letterSpacing = 0;
+            addClass(html, 'ie8-s');
         } else {
-            // 窗口宽度大于等于1205px时，还原
-            for(var i=0; i<gWrap.length; i++) {
-                gWrap[i].style.width = 1205 + 'px';
-            }
-            for(var i=0; i<intro.length; i++) {
-                intro[i].style.width = 344 + 'px';
-                intro[i].style.marginLeft = 80 + 'px';  
-            }
-            for(var i=0; i<p.length; i++) {
-                p[i].style.letterSpacing = 0.5 + 'px';
-            }
-            intro[0].style.marginLeft = 5 + 'px';
-            mContent.style.width = 980 + 'px';
-            ftlf.style.paddingLeft = 50 + 'px';
-            ftrt.style.letterSpacing = 0.5 + 'px';            
-        }  
+            // 窗口大于等于1205时，html标签移除 ie8-s 类名
+            removeClass(html, 'ie8-s');
+        }
     }
 }
 /* IE8不兼容媒体查询解决方法 */
