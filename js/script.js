@@ -1,6 +1,3 @@
-// 待解决问题记录
-// IE8 下不支持@media媒体查询
-
 /* 顶部提示信息 */
 function msgDisplay() {
     var cookie = getCookie();
@@ -778,8 +775,70 @@ function setVideo() {
 /* /视频播放 */
 
 
+/* IE8不兼容媒体查询解决方法 */
+function forIE () {
+    // IE8下进行兼容
+    if (isIE(8)) {
+        var wdh = document.body.clientWidth;
+        // 初次打开宽度小于1205px，执行reponsive函数
+        if (wdh < 1205) {
+            responsive(wdh);
+        }
+        // 窗口改变大小时，执行responsive函数
+        eventUtil.addHandler(window, 'resize', function(){
+            var cWidth = document.body.clientWidth;
+            responsive(cWidth);           
+        });        
+    }
+    // 更换@media媒体查询（IE8不兼容）下的样式
+    function responsive(cWidth) {
+        var gWrap = getByClass('g-wrap'),
+            intro = getByClass('intro'),
+            mContent = getByClass('m-content')[0],
+            ftlf = getByClass('ftlf')[0],
+            ftrt = getByClass('ftrt')[0],
+            p = document.querySelectorAll('.m-foot .copy p');
+
+        // 窗口宽度小于1205px时
+        if (cWidth < 1205) {
+            for(var i=0; i<gWrap.length; i++) {
+                gWrap[i].style.width = 958 + 'px';
+            }
+            for(var i=0; i<intro.length; i++) {
+                intro[i].style.width = 272 + 'px';
+                intro[i].style.marginLeft = 71 + 'px';  
+            }
+            for(var i=0; i<p.length; i++) {
+                p[i].style.letterSpacing = 0;
+            }
+            intro[0].style.marginLeft = 0;
+            mContent.style.width = 735 + 'px';
+            ftlf.style.paddingLeft = 0;
+            ftrt.style.letterSpacing = 0;
+        } else {
+            // 窗口宽度大于等于1205px时，还原
+            for(var i=0; i<gWrap.length; i++) {
+                gWrap[i].style.width = 1205 + 'px';
+            }
+            for(var i=0; i<intro.length; i++) {
+                intro[i].style.width = 344 + 'px';
+                intro[i].style.marginLeft = 80 + 'px';  
+            }
+            for(var i=0; i<p.length; i++) {
+                p[i].style.letterSpacing = 0.5 + 'px';
+            }
+            intro[0].style.marginLeft = 5 + 'px';
+            mContent.style.width = 980 + 'px';
+            ftlf.style.paddingLeft = 50 + 'px';
+            ftrt.style.letterSpacing = 0.5 + 'px';            
+        }  
+    }
+}
+/* IE8不兼容媒体查询解决方法 */
 
 
+
+addLoadEvent(forIE);
 addLoadEvent(setVideo);
 addLoadEvent(getHotCourse);
 addLoadEvent(tab);
