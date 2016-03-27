@@ -1,22 +1,9 @@
-// 待解决问题记录
-// IE8 下不支持@media媒体查询
-// 关注 重写
-
 /* 顶部提示信息 */
 function msgDisplay() {
     var cookie = getCookie();
     var msg = getByClass('m-msg')[0],
         close = getByClass('close_msg')[0];
-    // if (cookie.hiddenMsg) {
-    //     addClass(msg, 'f-dn');
-    // } else {
-    //     removeClass(msg, 'f-dn');
-
-    //     eventUtil.addHandler(close, 'click', function(){
-    //         addClass(msg, 'f-dn');            
-    //         setCookie('hiddenMsg', 'true', '/');
-    //     });
-    // }
+    // hiddenMsg 不存在，则显示提示消息
     if (!cookie.hiddenMsg) {
         removeClass(msg, 'f-dn');
     }
@@ -48,7 +35,6 @@ function fadeout (ele,stepLength,stepTime) {
             clearInterval(setfadeout);
         }
     }
-
     var setfadeout = setInterval(step, stepTime);
 }
 
@@ -117,9 +103,11 @@ function slider() {
     var amn = setInterval(animation,5000);      
 
     var mSlider = getByClass('m-slider')[0];
+    // 鼠标悬停，停止轮播
     eventUtil.addHandler(mSlider, 'mouseover', function(){
         clearInterval(amn);            
     });
+    // 鼠标移开，继续轮播
     eventUtil.addHandler(mSlider, 'mouseout', function(){
         amn = setInterval(animation,5000);            
     });         
@@ -160,8 +148,6 @@ function slider() {
         });
     }  
 }
-
-
 /* /banner轮播图 */
 
 
@@ -212,6 +198,7 @@ function signinOrFocus() {
     }    
 }
 
+// 关注
 function follow() {
     var url = 'http://study.163.com/webDev/attention.htm';
     var options = '';
@@ -220,7 +207,7 @@ function follow() {
 
     // get 返回1，关注成功
     function followSuc(data) {
-        if(data == 1) {
+        if(data === 1) {
             setCookie('followSuc', 'true', '/');
         }
     }       
@@ -286,7 +273,7 @@ function toSubmit(event) {
 
     function oSubmit(data) {
         // get 返回1，登陆成功
-        if(data == 1) {
+        if(data === 1) {
             addClass(login, 'f-dn');
             addClass(mask, 'f-dn');
             setCookie('loginSuc', 'ture', '/');
@@ -300,9 +287,7 @@ function toSubmit(event) {
     // 登陆验证
     get(url, options, oSubmit);    
 } 
-
 /* /登录框与关注 */
-
 
 
 
@@ -346,7 +331,7 @@ function showCourse(courseData, options) {
 function getCourse(num, cType){
     // 清除原有课程
     var courses = getByClass('courses')[0];
-        courses.innerHTML = '';
+    courses.innerHTML = '';
 
     // 换页成功前隐藏翻页器
     var mPager = getByClass('m-pager')[0]; 
@@ -407,8 +392,8 @@ function getCType() {
         return cType = 20;
     }
 }
-
 /* /课程 */
+
 
 /* 翻页器 */
 // 点击事件注册
@@ -441,13 +426,6 @@ function pager () {
     });
 }
 
-// 翻页后上移
-// function returnTop() {
-//     window.scrollBy(0,-50);
-//     if(document.body.scrollTop>1150) { 
-//         var sdelay= setTimeout('returnTop()',10);
-//     }
-// }
 
 // 换页
 function clickPage (event) {
@@ -589,7 +567,7 @@ function replaceHot (data) {
         // 取出第一个值
         var add = restList.shift();
         // 将被移除的值重新添加到 restList
-        if(add >= 10) {
+        if (add >= 10) {
             restList.push(add-10);
         }else {
             restList.push(add+10);
@@ -629,6 +607,7 @@ function getElementLeft(elm){
     return actualLeft;
 }
 
+// 转换时间
 function convertTime(time) {
     var time = Math.ceil(time);
     var scd = time%60;
@@ -654,7 +633,8 @@ function setVideo() {
 
     // 显示视频界面
     function showVideo() {
-        if (navigator.userAgent.indexOf("MSIE 8.0")>0) {
+        // IE8不支持
+        if (isIE(8)) {
             var control = getByClass('control')[0],
                 para = document.querySelector('.m-video p');
             para.innerHTML = '您所使用的浏览器版本过低，无法播放此视频；请升级浏览器或使用其他浏览器观看，谢谢！';
@@ -708,7 +688,7 @@ function setVideo() {
                     bfLength = bf + 'px';
 
                 // 插入已播放时间文本
-                crtTime.innerHTML = convertTime(video.currentTime) + '/';
+                crtTime.innerHTML = convertTime(video.currentTime) + ' /';
 
                 // 改变已播放进度条
                 if (crt > 7) {
@@ -727,16 +707,17 @@ function setVideo() {
                     }
                 }
             } else {
-                clearInterval(change, 300);
+                clearInterval(change, 100);
             }
 
         }
-        // 每300毫秒改变一次进度条
-        var cg = setInterval(change, 300);
+        // 每100毫秒改变一次进度条
+        var cg = setInterval(change, 100);
     }
     eventUtil.addHandler(video, 'canplay', changeBar);
 
     // 音量调整
+    // 初始音量0.4
     video.volume = 0.4;
     var volumeBar = getByClass('volume_bar')[0];
     function changeVlm(event) {
@@ -786,8 +767,51 @@ function setVideo() {
 /* /视频播放 */
 
 
+/* IE8不兼容媒体查询解决方法 */
+function forIE () {
+    var html = document.getElementsByTagName('html')[0];    
+    // IE8下进行兼容
+    if (isIE(8)) {
+        // html标签添加 ie8 类名
+        addClass(html, 'ie8'); 
+                
+        var wdh = document.body.clientWidth;
+        // 初次打开宽度小于1205px，执行reponsive函数
+        if (wdh < 1205) {
+            responsive(wdh);
+        }
+        // 窗口改变大小时，执行responsive函数
+        eventUtil.addHandler(window, 'resize', function(){
+            var cWidth = document.body.clientWidth;
+            responsive(cWidth);           
+        });       
+    }
+
+    // 更换@media媒体查询（IE8不兼容）下的样式
+    function responsive(cWidth) {
+        var ftrt = getByClass('ftrt')[0],
+            p = document.querySelectorAll('.m-foot .copy p');
+
+        // 由于小数数值问题，IE8不设置letter-spacing
+        for(var i=0; i<p.length; i++) {
+            p[i].style.letterSpacing = 0;
+        }
+        ftrt.style.letterSpacing = 0;            
+
+        // 窗口小于1205时，html标签添加 ie8-s 类名
+        if (cWidth < 1205) {
+            addClass(html, 'ie8-s');
+        } else {
+            // 窗口大于等于1205时，html标签移除 ie8-s 类名
+            removeClass(html, 'ie8-s');
+        }
+    }
+}
+/* IE8不兼容媒体查询解决方法 */
 
 
+
+addLoadEvent(forIE);
 addLoadEvent(setVideo);
 addLoadEvent(getHotCourse);
 addLoadEvent(tab);
