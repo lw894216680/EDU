@@ -1,22 +1,12 @@
 // 待解决问题记录
 // IE8 下不支持@media媒体查询
-// 关注 重写
 
 /* 顶部提示信息 */
 function msgDisplay() {
     var cookie = getCookie();
     var msg = getByClass('m-msg')[0],
         close = getByClass('close_msg')[0];
-    // if (cookie.hiddenMsg) {
-    //     addClass(msg, 'f-dn');
-    // } else {
-    //     removeClass(msg, 'f-dn');
-
-    //     eventUtil.addHandler(close, 'click', function(){
-    //         addClass(msg, 'f-dn');            
-    //         setCookie('hiddenMsg', 'true', '/');
-    //     });
-    // }
+    // hiddenMsg 不存在，则显示提示消息
     if (!cookie.hiddenMsg) {
         removeClass(msg, 'f-dn');
     }
@@ -48,7 +38,6 @@ function fadeout (ele,stepLength,stepTime) {
             clearInterval(setfadeout);
         }
     }
-
     var setfadeout = setInterval(step, stepTime);
 }
 
@@ -117,9 +106,11 @@ function slider() {
     var amn = setInterval(animation,5000);      
 
     var mSlider = getByClass('m-slider')[0];
+    // 鼠标悬停，停止轮播
     eventUtil.addHandler(mSlider, 'mouseover', function(){
         clearInterval(amn);            
     });
+    // 鼠标移开，继续轮播
     eventUtil.addHandler(mSlider, 'mouseout', function(){
         amn = setInterval(animation,5000);            
     });         
@@ -220,7 +211,7 @@ function follow() {
 
     // get 返回1，关注成功
     function followSuc(data) {
-        if(data == 1) {
+        if(data === 1) {
             setCookie('followSuc', 'true', '/');
         }
     }       
@@ -286,7 +277,7 @@ function toSubmit(event) {
 
     function oSubmit(data) {
         // get 返回1，登陆成功
-        if(data == 1) {
+        if(data === 1) {
             addClass(login, 'f-dn');
             addClass(mask, 'f-dn');
             setCookie('loginSuc', 'ture', '/');

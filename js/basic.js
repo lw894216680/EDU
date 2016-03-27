@@ -63,23 +63,23 @@ function removeClass(elm,oldClsName) {
 /* 事件处理封装 */
 var eventUtil = {
 	// 添加事件
-	addHandler: function(element, type, handler) {
-		if(element.addEventListener) {
-			element.addEventListener(type,handler,false);
-		}else if(element.attachEvent) {
-			element.attachEvent('on'+type,handler);
+	addHandler: function(elm, type, handler) {
+		if(elm.addEventListener) {
+			elm.addEventListener(type,handler,false);
+		}else if(elm.attachEvent) {
+			elm.attachEvent('on'+type,handler);
 		}else {
-			element['on'+type] = handler;
+			elm['on'+type] = handler;
 		}
 	},
 	// 移除事件
-	removeHandler: function(element, type, handler) {
-		if(element.removeEventListener) {
-			element.removeEventListener(type,handler,false);
-		}else if(element.detachEvent) {
-			element.detachEvent('on'+type,handler);
+	removeHandler: function(elm, type, handler) {
+		if(elm.removeEventListener) {
+			elm.removeEventListener(type,handler,false);
+		}else if(elm.detachEvent) {
+			elm.detachEvent('on'+type,handler);
 		}else {
-			element['on'+type] = null;
+			elm['on'+type] = null;
 		}
 	},
 	// 取消事件默认动作

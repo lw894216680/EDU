@@ -412,10 +412,10 @@ body {
 	line-height: 50px;
 	background: #fff;
 	color: #666;
-	-webkit-box-shadow: 0 1px 1px #d4d3d3;;
-	-moz-box-shadow: 0 1px 1px #d4d3d3;;
-	-o-box-shadow: 0 1px 1px #d4d3d3;;
-	box-shadow: 0 1px 1px #d4d3d3;;	
+	-webkit-box-shadow: 0 1px 1px #d4d3d3;
+	-moz-box-shadow: 0 1px 1px #d4d3d3;
+	-o-box-shadow: 0 1px 1px #d4d3d3;
+	box-shadow: 0 1px 1px #d4d3d3;
 }
 .m-content .tab h4 {
 	float: left;	
@@ -509,6 +509,7 @@ body {
 }
 .m-course:hover .dtltxt_1 {
 	margin-left: 257px;
+	padding-right: 10px;
 }
 .m-course:hover .dtltxt_1 h5 {
 	margin: 4px 0 16px -4px;
@@ -696,7 +697,7 @@ body {
 .m-video .pause_btn,
 .m-video .start_btn {
 	position: absolute;
-	top: 6px;
+	top: 5px;
 	left: 7px;
 	width: 7px;
 	height: 10px;
@@ -796,7 +797,8 @@ body {
 	margin-bottom: 200px;
 }
 .m-card-top .top_course {
-	padding: 20px 15px 0 20px;
+	margin-top: 20px;
+	padding: 0 15px 0 20px;
 }
 .m-card-top p {
 	text-overflow: ellipsis;
@@ -805,7 +807,7 @@ body {
 	line-height: 14px;
 	cursor: pointer;	
 }
-.top_course .course_name {
+.m-card-top .top_course .course_name {
 	margin-bottom: 13px;
 	color: #333;	
 }
@@ -1006,6 +1008,9 @@ body {
 	height: 43px;
 	line-height: 43px; /* 解决IE8光标错位 */
 	border: 1px solid #dfdfdf;
+	-webkit-box-shadow: 1px 1px 1px #f1f1f1 inset;
+	-moz-box-shadow: 1px 1px 1px #f1f1f1 inset;
+	-o-box-shadow: 1px 1px 1px #f1f1f1 inset;	
     box-shadow: 1px 1px 1px #f1f1f1 inset;	
 	text-indent: 7px;
 	color: #333;
