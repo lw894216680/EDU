@@ -81,26 +81,26 @@ body {
 	width: 100%;	
 	height: 36px;
 	line-height: 36px;
-	background: #f3f3f3;
 	font-size: 12px;
 	color: #333;
+	background: #f3f3f3;	
 }
 .m-msg a {
 	text-decoration: none;
 	color: #21a557;
 }
 .m-msg i {
-	margin-right: 6px;
 	width: 9px;
-	height: 9px;
-	background-position: 0 0;
+	height: 9px;	
+	margin-right: 6px;
 	cursor: pointer;
+	background-position: 0 0;	
 }
 /* /顶部提示信息模块 */
 
 .g-wrap {
+	width: 1205px;	
 	margin: 0 auto;
-	width: 1205px;
 }
 @media screen and (max-width: 1204px) {
 	.g-wrap {
@@ -111,6 +111,8 @@ body {
 .ie8-s .g-wrap {
 	width: 958px;
 }
+
+
 /* 头部(导航及轮播图) */
 .g-head {
 	background: #fff;
@@ -130,9 +132,9 @@ body {
 .m-logo i {
 	position: relative;
 	top: 35px;
-	margin: 0 12px 0 10px;
 	width: 1px;
-	height: 18px;
+	height: 18px;	
+	margin: 0 12px 0 10px;
 	vertical-align: middle;
 	background-position: -74px -20px;
 }
@@ -150,24 +152,24 @@ body {
 
 /* 关注及取消按钮 */
 .u-btn {
-	margin: 0 14px 0 30px;		
-	height: 21px;
-	font-size: 12px;
+	height: 21px;	
+	margin: 0 14px 0 30px;
+	border-radius: 2px;				
+	font-size: 12px;	
 	line-height: 21px;	
-	vertical-align: middle;
-	border-radius: 2px;	
 	text-align: center;
+	vertical-align: middle;	
 	cursor: pointer;			
 }
 .u-btn-1 {
-	width: 54px;			
-	background: #21a557;		
+	width: 54px;				
 	color: #fff;
+	background: #21a557;		
 }
 .u-btn-1 span {
-	margin-right: 5px;
 	width: 8px;
-	height: 8px;
+	height: 8px;	
+	margin-right: 5px;
 	background-position: 0 -20px;
 }
 .u-btn-1:hover {
@@ -178,19 +180,19 @@ body {
 	height: 19px;
 	border: 1px solid #efefef;
 	line-height: 19px;
-	background-color: #f8f8f8;
 	color: #333;
+	background-color: #f8f8f8;	
 }
 .u-btn-2 .ic1 {
-	margin-right: 5px;
 	width: 11px;
-	height: 9px;
+	height: 9px;	
+	margin-right: 5px;
 	background-position: -24px -20px;	
 }
 .u-btn-2 .ic2 {
-	margin: 0 8px;
 	width: 1px;
-	height: 10px;
+	height: 10px;	
+	margin: 0 8px;
 	background-position: -53px -20px;
 }
 .u-btn-2 a {
@@ -204,8 +206,8 @@ body {
 
 /* 导航栏模块 */
 .m-nav {
-	line-height: 89px;
 	font-family: "HiraginoSansGB W3","Microsoft YaHei", "Arial";
+	line-height: 89px;	
 }
 .m-nav .follow {
 	float: left;
@@ -214,25 +216,25 @@ body {
 }
 .m-nav .fans {
 	height: 21px;	
-	line-height: 21px;
-	font-size: 12px;		    
+	font-size: 12px;	
+	line-height: 21px;		    
 	vertical-align: middle;
 	color: #666;
 }
 .m-nav .topnav {
 	float: right;
+	list-style: none;	
 	margin: 0;
 	font-size: 0;
-	list-style: none;
 
 }
 .m-nav .topnav span {
-	margin-left: 30px;
 	width: 19px;
-	height: 19px;
+	height: 19px;	
+	margin-left: 30px;
 	vertical-align: middle;		
-	cursor: pointer;
-	background-position: 0 -41px;	
+	background-position: 0 -41px;
+	cursor: pointer;		
 }
 .m-nav .topnav span:hover {
 	background-position: -24px -41px;	
@@ -278,21 +280,21 @@ body {
 	position: absolute;
 	bottom: 20px;
 	left: 50%;
-	margin-left: -26px;
 	width: 52px;
-	height: 10px;
+	height: 10px;	
+	margin-left: -26px;
 	font-size: 0;  
 	line-height: 0;
 	z-index: 10;
 }
 .m-slider i {
 	display: inline-block;
-	margin-left: 11px;
 	width: 10px;
-	height: 10px;
+	height: 10px;	
+	margin-left: 11px;
 	border-radius: 50%;
-	cursor: pointer;
 	background: #fff;
+	cursor: pointer;	
 }
 .m-slider .crt_point {
 	background: #000;
@@ -309,9 +311,9 @@ body {
 }
 .m-intro .intro {
 	float: left;
-	margin-left: 80px;	
 	width: 344px;
-	height: 180px;
+	height: 180px;	
+	margin-left: 80px;	
 }
 .m-intro .intro:first-child{
 	margin-left: 5px;
@@ -356,8 +358,8 @@ body {
 }
 @media screen and (max-width: 1204px){
 	.m-intro .intro {
+		width: 272px;		
 		margin-left: 71px;		
-		width: 272px;
 	}
 	.m-intro .intro:first-child{
 		margin-left: 0;
@@ -365,8 +367,8 @@ body {
 }
 /* IE8响应式兼容 */
 .ie8-s .m-intro .intro {
+	width: 272px;	
 	margin-left: 71px;		
-	width: 272px;
 }
 .ie8-s .m-intro .intro:first-child{
 	margin-left: 0;
@@ -378,8 +380,8 @@ body {
 
 /* 主体（课程）*/
 .g-body {
+	width: 100%;	
 	padding-top: 2px;	
-	width: 100%;
 	overflow: hidden;
 	background: #f8f8f8;
 }
@@ -391,9 +393,9 @@ body {
 .m-imgcolm {
 	position: relative;
 	left: 50%;
-	margin-left: -808px;
 	width: 1616px;
-	height: 220px;
+	height: 220px;	
+	margin-left: -808px;
 }
 .m-imgcolm img {
 	float: left;
@@ -407,9 +409,9 @@ body {
 /* 课程展示模块 */
 .m-content {
 	float: left;
-	padding-bottom: 120px;		
 	width: 980px;
-	min-height: 275px;
+	min-height: 275px;	
+	padding-bottom: 120px;		
 }
 @media screen and (max-width: 1204px) {
 	.m-content {
@@ -421,29 +423,29 @@ body {
 	width: 735px;
 }
 .m-content .tab {
-	margin-bottom: 30px;
 	width: 400px;
-	height: 50px;
-	line-height: 50px;
-	background: #fff;
-	color: #666;
+	height: 50px;	
+	margin-bottom: 30px;
 	-webkit-box-shadow: 0 1px 1px #d4d3d3;
 	-moz-box-shadow: 0 1px 1px #d4d3d3;
 	-o-box-shadow: 0 1px 1px #d4d3d3;
-	box-shadow: 0 1px 1px #d4d3d3;
+	box-shadow: 0 1px 1px #d4d3d3;	
+	line-height: 50px;
+	color: #666;	
+	background: #fff;
 }
 .m-content .tab h4 {
-	float: left;	
+	float: left;
+	width: 200px;		
 	margin: 0;
-	width: 200px;
-	text-align: center;
 	font-size: 20px;
 	font-weight: normal;
+	text-align: center;	
 	cursor: pointer;
 }
 .m-content .crt_tab {
+	color: #fff;	
 	background: #39a030;
-	color: #fff;
 }
 .m-content .courses {
 	margin-bottom: 10px;
@@ -454,10 +456,10 @@ body {
 .m-course {
 	position: relative;
 	float: left;
+	width: 225px;
+	height: 228px;	
 	margin-right: 20px;
 	margin-bottom: 20px;
-	width: 225px;
-	height: 228px;
 	font-size: 0;  /* 消除图片与文字的间距 */ 
 	-webkit-box-shadow: 0 1px 1px #e6e6e6;
 	-moz-box-shadow: 0 1px 1px #e6e6e6;
@@ -473,12 +475,12 @@ body {
 	padding: 10px 4px 9px;
 }
 .m-course h5 {
-	margin: 0 0 10px 0;
+	margin: 0 0 10px;
+	overflow: hidden;	
 	font-size: 12px;	
 	line-height: 12px;		
 	font-weight: normal;
 	text-overflow: ellipsis;
-	overflow: hidden;
 	white-space: nowrap;
 	color: #333;
 	cursor: pointer;	
@@ -505,17 +507,17 @@ body {
 	position: absolute;
 	top: -10px;
 	left: -10px;
-	padding-top: 11px;
 	width: 480px;
-	height: 228px;
-	background: #fff;
+	height: 228px;	
+	padding-top: 11px;
 	-webkit-box-shadow: 0 0 3px 1px #d4d3d3;
 	-moz-box-shadow: 0 0 3px 1px #d4d3d3;
 	-o-box-shadow: 0 0 3px 1px #d4d3d3;
 	box-shadow: 0 0 3px 1px #d4d3d3;
-	color: #666;
 	z-index: 1;
-	overflow: hidden;			
+	overflow: hidden;
+	color: #666;	
+	background: #fff;				
 }
 /* IE8下显示边框 */
 .ie8 .detail {
@@ -539,8 +541,8 @@ body {
 	margin: 13px 0 8px 0;
 }
 .m-course .dtltxt_2 {
+	height: 84px;	
 	padding: 10px 20px 0;
-	height: 84px;
 	background: #f8f8f8;
 }
 .m-course .dtltxt_2 p {
@@ -571,11 +573,11 @@ body {
 }
 .m-pager a {
 	display: block;
-	margin: 0 4px;	
 	width: 20px;
-	height: 20px;
-	color: #666;
+	height: 20px;	
+	margin: 0 4px;	
 	text-decoration: none;
+	color: #666;	
 }
 .m-pager span {
 	font-size: 14px;
@@ -606,8 +608,8 @@ body {
 
 /* 右侧信息展示模块 */
 .m-card {
+	width: 223px;	
 	padding-bottom: 20px;	
-	width: 223px;
 	-webkit-box-shadow: 0 1px 1px #d4d3d3;
 	-moz-box-shadow: 0 1px 1px #d4d3d3;
 	-o-box-shadow: 0 1px 1px #d4d3d3;
@@ -616,9 +618,9 @@ body {
 	background: #fff;	
 }
 .m-card h4 {
+	height: 55px;	
 	margin: 0;
 	padding-left: 20px;	
-	height: 55px;
 	border-bottom: 1px solid #ddd;	
 	font-size: 16px;
 	font-weight: normal;	
@@ -642,8 +644,8 @@ body {
 	line-height: 14px;	
 }
 .m-card-video .show_video {
+	width: 180px;	
 	margin: 0 auto;	
-	width: 180px;
 	cursor: pointer;	
 }
 .m-card-video img {
@@ -667,10 +669,10 @@ body {
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	width: 950px;
+	min-height: 640px;	
 	margin-top: -320px;
 	margin-left: -475px;
-	width: 950px;
-	min-height: 640px;
 	z-index: 1000;
 	background: #fff;
 }
@@ -681,8 +683,8 @@ body {
 	color: #444;
 }
 .m-video video {
+	width:889px;	
 	padding: 0 31px;
-	width:889px;
 	font-size: 0;
 	cursor: pointer;
 }
@@ -730,8 +732,8 @@ body {
 	background-position: -12px -261px; 	
 }
 .m-video .time {
+	height: 22px;	
 	padding-left: 30px;
-	height: 22px;
 	line-height: 22px;
 	font-size: 0;
 	color: #b6b6b6;
@@ -739,7 +741,7 @@ body {
 .m-video .time span {
 	display: inline-block;
 	font-size: 8px;
-	-webkit-transform: scale(0.67); /* 兼容chorme字体 */
+	-webkit-transform: scale(.67); /* 兼容chorme字体 */
 	-o-transform: scale(1);		
 	-webkit-margin-start: -5px;	
 	-webkit-margin-end: -4px;		
@@ -752,9 +754,9 @@ body {
 	position: absolute;
 	top: 0;
 	right: 60px;
-	padding: 9px 0;
 	width: 70px;
-	height: 4px;
+	height: 4px;	
+	padding: 9px 0;
 	cursor: pointer;
 }
 .m-video .volume_bar .vbar {
@@ -833,9 +835,9 @@ body {
 }
 .m-card-top .top_course img {
 	float: left;
-	margin-right: 12px;
 	width: 50px;
-	height: 50px;
+	height: 50px;	
+	margin-right: 12px;
 	cursor: pointer;		
 }
 /* /热门课程展示模块 */ 
@@ -846,16 +848,16 @@ body {
 	color: #666;		
 }
 .u-num .num_icon {
-	margin-right: 5px;
 	width: 9px;
-	height: 10px;
+	height: 10px;	
+	margin-right: 5px;
 	background-position: -43px -106px;
 }
 .u-num .num_txt {
 	display: inline-block;	
 	font-size: 10px;
 	line-height: 10px;
-	-webkit-transform: scale(0.83);
+	-webkit-transform: scale(.83);
 	-o-transform: scale(1);
 	-webkit-margin-start: -2px;
 }
@@ -868,9 +870,9 @@ body {
 	-webkit-margin-start: 0;		
 }
 .u-num-2 {
+	height: 16px;	
 	margin: 10px 0 9px;		
 	padding: 0 3px;
-	height: 16px;
 	line-height: 16px;
 	border: 1px solid #999;
 	border-radius: 2px;
@@ -879,10 +881,10 @@ body {
 	margin-top: 3px;
 }
 .u-num-2 .num_txt{
-	vertical-align: top;
 	font-size: 8px;
+	vertical-align: top;	
 	line-height: 16px;
-	-webkit-transform: scale(0.67);
+	-webkit-transform: scale(.67);
 	-o-transform: scale(1);
 	-webkit-margin-start: -4px;
     -webkit-margin-end: -3px;
@@ -916,11 +918,11 @@ body {
 	font-size: 12.5px;
 	line-height: 25px;
 	color: #fff;
-	letter-spacing: 0.04em;
+	letter-spacing: .04em;
 }
 .m-foot .ftrt {
 	padding: 80px 0 80px;
-	letter-spacing: 0.04em;	
+	letter-spacing: .04em;	
 }
 /* /页脚模块 */
 
@@ -935,15 +937,15 @@ body {
 	line-height: 13px;
 }
 .m-list ul {
+	list-style: none;	
 	margin: 0;
 	padding: 0;
-	list-style: none;
 	font-size: 15px;
 	line-height: 28px;
 }
 .m-list a {
+	text-decoration: none;	
 	color: #fff;
-	text-decoration: none;
 }
 .m-list a:hover {
 	text-decoration: underline;
@@ -953,9 +955,9 @@ body {
 	margin-right: 72px;
 }
 .m-list-1 i {
-	margin: 0 0 -3px 11px;
 	width: 20px;
-	height: 16px;
+	height: 16px;	
+	margin: 0 0 -3px 11px;
 	background-position: 0 -106px;
 }
 .m-list-2 {
@@ -975,10 +977,10 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 500;
-	background: #3b3b3b;
-	opacity: 0.7;
+	opacity: .7;
 	filter: "alpha(opacity=70)";
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	background: #3b3b3b;	
 }
 
 /* 登入框模块 */
@@ -986,10 +988,10 @@ body {
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	width: 387px;
+	height: 288px;	
 	margin-left: -193.5px;
 	margin-top: -144px;
-	width: 387px;
-	height: 288px;
 	z-index: 1000;	
 	background: #fff;
 }
@@ -1031,8 +1033,8 @@ body {
 .u-ipt input {
 	width: 293px;
 	height: 43px;
+	border: 1px solid #dfdfdf;	
 	line-height: 43px; /* 解决IE8光标错位 */
-	border: 1px solid #dfdfdf;
 	-webkit-box-shadow: 1px 1px 1px #f1f1f1 inset;
 	-moz-box-shadow: 1px 1px 1px #f1f1f1 inset;
 	-o-box-shadow: 1px 1px 1px #f1f1f1 inset;	
@@ -1054,9 +1056,9 @@ body {
 	margin-bottom: 29px;
 }
 .u-smbtn {
-	padding: 0;
 	width: 295px;
-	height: 48px;
+	height: 48px;	
+	padding: 0;
 	border: none;
 	color: #fff;
 	background-position: 0 -56px;
